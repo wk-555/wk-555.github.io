@@ -683,7 +683,7 @@
 
 <p><img src="/2021/06/25/%E6%A1%86%E6%9E%B6_06_springboot_wukang/image-20210627200458224.png" alt="image-20210627200458224"></p>
 <p>发现所有的实例变量属性都正确的赋值给Person变量了</p>
-<h3 id="2-JSR303校验邮箱"><a href="#2-JSR303校验邮箱" class="headerlink" title="2 JSR303校验邮箱"></a>2 JSR303校验邮箱</h3><p><strong>接下来使用 JSR303数据校验功能</strong>对email格式进行验证，发现如果注入1123456，无法运行；当注入<a href="mailto:&#49;&#x32;&#51;&#x34;&#x35;&#54;&#x40;&#49;&#x36;&#x33;&#46;&#x63;&#x6f;&#109;">&#49;&#x32;&#51;&#x34;&#x35;&#54;&#x40;&#49;&#x36;&#x33;&#46;&#x63;&#x6f;&#109;</a>时，可以运行成功。</p>
+<h3 id="2-JSR303校验邮箱"><a href="#2-JSR303校验邮箱" class="headerlink" title="2 JSR303校验邮箱"></a>2 JSR303校验邮箱</h3><p><strong>接下来使用 JSR303数据校验功能</strong>对email格式进行验证，发现如果注入1123456，无法运行；当注入<a href="mailto:&#x31;&#50;&#x33;&#x34;&#53;&#54;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">&#x31;&#50;&#x33;&#x34;&#53;&#54;&#64;&#49;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;</a>时，可以运行成功。</p>
 <p>1 添加validation启动器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-validation&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
 
