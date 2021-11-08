@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wukang555.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="面向对象的三个基本特征是：封装、继承、多态。 方法重写与方法重载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础之面向对象">
+<meta property="og:url" content="https://wukang555.github.io/2021/01/09/javaSE_02_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="落风的风">
+<meta property="og:description" content="面向对象的三个基本特征是：封装、继承、多态。 方法重写与方法重载">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-09T04:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-09T05:21:56.000Z">
+<meta property="article:author" content="Wu kang">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://wukang555.github.io/2021/01/09/javaSE_02_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>Java基础之面向对象 | 落风的风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落风的风" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">落风的风</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wukang555.github.io/2021/01/09/javaSE_02_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wu kang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落风的风">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java基础之面向对象
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 12:00:00 / Modified: 13:21:56" itemprop="dateCreated datePublished" datetime="2021-01-09T12:00:00+08:00">2021-01-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>面向对象的三个基本特征是：封装、继承、多态。</p>
+<p>方法重写与方法重载</p>
+<a id="more"></a>
+
+<h2 id="面向对象之封装"><a href="#面向对象之封装" class="headerlink" title="面向对象之封装"></a>面向对象之封装</h2><p>用大白话来讲，封装就是将自己类内部的方法、变量设为私有、不允许外部类直接访问。要想访问、就必须通过我指定的get() set()方法来访问。封装和private直接相关。</p>
+<h4 id="封装的概念"><a href="#封装的概念" class="headerlink" title="封装的概念"></a>封装的概念</h4><ul>
+<li><p>1.封装概述</p>
+<ul>
+<li>是面向对象编程语言对客观世界的模拟，客观世界里成员变量都是隐藏在对象内部的，外界是无法直接操作的</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>封装原则</li>
+</ol>
+<ul>
+<li>将类的某些信息隐藏在类内部，不允许外部程序直接访问，而是通过该类提供的方法来实现对隐藏信息的操作和访问</li>
+<li>成员变量private，提供对应的getXxx()/setXxx()方法</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>封装好处</li>
+</ol>
+<ul>
+<li><strong>通过方法来控制成员变量的操作，提高了代码的安全性</strong></li>
+<li><strong>把代码用方法进行封装，提高了代码的复用性</strong> </li>
+</ul>
+</li>
+</ul>
+<h4 id="private关键字"><a href="#private关键字" class="headerlink" title="private关键字"></a>private关键字</h4><p><strong>概念：</strong></p>
+<ul>
+<li>private是一个修饰符，可以用来修饰成员（成员变量，成员方法） </li>
+<li>被private修饰的成员，只能在本类进行访问 </li>
+<li>针对private修饰的成员变量，如果需要被其他类使用，提供相应的操作 <ul>
+<li>提供“get变量名()”方法，用于获取成员变量的值，方法用public修饰</li>
+<li>提供“set变量名(参数)”方法，用于设置成员变量的值，方法用public修饰 </li>
+</ul>
+</li>
+</ul>
+<p><strong>用法示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"><span class="comment">// get/set</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String n)</span> </span>&#123;</span><br><span class="line">	name = n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="面向对象之继承"><a href="#面向对象之继承" class="headerlink" title="面向对象之继承"></a>面向对象之继承</h2><p>用大白话来讲就是，将多个对象共同的部分抽象称为一个父类，这些共同的属性就直接在父类中定义就可以了，子类直接继承父类，代码更简洁、修改时只需修改一次，很实用。比如猫、老虎、豹子都是属于猫科动物，我就直接定义一个猫科动物的父类，这三个家伙直接继承之。</p>
+<h4 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h4><ul>
+<li>定义<ul>
+<li>继承是面向对象三大特征之一，可以使得子类具有父类的属性和方法，还可以在子类中重新定义，以及追加属性和方法</li>
+</ul>
+</li>
+<li>格式<ul>
+<li>格式：class 子类 extends 父类 { }</li>
+<li>举例：class Dog extends Animal { }</li>
+</ul>
+</li>
+<li>子父类的关系<ul>
+<li>继承可以让类与类之间产生关系，子父类关系，</li>
+<li>子类则可以使用父类中非私有的成员</li>
+<li>子类也可以有自己特有的内容</li>
+</ul>
+</li>
+</ul>
+<h4 id="继承的好处和弊端"><a href="#继承的好处和弊端" class="headerlink" title="继承的好处和弊端"></a>继承的好处和弊端</h4><ul>
+<li>好处<ul>
+<li>提高了代码的复用性(多个类相同的成员可以放到同一个类中)</li>
+<li>提高了代码的维护性(如果方法的代码需要修改，修改一处即可)</li>
+</ul>
+</li>
+<li>弊端<ul>
+<li>继承让类与类之间产生了关系，类的耦合性增强了，当父类发生变化时子类实现也不得不跟着变化，削弱了子类的独立性</li>
+</ul>
+</li>
+<li>应用场景<ul>
+<li>使用继承，需要考虑类与类之间是否存在is..a的关系，不能盲目使用继承</li>
+<li>如：苹果和水果 猫和动物</li>
+</ul>
+</li>
+</ul>
+<h2 id="面向对象之多态"><a href="#面向对象之多态" class="headerlink" title="面向对象之多态"></a>面向对象之多态</h2><p>一个对象的多种状态？基于封装和继承。多态指在编译层面无法确定最终调用的方法体，在运行期由 JVM 动态绑定，调用合适的重写方法。多态一般专指重写。</p>
+<h4 id="多态的概念"><a href="#多态的概念" class="headerlink" title="多态的概念"></a>多态的概念</h4><ul>
+<li><p>定义</p>
+<ul>
+<li>同一个对象，在不同时刻表现出来的不同状态</li>
+</ul>
+</li>
+<li><p>前提（同时满足）</p>
+<ul>
+<li><p>要有继承或者实现关系、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要有方法的重写（子类中重写父类的方法）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;猫吃鱼&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有父类引用指向子类对象（在测试类中实现）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Animal a = <span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="多态的特点和转型"><a href="#多态的特点和转型" class="headerlink" title="多态的特点和转型"></a>多态的特点和转型</h4><ul>
+<li><p>好处和弊端</p>
+<ul>
+<li>好处、<ul>
+<li>提高程序的扩展性。定义方法时候，使用父类型作为参数，在使用的时候，使用具体的子类型参与</li>
+</ul>
+</li>
+<li>操作弊端<ul>
+<li>不能使用子类的特有成员</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多态的转型</p>
+<ul>
+<li><p>向上 转型</p>
+<p>父类引用指向子类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Animal a = <span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向下转型</p>
+<p>父类引用转为子类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal a = <span class="keyword">new</span> Cat();</span><br><span class="line">Cat c = (Cat)a;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>多态成员的访问特点</p>
+<ul>
+<li>成员变量<ul>
+<li>编译看父类，运行看父类</li>
+</ul>
+</li>
+<li>成员方法<ul>
+<li><strong>编译看父类，运行看子类</strong></li>
+</ul>
+</li>
+<li>原因<ul>
+<li>成员方法在子类中存在重写 ，而成员变量没有<h2 id="方法重写与方法重载"><a href="#方法重写与方法重载" class="headerlink" title="方法重写与方法重载"></a>方法重写与方法重载</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>方法重写</strong></p>
+<p>方法重写：子类对父类的允许访问的方法的实现过程进行重新编写，返回值的形参都不能改变。即外壳不变，核心重写。</p>
+<p>特点：对编译器来说，方法名称和参数列表组成了一个唯一键，称为方法签名，JVM 通过<br>方法签名决定调用哪种重载方法。重载在编译时可以根据规则知道调用哪种目标方法，因此属于静态绑定。</p>
+<p><strong>方法重载</strong></p>
+<p>方法重载：在一个类里面，方法名相同，而参数不同，返回值可同可不同。每个重载的方法（或构造函数）都必须有一个独一无二的参数类型列表。</p>
+<p>特点：重写方法访问权限不能变小，返回类型和抛出的异常类型不能变大，必须加<br>@Override 。</p>
+
+    </div>
+
+    <div>
+      
+          
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------感谢阅读<i class="fa fa-paw"></i>没事常来-------------
+        </div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag"># 面向对象</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/24/javaSE_01_%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="prev" title="Java基础之二进制位运算">
+      <i class="fa fa-chevron-left"></i> Java基础之二进制位运算
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/14/javaSE_03_%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" rel="next" title="Java基础之输入输出命令">
+      Java基础之输入输出命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%B0%81%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">面向对象之封装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.1.</span> <span class="nav-text">封装的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#private%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.0.2.</span> <span class="nav-text">private关键字</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E7%BB%A7%E6%89%BF"><span class="nav-number">2.</span> <span class="nav-text">面向对象之继承</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.0.1.</span> <span class="nav-text">继承的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%BC%8A%E7%AB%AF"><span class="nav-number">2.0.2.</span> <span class="nav-text">继承的好处和弊端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B9%8B%E5%A4%9A%E6%80%81"><span class="nav-number">3.</span> <span class="nav-text">面向对象之多态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.0.1.</span> <span class="nav-text">多态的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E7%9A%84%E7%89%B9%E7%82%B9%E5%92%8C%E8%BD%AC%E5%9E%8B"><span class="nav-number">3.0.2.</span> <span class="nav-text">多态的特点和转型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E4%B8%8E%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">4.</span> <span class="nav-text">方法重写与方法重载</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wu kang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu kang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
