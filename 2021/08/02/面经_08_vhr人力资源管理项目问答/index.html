@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wukang555.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vhr人力资源管理系统面经">
+<meta property="og:url" content="https://wukang555.github.io/2021/08/02/%E9%9D%A2%E7%BB%8F_08_vhr%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E9%97%AE%E7%AD%94/index.html">
+<meta property="og:site_name" content="落风的风">
+<meta property="og:description" content="Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212621.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212624.png">
+<meta property="article:published_time" content="2021-08-02T14:55:00.000Z">
+<meta property="article:modified_time" content="2021-11-12T14:16:29.577Z">
+<meta property="article:author" content="Wu kang">
+<meta property="article:tag" content="后端开发">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212621.png">
+
+<link rel="canonical" href="https://wukang555.github.io/2021/08/02/%E9%9D%A2%E7%BB%8F_08_vhr%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E9%97%AE%E7%AD%94/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>vhr人力资源管理系统面经 | 落风的风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落风的风" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">落风的风</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wukang555.github.io/2021/08/02/%E9%9D%A2%E7%BB%8F_08_vhr%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E9%97%AE%E7%AD%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wu kang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落风的风">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vhr人力资源管理系统面经
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-02 22:55:00" itemprop="dateCreated datePublished" datetime="2021-08-02T22:55:00+08:00">2021-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 22:16:29" itemprop="dateModified" datetime="2021-11-12T22:16:29+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。</p>
+<a id="more"></a>
+
+<h2 id="1-介绍一下vhr人力资源管理系统"><a href="#1-介绍一下vhr人力资源管理系统" class="headerlink" title="1 介绍一下vhr人力资源管理系统"></a>1 介绍一下vhr人力资源管理系统</h2><p>vhr 是一个前后端分离的人力资源管理系统，包括人事管理、系统管理等模块，基于 Restful 风格开发后端接口、使用 Swagger 进行接口测试；</p>
+<p>技术栈：Spring Boot、Spring Security、MyBatis、MySQL、Redis、RabbitMQ</p>
+<ul>
+<li>1、使用 Spring Security 基于角色的动态访问控制，实现用户认证和用户授权；即根据用户的角色赋予不同的操作权限和显示菜单。</li>
+<li>2、将邮件服务划分为单独的模块、引入消息中间件 RabbitMQ，实现异步发送欢迎新员工的入职邮件；</li>
+<li>3、实现前后端分离，后端不再处理页面跳转仅传递 JSON 字符串，实现了基于 JWT 的无状态登录；</li>
+</ul>
+<h2 id="2-vhr的数据库是怎么设计的？"><a href="#2-vhr的数据库是怎么设计的？" class="headerlink" title="2 vhr的数据库是怎么设计的？"></a>2 vhr的数据库是怎么设计的？</h2><p>面向的用户是公司的管理人员，然后实现了基于角色的动态动态访问控制，基本的就有管理人员的hr表（用户表）、role表（角色表）、menu表（菜单表），然后就是实现用户、角色和菜单之间连接关系的hr_role表（一对多的关系）、menu_role表（多对多的关系）。然后就是其他一些公司的employee表（员工表）、departmen表（部门表）、joblevel表（职称表）等。</p>
+<ul>
+<li>hr用户表，公司的管理人员也就是该系统的使用用户。。一个用户一般拥有一种或者多种角色</li>
+<li>role角色表，不同的角色对用有不同的权限，比如人事专员只管人事、部门经理管理该部门的员工等</li>
+<li>hr表和role表通过 一个hr_role表相联系，即指定一个用户具有哪几种角色</li>
+<li>还有一个menu表，相当于是一个资源表，menu中的数据会以json返回给前端，然后vue动态更新。其中里面最重要的字段就是url、路径匹配规则，所有的请求会被拦截然后根据这个url去查询访问这个url需要什么角色的权限，然后看当前用户是否具备相应的角色。</li>
+<li>menu_role表将menu和role表相联系，即指定某个url会对哪些角色可见（menu和role是多对多的关系）</li>
+</ul>
+<h2 id="3-RESTful风格，介绍一下"><a href="#3-RESTful风格，介绍一下" class="headerlink" title="3 RESTful风格，介绍一下"></a>3 RESTful风格，介绍一下</h2><h3 id="3-1-RESTful风格是什么？"><a href="#3-1-RESTful风格是什么？" class="headerlink" title="3.1 RESTful风格是什么？"></a>3.1 RESTful风格是什么？</h3><blockquote>
+<p>URI统一资源标识符</p>
+<p>URL是统一资源定位符</p>
+</blockquote>
+<p>REST(Representational State Transfer) 指 表现层状态转化。</p>
+<ul>
+<li><p>在web应用中，我们一般用<strong>URI统一资源标识符</strong>来表示一种资源</p>
+</li>
+<li><p>表现层指的是一个”资源“的具体表现形式，比如一个html文本、一个xml或者一个图片都是表现层</p>
+</li>
+<li><p>状态转换就是客户端通过http的几种请求方式（get\post\put\delete）对服务器进行访问，完成资源的状态转换</p>
+<ul>
+<li>GET 用来获取资源、POST 用来新建资源（也可以用于更新资源）、PUT 用来更新资源、DELETE 用来删除资源</li>
+</ul>
+</li>
+</ul>
+<p>REST的核心在于，当你设计一个系统的时候，资源是第一位的考虑，你首先从资源的角度进行系统的拆分、设计，而不是像以往一样以操作为角度来进行设计。</p>
+<p>总的来说就是，RESTful定义了一种客户端和服务器交互的风格，使URL更简洁、更有层次感。</p>
+<h3 id="3-2-RESTful的使用示例"><a href="#3-2-RESTful的使用示例" class="headerlink" title="3.2 RESTful的使用示例"></a>3.2 RESTful的使用示例</h3><p>SpringMVC 对 RESTful 提供了非常全面的支持，主要有如下几个注解：</p>
+<ul>
+<li>@PathVariable注解：提取请求地址中的参数</li>
+<li>@PostMapping注解：映射一个POST请求</li>
+<li>@GetMapping注解：映射一个GET请求</li>
+<li>@PutMapping注解：映射一个PUT请求</li>
+<li>@DeleteMapping注解：映射一个DELETE请求</li>
+</ul>
+<p>1 使用@PathVariable 注解可以将Controller下方法的参数<strong>绑定到URL的模板变量上</strong>，使url的访问更灵活。反之如果不使用的话，就需要在URL手动用=赋值参数</p>
+<p>2 使用不同的注解组合（不同的请求方式）可以实现 相同的URL实现不同的效果！！使显示的url更简洁和有层次感</p>
+<h3 id="3-3-RESTful风格的设计原则"><a href="#3-3-RESTful风格的设计原则" class="headerlink" title="3.3 RESTful风格的设计原则"></a>3.3 RESTful风格的设计原则</h3><ul>
+<li><p>URL尽量使用名词复数, 不使用动词</p>
+</li>
+<li><p>访问同一个URL地址, 采用不同的请求方式, 代表执行不同的操作(get获取, post新增等)</p>
+</li>
+<li><p>服务器返回的响应格式数据，尽量通过XML JSON进行数据传递；</p>
+</li>
+<li><p>无状态连接，服务器端不应保存过多上下文状态，即每个请求都是独立的；</p>
+</li>
+</ul>
+<h2 id="4-前后端分离时，前后端是如何交互的"><a href="#4-前后端分离时，前后端是如何交互的" class="headerlink" title="4 前后端分离时，前后端是如何交互的"></a>4 前后端分离时，前后端是如何交互的</h2><h3 id="4-1-后台如何处理前端传递过来信息，并返回数据的过程"><a href="#4-1-后台如何处理前端传递过来信息，并返回数据的过程" class="headerlink" title="4.1 后台如何处理前端传递过来信息，并返回数据的过程"></a>4.1 后台如何处理前端传递过来信息，并返回数据的过程</h3><blockquote>
+<p>其实就是问springMVC的原理和执行流程</p>
+</blockquote>
+<p>用户发出请求后，前端传过来的实际上是一个url，后台接受请求，返回数据给前端。接受请求并返回数据其实就是springMVC的整个处理流程。</p>
+<p>SpringMVC的执行过程是围绕着前置（调度）控制器<strong>DispatcherServlet</strong>的调度来设计的。</p>
+<ul>
+<li>第一步，DispatcherServlet拦截请求，并调用 处理器映射HandlerMapping 和 解析控制器映射HandlerExecution。<ul>
+<li>目的是根据url查找对应控制器，找到是哪个Controller应该处理这个请求，找到之后返回给DispatcherServlet</li>
+</ul>
+</li>
+<li>第二步，DispatcherServlet调用HandlerAdapter处理器适配器，并让他调用那个Controller。<ul>
+<li>接下来就是我们编写的代码逻辑，后端Controller调Service、Service调Mapper接口，mapper.xml做持久层的增删改查，得到一个JSON对象传递给前端</li>
+<li>前端解析JSON对自己的js对象，然后得到视图和模型，通过HandlerAdapter处理器适配器传递给DispatcherServlet</li>
+</ul>
+</li>
+<li>第三步，DispatcherServlet调用视图解析器(ViewResolver)来解析逻辑视图，最后得到视图，再呈现给用户！！</li>
+</ul>
+<p>总结：简单来讲的话就是三步：1通过url找到对应的Controller、然后2调用执行持久化层的查询获得逻辑视图或者model，最后3解析视图、并呈现给用户。</p>
+<h3 id="4-2-后端返回值有字符串、JSON、实体对象，如何统一的传给前端的？"><a href="#4-2-后端返回值有字符串、JSON、实体对象，如何统一的传给前端的？" class="headerlink" title="4.2 后端返回值有字符串、JSON、实体对象，如何统一的传给前端的？"></a>4.2 后端返回值有字符串、JSON、实体对象，如何统一的传给前端的？</h3><blockquote>
+<p>做一个删除操作——返回的是RespBean对象</p>
+<p>查询所有员工 返回的是一个RespPageBean对象</p>
+<p>查询部门的时候返回的是一个list集合 List<Department></Department></p>
+<p>@ResponseBody是作用在方法上的，@ResponseBody 表示该方法的返回结果直接写入 HTTP response body 中</p>
+</blockquote>
+<p>其实就是SpringBoot框架的功能，使用了@ResponseBody注解，所有的java对象都转换为了JSON格式写入Http response body中。</p>
+<p>所以我后端不用管其他，你要集合我返回集合、要msg我返回msg、要page返回page，反正最后都变成JSON给前端了。</p>
+<h2 id="5-RBAC基于角色的权限访问控制"><a href="#5-RBAC基于角色的权限访问控制" class="headerlink" title="5 RBAC基于角色的权限访问控制"></a>5 RBAC基于角色的权限访问控制</h2><h3 id="5-1-基于角色的动态访问控制逻辑"><a href="#5-1-基于角色的动态访问控制逻辑" class="headerlink" title="5.1 基于角色的动态访问控制逻辑"></a>5.1 基于角色的动态访问控制逻辑</h3><p>使用springScurity完成用户认证和用户授权。@EnableWebSecurity //开启WebSecurity模式，然后编写一个SecurityConfig类继承WebSecurityConfigurerAdapter，重写里面的configure方法给用户设置角色和权限。</p>
+<p>因为是前后端分离的项目，基本的登录逻辑就是：用户(hr表)登录成功之后，可以通过hr_role表查询到用户的角色，再根据用户角色去（meau_role中）查出来用户可以操作的菜单（资源），然后把这些可以操作的资源，组织成一个 JSON 数据，返回给前端，前端再根据这个 JSON 渲染出相应的菜单。</p>
+<p>这样就可以根据数据库中的表信息，动态的配置资源-角色以及用户-角色之间的关系，进而调整用户可以操作的资源(菜单)。</p>
+<h3 id="5-2-有状态登录和无状态登录"><a href="#5-2-有状态登录和无状态登录" class="headerlink" title="5.2 有状态登录和无状态登录"></a>5.2 有状态登录和无状态登录</h3><p><strong>传统的有状态登录Session</strong></p>
+<ul>
+<li><p>服务端需要记录每次会话的客户端信息，从而识别客户端身份，根据用户身份进行请求的处理。典型的就是Session。</p>
+</li>
+<li><p>例如登录：用户登录后，我们把用户的信息保存在服务端 session 中，并且给用户一个 cookie 值，记录对应的 session，然后下次请求，用户携带 cookie 值来（这一步有浏览器自动完成），我们就能识别到对应 session，从而找到用户的信息。这种方式目前来看最方便，但是也有一些缺陷，如下：</p>
+<ul>
+<li><p>服务端保存大量数据，增加服务端压力</p>
+</li>
+<li><p>服务端保存用户状态，不支持集群化部署</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212621.png" alt="img" style="zoom:80%;">
+
+<p><strong>RESTful 风格的无状态服务</strong></p>
+<p>微服务集群中的每个服务，对外提供的都使用 RESTful 风格的接口。而 RESTful 风格的一个最重要的规范就是：<strong>服务的无状态性</strong>，即：</p>
+<ul>
+<li>服务端不保存任何客户端请求者信息</li>
+<li>客户端的每次请求必须具备自描述信息，通过这些信息识别客户端身份</li>
+</ul>
+<p>好处：</p>
+<ul>
+<li><p>多次请求不需要必须访问到同一台服务器，</p>
+</li>
+<li><p>服务端可以任意的迁移和伸缩（可以方便的进行集群化部署）</p>
+</li>
+<li><p>减小服务端存储压力</p>
+</li>
+</ul>
+<p><strong>使用JWT实现无状态服务</strong> </p>
+<ul>
+<li>首先客户端发送账户名/密码到服务端进行认证登录 </li>
+<li>认证通过后，服务端将用户信息加密并且编码成一个 token，返回给客户端</li>
+<li>以后客户端每次发送请求，都需要携带认证的 token   Json web token (JWT)</li>
+<li>服务端对客户端发送来的 token 进行解密，判断是否有效，并且获取用户登录信息</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212624.png" alt="jwt" style="zoom:80%;">
+
+<h3 id="5-3-Token如何保存状态"><a href="#5-3-Token如何保存状态" class="headerlink" title="5.3 Token如何保存状态"></a>5.3 Token如何保存状态</h3><p><strong>如何处理注销账户之后token还有效的问题？</strong></p>
+<blockquote>
+<p>相关的有：退出登录、修改密码、修改权限、注销账户之后，token还有效</p>
+<p>Redis用来储存token,账户注销或者退出登录之后就删除Redis中的token</p>
+</blockquote>
+<p>这个问题不存在于 Session 认证方式中，因为在 Session 认证方式中，遇到这种情况的话服务端删除对应的 Session 记录即可。</p>
+<p>token 一旦派发出去，如果后端不增加其他逻辑的话，它在失效之前都是有效的。</p>
+<ul>
+<li>解决方案一：<strong>将 token 存入内存数据库</strong>：将 token 存入 DB 中，redis 内存数据库在这里是是不错的选择。如果需要让某个 token 失效就直接从 redis 中删除这个 token 即可。但是，这样会导致每次使用 token 发送请求都要先从 DB 中查询 token 是否存在的步骤，而且违背了 JWT 的无状态原则。</li>
+</ul>
+<p><strong>token 有效期一般都建议设置的不太长，那么 token 过期后如何认证，如何实现动态刷新 token，避免用户经常需要重新登录？</strong></p>
+<blockquote>
+<p>设置token的有效期为30分钟，服务器每次校验时，检查token的有效期，如果快过期了，就重新生成一个token给客户端。客户端请求之前先检查更新自己的token</p>
+</blockquote>
+<p>先来看看在 Session 认证中一般的做法：假如 session 的有效期30分钟，如果 30 分钟内用户有访问，就把 session 有效期被延长30分钟。</p>
+<ol>
+<li><strong>类似于 Session 认证中的做法</strong>：这种方案满足于大部分场景。假设服务端给的 token 有效期设置为30分钟，服务端每次进行校验时，如果发现 token 的有效期马上快过期了，服务端就重新生成 token 给客户端。客户端每次请求都检查新旧token，如果不一致，则更新本地的token。这种做法的问题是仅仅在快过期的时候请求才会更新 token ,对客户端不是很友好。</li>
+<li><strong>每次请求都返回新 token</strong> :这种方案的的思路很简单，但是，很明显，开销会比较大。</li>
+<li><strong>token 有效期设置到半夜</strong> ：这种方案是一种折衷的方案，保证了大部分用户白天可以正常登录，适用于对安全性要求不高的系统。</li>
+<li><strong>用户登录返回两个 token</strong> ：第一个是 acessToken ，它的过期时间 token 本身的过期时间比如半个小时，另外一个是 refreshToken 它的过期时间更长一点比如为1天。客户端登录后，将 accessToken和refreshToken 保存在本地，每次访问将 accessToken 传给服务端。服务端校验 accessToken 的有效性，如果过期的话，就将 refreshToken 传给服务端。如果有效，服务端就生成新的 accessToken 给客户端。否则，客户端就重新登录即可。该方案的不足是：1⃣️需要客户端来配合；2⃣️用户注销的时候需要同时保证两个 token 都无效；3⃣️重新请求获取 token 的过程中会有短暂 token 不可用的情况（可以通过在客户端设置定时器，当accessToken 快过期的时候，提前去通过 refreshToken 获取新的accessToken）。</li>
+</ol>
+<h3 id="5-4-JWT的格式？？"><a href="#5-4-JWT的格式？？" class="headerlink" title="==5.4 JWT的格式？？=="></a>==5.4 JWT的格式？？==</h3><h2 id="6-邮件服务原理"><a href="#6-邮件服务原理" class="headerlink" title="6 邮件服务原理"></a>6 邮件服务原理</h2><blockquote>
+<p>vhrserver相当于只是发送了一个消息给中间件</p>
+<p>然后真正发送邮件的功能都在mailserver中，JavaMailSender接口</p>
+</blockquote>
+<p>将邮件服务划分为单独的模块、引入消息中间件 RabbitMQ，实现异步发送欢迎新员工的入职邮件；即当管理人员比如hr在界面上操作新增了一名员工到数据库中，就会自动的向中间件RabbitMQ发送一条消息，然后mailServer会自动异步的订阅消息，向新入职的员工发送一封入职邮件，里面包含姓名、职位、职称和部门等信息。</p>
+<p>vhrServer中的业务逻辑：</p>
+<ul>
+<li>新增员工的命令返回值为1时，进入邮件发送的代码中</li>
+<li>指定消息的唯一UUID,获取一个新的employee对象用于传递</li>
+<li>一个MailSendLog类用来记录消息的发送日志，里面实例变量有消息的id、员工id、投递状态、投递规则key exchage等</li>
+<li>配置RabbitMQ的配置文件，声明队列、交换机、绑定交换机等</li>
+</ul>
+<p>mailServer中的业务逻辑：</p>
+<ul>
+<li>配置RabbitMQ的配置文件，然后消费消息就ok了</li>
+<li>消息确认机制改为手动，只要消费成功一条消息，就将消息id记录在Redis上，避免消息的重复消费</li>
+</ul>
+<h2 id="7-RabbitMQ如何保证消息的可靠性"><a href="#7-RabbitMQ如何保证消息的可靠性" class="headerlink" title="7 RabbitMQ如何保证消息的可靠性"></a>7 RabbitMQ如何保证消息的可靠性</h2><h3 id="1-保证我们的消息能够成功到达队列"><a href="#1-保证我们的消息能够成功到达队列" class="headerlink" title="1 保证我们的消息能够成功到达队列"></a>1 保证我们的消息能够成功到达队列</h3><ul>
+<li><p>消息传递、要经过三个流程：</p>
+<ul>
+<li><p>1 消息到达交换机 </p>
+<ul>
+<li>第一个流程可能由于网络的波动、延迟等原因，消息没有准确达到交换机</li>
+</ul>
+</li>
+<li><p>2 交换机把消息路由到队列中</p>
+<ul>
+<li>第二个流程可能routing key错误等原因，消息没有准确到达队列</li>
+</ul>
+</li>
+<li><p>3 消息持久化写入日志</p>
+<ul>
+<li>第三个流程可能在消息写入日志的过程中，broker crash掉了，重启后消息丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解决方案一：事务控制，但大幅度降低了效率不推荐使用</p>
+</li>
+<li><p>解决方案二：发送者确认模式：即消息发送失败回调、路由失败回调</p>
+<ul>
+<li><p>1 通过实现ConfirmCallBack接口，消息发送到交换器Exchange后触发回调</p>
+</li>
+<li><p>2 通过实现ReturnCallback接口，如果消息从交换器发送到对应队列失败时触发（比如根据发送消息时指定的routingKey找不到队列时会触发）</p>
+</li>
+<li><p>总结：</p>
+<ul>
+<li><p>如果成功入列，单纯给客户端发送”ack”信号</p>
+</li>
+<li><p>如果消息无法路由到队列则是发送 “消息” + “ack”,且”消息”比ack信号先到</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-rabbitmq的持久化（解决消息到达队列之后的可靠性）"><a href="#2-rabbitmq的持久化（解决消息到达队列之后的可靠性）" class="headerlink" title="2 rabbitmq的持久化（解决消息到达队列之后的可靠性）"></a>2 rabbitmq的持久化（解决消息到达队列之后的可靠性）</h3><ul>
+<li><p>三个持久化：交换机持久化、队列持久化、消息持久化</p>
+</li>
+<li><p>持久化的消息在进入持久化队列之后会写入到rabbitmq的持久性日志文件中，消息被消费掉后，会把持久性日志文件中该消息标记为等待垃圾收集</p>
+</li>
+<li><p>三个持久化很大程度上已经解决了rabbitmq这一端因为宕机而导致消息丢失的问题。。。如果在broker在把消息写入日志文件的时候崩掉了（极端情况），这时可以借助mirror queue来处理</p>
+</li>
+</ul>
+<h3 id="3-确保一条消息只消费一次"><a href="#3-确保一条消息只消费一次" class="headerlink" title="3 确保一条消息只消费一次"></a>3 确保一条消息只消费一次</h3><ul>
+<li><p>首先将 RabbitMQ 的消息自动确认机制改为手动确认，然后每当有一条消息消费成功了，就把该消息的唯一 ID 记录在 Redis 上，然后每次收到消息时，都先去 Redis 上查看是否有该消息的 ID，如果有，表示该消息已经消费过了，不再处理，否则再去处理。</p>
+</li>
+<li><p>这里使用的是Token的思想，核心就是每个操作都有一个唯一凭证 token，一旦执行成功，对于重复的请求，总是返回同一个结果。</p>
+</li>
+<li><p>每一个邮件消息都有唯一的uuid，作为唯一的凭证</p>
+</li>
+</ul>
+
+    </div>
+
+    <div>
+      
+          
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------感谢阅读<i class="fa fa-paw"></i>没事常来-------------
+        </div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag"># 后端开发</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"># 项目</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/01/%E9%9D%A2%E7%BB%8F_07_Spring%E6%A1%86%E6%9E%B6%20/" rel="prev" title="Spring框架面经">
+      <i class="fa fa-chevron-left"></i> Spring框架面经
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/03/%E9%9D%A2%E7%BB%8F_09_Redis/" rel="next" title="Redis面经">
+      Redis面经 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bvhr%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">1 介绍一下vhr人力资源管理系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-vhr%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">2 vhr的数据库是怎么设计的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-RESTful%E9%A3%8E%E6%A0%BC%EF%BC%8C%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">3 RESTful风格，介绍一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-RESTful%E9%A3%8E%E6%A0%BC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 RESTful风格是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-RESTful%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 RESTful的使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-RESTful%E9%A3%8E%E6%A0%BC%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 RESTful风格的设计原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E6%97%B6%EF%BC%8C%E5%89%8D%E5%90%8E%E7%AB%AF%E6%98%AF%E5%A6%82%E4%BD%95%E4%BA%A4%E4%BA%92%E7%9A%84"><span class="nav-number">4.</span> <span class="nav-text">4 前后端分离时，前后端是如何交互的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%90%8E%E5%8F%B0%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E5%89%8D%E7%AB%AF%E4%BC%A0%E9%80%92%E8%BF%87%E6%9D%A5%E4%BF%A1%E6%81%AF%EF%BC%8C%E5%B9%B6%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 后台如何处理前端传递过来信息，并返回数据的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%90%8E%E7%AB%AF%E8%BF%94%E5%9B%9E%E5%80%BC%E6%9C%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81JSON%E3%80%81%E5%AE%9E%E4%BD%93%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%A6%82%E4%BD%95%E7%BB%9F%E4%B8%80%E7%9A%84%E4%BC%A0%E7%BB%99%E5%89%8D%E7%AB%AF%E7%9A%84%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 后端返回值有字符串、JSON、实体对象，如何统一的传给前端的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-RBAC%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E6%9D%83%E9%99%90%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">5 RBAC基于角色的权限访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E5%8A%A8%E6%80%81%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E9%80%BB%E8%BE%91"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 基于角色的动态访问控制逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%9C%89%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95%E5%92%8C%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 有状态登录和无状态登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-Token%E5%A6%82%E4%BD%95%E4%BF%9D%E5%AD%98%E7%8A%B6%E6%80%81"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 Token如何保存状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-JWT%E7%9A%84%E6%A0%BC%E5%BC%8F%EF%BC%9F%EF%BC%9F"><span class="nav-number">5.4.</span> <span class="nav-text">&#x3D;&#x3D;5.4 JWT的格式？？&#x3D;&#x3D;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">6 邮件服务原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-RabbitMQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">7 RabbitMQ如何保证消息的可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BF%9D%E8%AF%81%E6%88%91%E4%BB%AC%E7%9A%84%E6%B6%88%E6%81%AF%E8%83%BD%E5%A4%9F%E6%88%90%E5%8A%9F%E5%88%B0%E8%BE%BE%E9%98%9F%E5%88%97"><span class="nav-number">7.1.</span> <span class="nav-text">1 保证我们的消息能够成功到达队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rabbitmq%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%88%E8%A7%A3%E5%86%B3%E6%B6%88%E6%81%AF%E5%88%B0%E8%BE%BE%E9%98%9F%E5%88%97%E4%B9%8B%E5%90%8E%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%EF%BC%89"><span class="nav-number">7.2.</span> <span class="nav-text">2 rabbitmq的持久化（解决消息到达队列之后的可靠性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A1%AE%E4%BF%9D%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF%E5%8F%AA%E6%B6%88%E8%B4%B9%E4%B8%80%E6%AC%A1"><span class="nav-number">7.3.</span> <span class="nav-text">3 确保一条消息只消费一次</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wu kang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu kang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

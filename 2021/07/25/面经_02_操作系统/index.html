@@ -27,20 +27,27 @@
 <meta property="og:site_name" content="落风的风">
 <meta property="og:description" content="操作系统面经，分为基础、进程管理、内存管理三个部分讲解。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Kernel_Layout.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/up-cd8ac705f6f004c01e0a1312f1599430ba5.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/A61F5B5322ED49038C64BDD82D341987.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1281379-76c95f147203c797.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728110226493.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728110242076.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728122507555.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212155.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212205.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212209.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212212.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212226.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212229.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212233.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212239.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212242.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212246.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212250.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212253.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212257.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212259.png">
 <meta property="article:published_time" content="2021-07-25T14:55:00.000Z">
-<meta property="article:modified_time" content="2021-07-29T02:37:16.000Z">
+<meta property="article:modified_time" content="2021-11-12T14:06:11.122Z">
 <meta property="article:author" content="Wu kang">
 <meta property="article:tag" content="计算机基础">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Kernel_Layout.png">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212155.png">
 
 <link rel="canonical" href="https://wukang555.github.io/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
@@ -206,7 +213,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-29 10:37:16" itemprop="dateModified" datetime="2021-07-29T10:37:16+08:00">2021-07-29</time>
+                <time title="Modified: 2021-11-12 22:06:11" itemprop="dateModified" datetime="2021-11-12T22:06:11+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +245,14 @@
 <p>[3] 参考了cyc2018的<a target="_blank" rel="noopener" href="http://www.cyc2018.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20-%20%E6%A6%82%E8%BF%B0.html#%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81">操作系统文章</a></p>
 <p>[4] 参考了小牛的<a target="_blank" rel="noopener" href="http://interviewtop.top/#/list">面经网站</a></p>
 </blockquote>
-<p>之前看现代操作系统的时候，看了前四章分别是引论、进程线程、内存管理、文件系统。似乎针对面试而言，进程线程、内存管理比较重要。Guide的总结恰好也是如此，面向面试学习主要就是弄懂Guide的文章、总结好自己能够理解的回答然后背下来，所以文章的主要结果分别是基础、进程和线程、内存管理、虚拟内存。</p>
+<p>之前看《现代操作系统》的时候，看了前四章分别是引论、进程线程、内存管理、文件系统。似乎针对面试而言，进程线程、内存管理比较重要。Guide的总结恰好也是如此，面向面试学习主要就是弄懂Guide的文章、总结好自己能够理解的回答然后背下来，所以文章的主要结果分别是基础、进程和线程、内存管理、虚拟内存。</p>
 <h2 id="1-操作系统基础"><a href="#1-操作系统基础" class="headerlink" title="1 操作系统基础"></a>1 操作系统基础</h2><h3 id="1-1-什么是操作系统"><a href="#1-1-什么是操作系统" class="headerlink" title="1.1 什么是操作系统"></a>1.1 什么是操作系统</h3><p>操作系统是管理计算机硬件和软件资源的计算机程序。本质上讲，操作系统也是一个软件，向上对用户程序提供接口，向下接管硬件资源。</p>
 <p>作为最接近硬件的系统软件，操作系统存在屏蔽了硬件层的复杂性，操作系统内核（Kernel）负责的基本功能有进程管理、内存管理、设备管理、文件管理。</p>
-<img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Kernel_Layout.png" alt="Kernel_Layout" style="zoom:50%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212155.png" alt="Kernel_Layout" style="zoom:50%;">
 
 <h3 id="1-2-操作系统的基本特征"><a href="#1-2-操作系统的基本特征" class="headerlink" title="1.2 操作系统的基本特征"></a>1.2 操作系统的基本特征</h3><p><strong>并发</strong></p>
 <ul>
-<li><p>并发（concurrency）：指宏观上看起来两个程序在同时运行，比如说在单核cpu上的多任务。但是从微观上看两个程序的指令是交织着运行的，指令之间交错执行，在单个周期内只运行了一个指令。</p>
+<li><p>并发（concurrency）：指宏观上看起来两个程序在同时运行，比如说在单核cpu上的多任务。但是从微观上看两个程序的指令是交织着运行的，在单个周期内只运行了一个指令。</p>
 </li>
 <li><p>并行（parallelism）：指严格物理意义上的同时运行，比如多核cpu，两个程序分别运行在两个核上，两者之间互不影响，单个周期内每个程序都运行了自己的指令，也就是运行了两条指令。</p>
 </li>
@@ -259,14 +266,14 @@
 <ul>
 <li>虚拟技术把一个物理实体转换为多个逻辑实体。主要有两种虚拟技术：时（时间）分复用技术和空（空间）分复用技术。</li>
 <li>多个进程能在同一个处理器上并发执行使用了时分复用技术，让每个进程轮流占用处理器，每次只执行一小个时间片并快速切换。</li>
-<li>虚拟内存使用了空分复用技术，它将物理内存抽象为地址空间，每个进程都有各自的地址空间。地址空间的页被映射到物理内存，==地址空间的页并不需要全部在物理内存中，当使用到一个没有在物理内存的页时，执行页面置换算法，将该页置换到内存中。== （暂时没懂）</li>
+<li>虚拟内存使用了空分复用技术，它将物理内存抽象为地址空间，每个进程都有各自的地址空间。地址空间的页被映射到物理内存，==地址空间的页并不需要全部在物理内存中，当使用到一个没有在物理内存的页时，执行页面置换算法，将该页置换到内存中。== </li>
 </ul>
 <p><strong>异步</strong></p>
 <p>异步指进程不是一次性执行完毕，而是走走停停，以不可知的速度向前推进。</p>
 <h3 id="1-3-什么是内核态和用户态？"><a href="#1-3-什么是内核态和用户态？" class="headerlink" title="1.3 什么是内核态和用户态？"></a>1.3 什么是内核态和用户态？</h3><p>为了避免操作系统和关键数据被用户程序破坏，将处理器的执行状态分为内核态和用户态。</p>
 <p>内核态是操作系统管理程序执行时所处的状态，能够执行包含特权指令在内的一切指令，能够访问系统内所有的存储空间。</p>
 <p>用户态是用户程序执行时处理器所处的状态，不能执行特权指令，只能访问用户地址空间。</p>
-<p>用户程序运行在用户态,操作系统内核运行在内核态。</p>
+<p>操作系统内核运行在内核态，用户程序运行在用户态。</p>
 <h3 id="1-4-系统调用"><a href="#1-4-系统调用" class="headerlink" title="1.4 系统调用"></a>1.4 系统调用</h3><p><strong>如果一个进程在用户态需要使用内核态的功能，就进行系统调用从而陷入内核，由操作系统代为完成。</strong>系统调用就是为了使用操作系统内核的功能，如进程管理、内存管理、文件管理、设备管理等 (操作系统内核现在也分为宏内核和微内核，微内核将部分功能模块化需要频繁的进行用户态和内核态的切换)</p>
 <ul>
 <li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
@@ -317,7 +324,7 @@
 <h2 id="2-进程和线程"><a href="#2-进程和线程" class="headerlink" title="2 进程和线程"></a>2 进程和线程</h2><h3 id="2-1-线程-进程的区别"><a href="#2-1-线程-进程的区别" class="headerlink" title="2.1 线程/进程的区别"></a>2.1 线程/进程的区别</h3><p>进程是资源分配的基本单位，而线程是任务调度和执行的基本单位。简单来说，进程就是一个正在运行的程序，并且一个进程中包含多个并发执行的线程（CPU调度，分配时间片给不同的线程）。</p>
 <p>多个线程共享进程的资源（如堆和方法区），同时线程也拥有自己的程序计数器、虚拟机栈和本地方法栈。</p>
 <p>总结来说 进程之间的执行和调度需要分配内存空间、开销较大。而线程之间的切换，开销较小</p>
-<img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/up-cd8ac705f6f004c01e0a1312f1599430ba5.png" alt="img" style="zoom:50%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212205.png" alt="img" style="zoom:50%;">
 
 <h3 id="2-2-进程的5种状态"><a href="#2-2-进程的5种状态" class="headerlink" title="2.2 进程的5种状态"></a>2.2 进程的5种状态</h3><p>进程一共有5种状态，分别是创建、就绪、运行（执行）、阻塞、终止。 （线程也是类似的5种状态）</p>
 <ul>
@@ -327,13 +334,13 @@
 <li><strong>阻塞状态(waiting)</strong> ：又称为等待状态，进程正在等待某一事件而暂停运行如等待某资源为可用或等待 IO 操作完成。即使处理器空闲，该进程也不能运行。</li>
 <li><strong>结束状态(terminated)</strong> ：进程正在从系统中消失。可能是进程正常结束或其他原因中断退出运行。</li>
 </ul>
-<p><img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/A61F5B5322ED49038C64BDD82D341987.png" alt="A61F5B5322ED49038C64BDD82D341987"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212209.png" alt="A61F5B5322ED49038C64BDD82D341987"></p>
 <h3 id="2-3-进程间通信的方式"><a href="#2-3-进程间通信的方式" class="headerlink" title="2.3 进程间通信的方式"></a>2.3 进程间通信的方式</h3><blockquote>
 <p>我还不懂，后面原理还是要看书</p>
 <p>Guide推荐:<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c1015f5ffa74">《进程间通信 IPC (InterProcess Communication)》</a> 推荐阅读，总结的非常不错。</p>
 </blockquote>
 <p>每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都看不到，所以进程之间要交换数据必须通过内核，在内核中开辟一块缓冲区，进程A把数据从用户空间拷到内核缓冲区，进程B再从内核缓冲区把数据读走，内核提供的这种机制称为<strong>进程间通信</strong></p>
-<p><img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1281379-76c95f147203c797.png" alt="进程间通信模型"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212212.png" alt="进程间通信模型"></p>
 <p>进程间通信主要包括 管道、命名管道FIFO、消息队列、信号量、信号、共享内存、以及套接字socket。</p>
 <ul>
 <li><strong>管道/匿名管道(Pipes)</strong> ：用于具有亲缘关系的父子进程间或者兄弟进程之间的通信。调用pipe系统函数即可创建一个管道。</li>
@@ -416,7 +423,7 @@
 </blockquote>
 <p><strong>5 时间片轮转法（RR，Round Robin）</strong></p>
 <blockquote>
-<p>将所有就绪进程按 FCFS 的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把 CPU 时间分配给队首的进程。时间片轮转算法的效率和时间片的大小有很大关系：</p>
+<p>将所有就绪进程按 FCFS 的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把 CPU 时间分配给队首的进程。时间片轮转算法的效率和时间片的大小有很大关系</p>
 </blockquote>
 <p><strong>6 多级反馈队列调度算法（MLFQ，Multi-Level Feedback Queue）</strong></p>
 <blockquote>
@@ -452,14 +459,14 @@
 </li>
 </ul>
 <h2 id="3-操作系统的内存管理基础"><a href="#3-操作系统的内存管理基础" class="headerlink" title="3 操作系统的内存管理基础"></a>3 操作系统的内存管理基础</h2><h3 id="3-1-什么是虚拟内存？为什么要引入虚拟内存【自用】"><a href="#3-1-什么是虚拟内存？为什么要引入虚拟内存【自用】" class="headerlink" title="3.1 什么是虚拟内存？为什么要引入虚拟内存【自用】"></a>3.1 什么是虚拟内存？为什么要引入虚拟内存【自用】</h3><p>虚拟内存是计算机系统内存管理的一种技术。每个程序拥有自己的虚拟地址空间，这些虚拟地址一般以分页的方式被映射到物理内存，但不需要映射到连续的物理内存，当程序引用到不在物理内存中的页时，就发生缺页中断修改映射关系，操作系统将再需要访问的页面映射到物理内存中以便程序顺利进行。这样造成的效果将物理内存扩充成了更大的虚拟内存，进程看起来像是拥有了更多的可用内存。</p>
-<p>说到虚拟内存，其实也可以提一下当不使用抽象储存的情景。比如上世纪60年代的IBM360机器。直接简单粗暴的使用物理内存地址，从0到某个上限值。这样会带来两个问题：1当在一个物理内存中运行多道程序时，会出现“保护和重定位”的问题，就是一个进程的指令可能跳转到另一个进程的地址中去了（之前是使用保护键、基址寄存器和界限寄存器的解决方案区分不同的进程）。2 就是内存的大小问题，一个现代操作系统动辄就是几十个甚至几百个进程，而内存的大小受价格等现实因素的约束一般是无法满足一些软件对内存的需求的。</p>
+<p>说到虚拟内存，其实也可以提一下当不使用抽象储存的情景。比如上世纪60年代的IBM360机器。直接简单粗暴的使用物理内存地址，从0到某个上限值。这样会带来两个问题：1当在一个物理内存中运行多道程序时，会出现“保护和重定位”的问题，就是一个进程的指令可能跳转到另一个进程的地址中去了（之前是使用保护键、基址寄存器和界限寄存器的解决方案来区分不同的进程）。2 就是内存的大小问题，一个现代操作系统动辄就是几十个甚至几百个进程，而内存的大小受价格等现实因素的约束一般是无法满足一些软件对内存的需求的。</p>
 <p>所以说白了虚拟内存就是解决了这两个问题，1首先每个进程拥有私有的地址空间，进程的虚拟地址空间是独立于其他进程了，解决了保护和重定位的问题。 2其次，虚拟内存技术使用了空分复用技术，使物理内存抽象为地址空间，地址空间的页并不需要全部在物理内存中，当使用到一个没有在物理内存的页时，执行页面置换算法，将该页置换到内存中。解决了内存大小不够用的问题</p>
 <h3 id="3-2-虚拟地址和物理地址及其转换原理？"><a href="#3-2-虚拟地址和物理地址及其转换原理？" class="headerlink" title="3.2 虚拟地址和物理地址及其转换原理？"></a>3.2 虚拟地址和物理地址及其转换原理？</h3><p>虚拟地址：页面号+偏移量；物理地址：页框号+偏移量</p>
 <p>程序或进程自己的地址称为虚拟地址，它们构成了虚拟地址空间。虚拟地址通过<strong>内存管理单元（Memory Management Unit， MMU）</strong> 映射到物理内存地址上，从而被执行。</p>
 <p><strong>MMU是CPU里面专门用来完成地址转换的单元。MMU通过查找页表来完成虚拟地址到物理地址的转换。</strong>有两种情况：1一种是该虚拟地址存在于物理内存中时直接查出物理地址；2该虚拟地址没有映射到物理内存中，那就需要缺页中断，利用页面置换算法，将该页面置换到物理内存中，然后重新查页表得到物理地址。</p>
-<p><img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728110226493.png" alt="image-20210728110226493"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212226.png" alt="image-20210728110226493"></p>
 <p>通过页表查询物理地址具体的过程：1 通过虚拟地址的页号作为索引找到对应的“页框号”和“在不在”位，2 如果在不在位为1，就将页框号拼接上偏移量得到物理地址。如果在不在为0，就先缺页中断进行页面的调度，最后也是获得页框号后拼接上偏移量的到物理地址。</p>
-<img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728110242076.png" alt="image-20210728110242076" style="zoom:80%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212229.png" alt="image-20210728110242076" style="zoom:80%;">
 
 <h3 id="3-3-快表和多级页表"><a href="#3-3-快表和多级页表" class="headerlink" title="3.3 快表和多级页表"></a>3.3 快表和多级页表</h3><blockquote>
 <p>普通的分页和MMU查询页表进行地址的转换还存在着两个问题：</p>
@@ -482,7 +489,7 @@
 <li>引入多级页表的原因是避免把全部页表一直保存在内存中。特别是那些从不需要的页表就不应该保留。</li>
 <li>比如一个程序只需要12M的内存，，但虚拟内存的空间有4G。这4GB被分为1024个4MB的块，，真正是需要将3个虚拟内存块映射的物理内存加入到内存中间就好了！！</li>
 </ul>
-<img src="/2021/07/25/%E9%9D%A2%E7%BB%8F_02_%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/image-20210728122507555.png" alt="image-20210728122507555" style="zoom:67%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212233.png" alt="image-20210728122507555" style="zoom:67%;">
 
 <h3 id="3-4-常用的页面置换算法"><a href="#3-4-常用的页面置换算法" class="headerlink" title="3.4 常用的页面置换算法"></a>3.4 常用的页面置换算法</h3><p>在程序运行过程中，如果要访问的页面不在内存中，就发生缺页中断从而将该页调入内存中。此时如果内存已无空闲空间，系统必须从内存中调出一个页面到磁盘对换区中来腾出空间。</p>
 <p>包括以下算法：</p>
@@ -497,7 +504,104 @@
 <p>分段内存管理当中，<strong>地址是二维的，一维是段号，二维是段内地址；其中每个段的长度是不一样的，而且每个段内部都是从0开始编址的</strong>。由于分段管理中，每个段内部是连续内存分配，但是段和段之间是离散分配的，因此也存在一个逻辑地址到物理地址的映射关系，相应的就是段表机制。</p>
 <p>段页式：</p>
 <p>段页式管理机制结合了段式管理和页式管理的优点。简单来说段页式管理机制就是把主存先分成若干段，每个段又分成若干页，也就是说 <strong>段页式管理机制</strong> 中段与段之间以及段的内部的都是离散的。</p>
+<h2 id="4-操作系统磁盘IO"><a href="#4-操作系统磁盘IO" class="headerlink" title="4 操作系统磁盘IO"></a>4 操作系统磁盘IO</h2><blockquote>
+<p>[1] 完全参考小林coding的文章<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/P0IP6c_qFhuebwdwD8HM7w">原来 8 张图，就可以搞懂「零拷贝」了</a> 建议阅读文章理解</p>
+</blockquote>
+<p>磁盘由核心态管理，用户程序想要访问磁盘数据，一般要经过系统调用，陷入核心态，进而获取数据。磁盘IO相比内存存储和cpu寄存器，是相当耗时的操作，所以要尽可能地提高磁盘IO操作的速度。</p>
+<h3 id="4-1-三种IO方式"><a href="#4-1-三种IO方式" class="headerlink" title="4.1 三种IO方式"></a>4.1 三种IO方式</h3><blockquote>
+<p>忙等待是阻塞的。一般来说普通异步IO和DMA模式的IO都是非阻塞的。它们的区别在于：</p>
+<ul>
+<li>普通异步IO在磁盘IO处理完之后就发起中断，交由CPU拷贝数据。</li>
+<li>DMA模式的IO在DMA将磁盘数据拷贝到内核内存上之后，再发起中断，占用CPU</li>
+</ul>
+</blockquote>
+<p>《现代操作系统》中介绍了实现输入输出（IO）的三种方式：忙等待、异步IO 中断、DMA中断。</p>
+<ul>
+<li><strong>忙等待</strong>：用户程序发出一个系统调用，然后就执行I/O过程，CPU一直等待I/O的数据，直到得到数据后处理，处理完以后返回结果，CPU才继续处理其他事情。这种方式称为忙等待。</li>
+<li><strong>异步IO</strong>：第二种是通过异步IO和中断机制，需要I/O时，先让I/O设备执行对应操作，这个时候CPU不需要等待，继续做其他事情，如果I/O执行完，拿到数据了，这个时候由中断控制器对CPU发起一个中断，处理这个I/O得到的数据。大白话就是先让CPU处理其他事情，当得到I/O数据后，告诉CPU，你先停一下现在手头上的事儿，你刚刚要的数据准备好了，现在给你，你处理下。</li>
+<li><strong>DMA的异步IO</strong>：使用直接存储器访问芯片(DMA,Direct Memory Access)，直接控制位流，DMA得到数据时，也会对CPU发起中断。（DMA模式的IO在DMA将磁盘数据拷贝到内核内存上之后，再发起中断，占用CPU）</li>
+</ul>
+<h4 id="1-传统的忙等待IO过程"><a href="#1-传统的忙等待IO过程" class="headerlink" title="1 传统的忙等待IO过程"></a><strong>1 传统的忙等待IO过程</strong></h4><ul>
+<li>CPU 发出对应的指令给磁盘控制器，然后返回；</li>
+<li>磁盘控制器收到指令后，于是就开始准备数据，会把数据放入到磁盘控制器的内部缓冲区中，然后产生一个<strong>中断</strong>；</li>
+<li>CPU 收到中断信号后，停下手头的工作，接着把磁盘控制器的缓冲区的数据一次一个字节地读进自己的寄存器（内核缓冲区PageCache），然后再把寄存器里的数据写入到内存，而在数据传输的期间 CPU 是无法执行其他任务的。</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212239.png" alt="6401" style="zoom:50%;">
 
+<h4 id="2-异步IO过程"><a href="#2-异步IO过程" class="headerlink" title="2 异步IO过程"></a>2 异步IO过程</h4><blockquote>
+<p>DMA和异步IO一般都是非阻塞的IO</p>
+</blockquote>
+<p>异步IO用于处理cpu阻塞的问题。 当不使用PageCache 内核缓存时也称为直接IO</p>
+<p>过程如下：</p>
+<ul>
+<li>前半部分，内核向磁盘发起读请求，但是可以<strong>不等待数据就位就可以返回</strong>，于是进程此时可以处理其他任务；</li>
+<li>后半部分，当内核将磁盘中的数据拷贝到进程缓冲区后，进程将接收到内核的<strong>通知</strong>，再去处理数据；</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212242.png" alt="6403" style="zoom:50%;">
+
+<h4 id="3-DMA中断IO过程"><a href="#3-DMA中断IO过程" class="headerlink" title="3 DMA中断IO过程"></a>3 DMA中断IO过程</h4><p><strong>DMA直接内存访问</strong>（Direct Memory Access）在进行 I/O 设备和内存的数据传输的时候，数据搬运的工作全部交给 DMA 控制器，而 CPU 不再参与任何与数据搬运相关的事情，这样 CPU 就可以去处理别的事务。</p>
+<p>简单来讲就是，传统IO由CPU负责将数据的拷贝搬运：从磁盘缓存器—&gt;到内核缓存区—&gt;再到用户缓冲区。。而使用DMA之后，<strong>磁盘缓存器—&gt;到内核缓存区</strong>过程由DMA负责，此时cpu可以处理其他的事情也可以闲置等待….</p>
+<p>过程如下：</p>
+<ul>
+<li>用户进程调用 read 方法，向操作系统发出 I/O 请求，请求读取数据到自己的内存缓冲区中，进程进入阻塞状态；</li>
+<li>操作系统收到请求后，进一步将 I/O 请求发送 DMA，然后让 CPU 执行其他任务（这其实就是一种的异步IO）；</li>
+<li>DMA 进一步将 I/O 请求发送给磁盘；</li>
+<li>磁盘收到 DMA 的 I/O 请求，把数据从磁盘读取到磁盘控制器的缓冲区中，当磁盘控制器的缓冲区被读满后，向 DMA 发起中断信号，告知自己缓冲区已满；</li>
+<li><strong>DMA 收到磁盘的信号，将磁盘控制器缓冲区中的数据拷贝到内核缓冲区中，此时不占用 CPU，CPU 可以执行其他任务</strong>；</li>
+<li>当 DMA 读取了足够多的数据，就会发送中断信号给 CPU；</li>
+<li>CPU 收到 DMA 的信号，知道数据已经准备好，于是将数据从内核拷贝到用户空间，系统调用返回；</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212246.png" alt="6402" style="zoom:50%;">
+
+
+
+<h3 id="4-2-零拷贝技术（传输小文件）"><a href="#4-2-零拷贝技术（传输小文件）" class="headerlink" title="4.2 零拷贝技术（传输小文件）"></a>4.2 零拷贝技术（传输小文件）</h3><p>传统的文件传输模式：read+write：4次上下文切换和4次数据拷贝过程。要想提高文件传输的性能，就需要减少「用户态与内核态的上下文切换」和「内存拷贝」的次数。零拷贝有两种方式：</p>
+<ul>
+<li>mmap + write：4 次上下文切换，和 3 次数据拷贝过程</li>
+<li>sendfile： 2 次上下文切换，和 3/2 次数据拷贝过程</li>
+</ul>
+<h4 id="1-传统的文件传输模式（4次切换、4次拷贝）"><a href="#1-传统的文件传输模式（4次切换、4次拷贝）" class="headerlink" title="1 传统的文件传输模式（4次切换、4次拷贝）"></a>1 传统的文件传输模式（4次切换、4次拷贝）</h4><p>如果服务端要提供文件传输的功能，我们能想到的最简单的方式是：将磁盘上的文件读取出来，然后通过网络协议发送给客户端。</p>
+<p>传统 I/O 的工作方式是，数据读取和写入是从用户空间到内核空间来回复制，而内核空间的数据是通过操作系统层面的 I/O 接口从磁盘读取或写入。如下两个系统调用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read(file, tmp_buf, len);</span><br><span class="line">write(socket, tmp_buf, len);</span><br></pre></td></tr></table></figure>
+
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212250.png" alt="6404" style="zoom:50%;">
+
+
+
+<p>期间共<strong>发生了 4 次用户态与内核态的上下文切换</strong>分别对应着两次系统调用：一次是 <code>read()</code> ，一次是 <code>write()</code>，还<strong>发生了 4 次数据拷贝</strong>，其中两次是 DMA 的拷贝，另外两次则是通过 CPU 拷贝的。</p>
+<h4 id="2-mmap-write（4-次切换，和-3-次拷贝）"><a href="#2-mmap-write（4-次切换，和-3-次拷贝）" class="headerlink" title="2 mmap + write（4 次切换，和 3 次拷贝）"></a>2 mmap + write（4 次切换，和 3 次拷贝）</h4><p><code>read()</code> 系统调用的过程中会把内核缓冲区的数据拷贝到用户的缓冲区里，于是为了减少这一步开销，我们可以用 <code>mmap()</code> 替换 <code>read()</code> 系统调用函数。</p>
+<p><code>mmap()</code> 系统调用函数会直接把内核缓冲区里的数据「<strong>映射</strong>」到用户空间，这样，操作系统内核与用户空间就不需要再进行任何的数据拷贝操作。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">buf</span> = mmap(file, len);</span><br><span class="line">write(sockfd, buf, len);</span><br></pre></td></tr></table></figure>
+
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212253.png" alt="6405" style="zoom:50%;">
+
+<p><strong>数据不用来回从内核态拷贝到用户态（只进行一个映射），减少了一次拷贝的过程</strong></p>
+<h4 id="3-sendfile（2-次切换，和-3-次拷贝-2次拷贝）"><a href="#3-sendfile（2-次切换，和-3-次拷贝-2次拷贝）" class="headerlink" title="3 sendfile（2 次切换，和 3 次拷贝/2次拷贝）"></a>3 sendfile（2 次切换，和 3 次拷贝/2次拷贝）</h4><p>在 Linux 内核版本 2.1 中，提供了一个专门发送文件的系统调用函数 <code>sendfile()</code>，函数形式如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;sys/socket.h&gt;</span></span><br><span class="line"><span class="attribute">ssize_t</span> sendfile(int out_fd, int in_fd, off_t *offset, size_t count);</span><br></pre></td></tr></table></figure>
+
+<p><code>sendfile()</code>可以替代前面的 <code>read()</code> 和 <code>write()</code> 这两个系统调用，这样就可以减少一次系统调用，也就减少了 2 次上下文切换的开销。</p>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212257.png" alt="6405" style="zoom:50%;">
+
+<p>对于支持网卡支持 SG-DMA 技术的情况下，还可以直接通过SG-DMA拷贝，将内核缓存区的数据直接拷贝到网卡上，可以再省一次的拷贝过程：</p>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212259.png" alt="6405" style="zoom:50%;">
+
+
+
+<p>这就是所谓的<strong>零拷贝（*Zero-copy*）技术，因为我们没有在内存层面（内核内存和用户内存）去拷贝数据，也就是说全程没有通过 CPU 来搬运数据，所有的数据都是通过 DMA 来进行传输的。</strong></p>
+<p>零拷贝技术的文件传输方式相比传统文件传输的方式，减少了 2 次上下文切换和数据拷贝次数，<strong>只需要 2 次上下文切换和数据拷贝次数，就可以完成文件的传输，而且 2 次的数据拷贝过程，都不需要通过 CPU，2 次都是由 DMA 来搬运。</strong></p>
+<p>所以，总体来看，<strong>零拷贝技术可以把文件传输的性能提高至少一倍以上</strong>。</p>
+<h3 id="4-3-传输大文件（异步直接IO）"><a href="#4-3-传输大文件（异步直接IO）" class="headerlink" title="4.3 传输大文件（异步直接IO）"></a>4.3 传输大文件（异步直接IO）</h3><blockquote>
+<p>零拷贝使用了内核缓存区PageCache（一种高速缓存）来缓存磁盘数据，提高了效率，但显然不适用于大文件的传输（高速缓存区放不下大文件）</p>
+</blockquote>
+<p>针对大文件的传输，不应该使用 PageCache，也就是说不应该使用零拷贝技术，因为可能由于 PageCache 被大文件占据，而导致「热点」小文件无法利用到 PageCache，这样在高并发的环境下，会带来严重的性能问题。</p>
+<p><strong>传输大文件应当使用：异步IO+直接IO</strong>（即不使用PageCache内核高速缓存）</p>
+<p>直接 I/O 应用场景常见的两种：</p>
+<ul>
+<li>应用程序已经实现了磁盘数据的缓存，那么可以不需要 PageCache 再次缓存，减少额外的性能损耗。在 MySQL 数据库中，可以通过参数设置开启直接 I/O，默认是不开启；</li>
+<li>传输大文件的时候，由于大文件难以命中 PageCache 缓存，而且会占满 PageCache 导致「热点」文件无法充分利用缓存，从而增大了性能开销，因此，这时应该使用直接 I/O。</li>
+</ul>
+<p>在 nginx 中，我们可以用如下配置，来根据文件的大小来使用不同的方式：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> /video/ &#123; </span><br><span class="line">    <span class="attribute">sendfile</span> <span class="literal">on</span>; </span><br><span class="line">    <span class="attribute">aio</span> <span class="literal">on</span>; </span><br><span class="line">    <span class="attribute">directio</span> <span class="number">1024m</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 当文件大小大于 directio 值后，使用「异步 I/O + 直接 I/O」，否则使用「零拷贝技术」。</span></span><br></pre></td></tr></table></figure>
     </div>
 
     <div>
@@ -543,8 +647,8 @@
       <i class="fa fa-chevron-left"></i> 计算机网络大赏
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/11/18/%E7%AE%97%E6%B3%95_07_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="next" title="动态规划-力扣题解">
-      动态规划-力扣题解 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/07/26/%E9%9D%A2%E7%BB%8F_03_JAVA%E4%B9%8B%E5%9F%BA%E7%A1%80/" rel="next" title="Java基础小解">
+      Java基础小解 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -604,7 +708,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">1 操作系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 操作系统的基本特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E6%A0%B8%E6%80%81%E5%92%8C%E7%94%A8%E6%88%B7%E6%80%81%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 什么是内核态和用户态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E7%94%A8%E6%88%B7%E6%80%81%E5%90%91%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88%E4%B9%9F%E5%8F%AB%E4%B8%AD%E6%96%AD%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 用户态向内核态切换的三种方式（也叫中断分类）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">2 进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BA%BF%E7%A8%8B-%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 线程&#x2F;进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%BF%9B%E7%A8%8B%E7%9A%845%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 进程的5种状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 进程间通信的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">2.4.</span> <span class="nav-text">2.3* 进程同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">2.4 进程的调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%AD%BB%E9%94%81%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">2.5 死锁的四个必要条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%87%BA%E7%8E%B0%E6%AD%BB%E9%94%81%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86"><span class="nav-number">2.7.</span> <span class="nav-text">2.6 出现死锁如何处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">3 操作系统的内存管理基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E3%80%90%E8%87%AA%E7%94%A8%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 什么是虚拟内存？为什么要引入虚拟内存【自用】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%92%8C%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E5%8F%8A%E5%85%B6%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 虚拟地址和物理地址及其转换原理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%BF%AB%E8%A1%A8%E5%92%8C%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 快表和多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%B8%B8%E7%94%A8%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 常用的页面置换算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%88%86%E6%AE%B5%E5%92%8C%E6%AE%B5%E9%A1%B5%E5%BC%8F%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 分段和段页式管理机制</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">1 操作系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 操作系统的基本特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E6%A0%B8%E6%80%81%E5%92%8C%E7%94%A8%E6%88%B7%E6%80%81%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 什么是内核态和用户态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E7%94%A8%E6%88%B7%E6%80%81%E5%90%91%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88%E4%B9%9F%E5%8F%AB%E4%B8%AD%E6%96%AD%E5%88%86%E7%B1%BB%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 用户态向内核态切换的三种方式（也叫中断分类）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">2 进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%BA%BF%E7%A8%8B-%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 线程&#x2F;进程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%BF%9B%E7%A8%8B%E7%9A%845%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 进程的5种状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 进程间通信的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">2.4.</span> <span class="nav-text">2.3* 进程同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.</span> <span class="nav-text">2.4 进程的调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%AD%BB%E9%94%81%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">2.5 死锁的四个必要条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%87%BA%E7%8E%B0%E6%AD%BB%E9%94%81%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86"><span class="nav-number">2.7.</span> <span class="nav-text">2.6 出现死锁如何处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="nav-number">3.</span> <span class="nav-text">3 操作系统的内存管理基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E3%80%90%E8%87%AA%E7%94%A8%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 什么是虚拟内存？为什么要引入虚拟内存【自用】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%92%8C%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E5%8F%8A%E5%85%B6%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 虚拟地址和物理地址及其转换原理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%BF%AB%E8%A1%A8%E5%92%8C%E5%A4%9A%E7%BA%A7%E9%A1%B5%E8%A1%A8"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 快表和多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%B8%B8%E7%94%A8%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 常用的页面置换算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E5%88%86%E6%AE%B5%E5%92%8C%E6%AE%B5%E9%A1%B5%E5%BC%8F%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 分段和段页式管理机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A3%81%E7%9B%98IO"><span class="nav-number">4.</span> <span class="nav-text">4 操作系统磁盘IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E4%B8%89%E7%A7%8DIO%E6%96%B9%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 三种IO方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BC%A0%E7%BB%9F%E7%9A%84%E5%BF%99%E7%AD%89%E5%BE%85IO%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">1 传统的忙等待IO过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%BC%82%E6%AD%A5IO%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.2.</span> <span class="nav-text">2 异步IO过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-DMA%E4%B8%AD%E6%96%ADIO%E8%BF%87%E7%A8%8B"><span class="nav-number">4.1.3.</span> <span class="nav-text">3 DMA中断IO过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BC%A0%E8%BE%93%E5%B0%8F%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 零拷贝技术（传输小文件）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%EF%BC%884%E6%AC%A1%E5%88%87%E6%8D%A2%E3%80%814%E6%AC%A1%E6%8B%B7%E8%B4%9D%EF%BC%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">1 传统的文件传输模式（4次切换、4次拷贝）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-mmap-write%EF%BC%884-%E6%AC%A1%E5%88%87%E6%8D%A2%EF%BC%8C%E5%92%8C-3-%E6%AC%A1%E6%8B%B7%E8%B4%9D%EF%BC%89"><span class="nav-number">4.2.2.</span> <span class="nav-text">2 mmap + write（4 次切换，和 3 次拷贝）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-sendfile%EF%BC%882-%E6%AC%A1%E5%88%87%E6%8D%A2%EF%BC%8C%E5%92%8C-3-%E6%AC%A1%E6%8B%B7%E8%B4%9D-2%E6%AC%A1%E6%8B%B7%E8%B4%9D%EF%BC%89"><span class="nav-number">4.2.3.</span> <span class="nav-text">3 sendfile（2 次切换，和 3 次拷贝&#x2F;2次拷贝）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BC%A0%E8%BE%93%E5%A4%A7%E6%96%87%E4%BB%B6%EF%BC%88%E5%BC%82%E6%AD%A5%E7%9B%B4%E6%8E%A5IO%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 传输大文件（异步直接IO）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -618,7 +722,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -631,7 +735,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

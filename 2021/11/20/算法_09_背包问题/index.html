@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wukang555.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="动态规划之背包问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="背包问题-力扣题解">
+<meta property="og:url" content="https://wukang555.github.io/2021/11/20/%E7%AE%97%E6%B3%95_09_%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="落风的风">
+<meta property="og:description" content="动态规划之背包问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112213518.png">
+<meta property="article:published_time" content="2021-11-20T14:55:00.000Z">
+<meta property="article:modified_time" content="2021-11-12T14:32:59.917Z">
+<meta property="article:author" content="Wu kang">
+<meta property="article:tag" content="力扣">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="背包问题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112213518.png">
+
+<link rel="canonical" href="https://wukang555.github.io/2021/11/20/%E7%AE%97%E6%B3%95_09_%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>背包问题-力扣题解 | 落风的风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落风的风" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">落风的风</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wukang555.github.io/2021/11/20/%E7%AE%97%E6%B3%95_09_%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wu kang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落风的风">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          背包问题-力扣题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-20 22:55:00" itemprop="dateCreated datePublished" datetime="2021-11-20T22:55:00+08:00">2021-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 22:32:59" itemprop="dateModified" datetime="2021-11-12T22:32:59+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>动态规划之背包问题。</p>
+<a id="more"></a>
+
+<blockquote>
+<p>讲解背包问题最经典的当属《背包九讲》，之前看了前面一点点，现在又忘了，所以还是的写笔记</p>
+<p>面试需要，不做太深入的了解。这里仅学习零一背包、完全背包和多重背包问题</p>
+<p>[1] 参考了<a target="_blank" rel="noopener" href="https://github.com/tianyicui/pack">背包九讲</a>  背包九讲就是讲背包的永远滴神</p>
+</blockquote>
+<h1 id="1-背包问题介绍"><a href="#1-背包问题介绍" class="headerlink" title="1 背包问题介绍"></a>1 背包问题介绍</h1><h2 id="1-1-背包问题的基本描述和分类"><a href="#1-1-背包问题的基本描述和分类" class="headerlink" title="1.1 背包问题的基本描述和分类"></a>1.1 背包问题的基本描述和分类</h2><blockquote>
+<p>背包问题的基本描述：有N件物品和一个最多能装重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。</p>
+</blockquote>
+<ul>
+<li>01背包：每种物品仅有一件，可以选择放或不放。求解将哪些物品装入背包可使价值总和最大。</li>
+<li>完全背包：每种物品都有无限件可用，求解将哪些物品装入背包可使价值总和最大。</li>
+<li>多重背包：每件物品的数量由nums[i]表示，求解价值总和最大的装法。</li>
+</ul>
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112213518.png" alt="416.分割等和子集1" style="zoom:80%;">
+
+<h2 id="1-2-背包问题的基本解法（01背包为例）"><a href="#1-2-背包问题的基本解法（01背包为例）" class="headerlink" title="1.2 背包问题的基本解法（01背包为例）"></a>1.2 背包问题的基本解法（01背包为例）</h2><blockquote>
+<p>就是动态规划，但不同问题，遍历计算的顺序大不相同。</p>
+<p>动态规划的三大要点：1状态  2确定初始化和重点 3列出状态转移方程</p>
+</blockquote>
+<p><strong>为什么要用动态规划？</strong></p>
+<p>一个物品存在选择或者不选择两种情况，暴力解法就是2^n种选择。显然需要用动态规划保存状态来降低时间复杂度。</p>
+<p><strong>基础的01背包案例：背包容量为n、一共有m个物品，物品重量数组W[1:m]，价值数组V[1:m]</strong></p>
+<ul>
+<li>状态<code>dp[i][j]</code>表示从前<code>i</code>个的物品种任意取，放进容量为<code>j</code>的背包，能获得的最大价值总和</li>
+<li>初始化状态和终点<ul>
+<li> <code>dp[i][0]=0</code>（容量为0的背包取出的价值为0）<code>dp[0][j]=0</code> （没有任何物品取出价值为0）</li>
+<li><code>dp[i][j]=dp[i-1][j]</code>（因为多一个物品一定比少一个物品获得可能的结果更大，所以可以用上一个状态表示初始值）</li>
+<li>终点：<code>dp[m][n]</code> 一共有m个物品，背包容量为n</li>
+</ul>
+</li>
+<li>状态转移方程<ul>
+<li>若(j-W[i-1]&gt;0),就表示W[i-1]元素可以作为填充背包的一部分，即</li>
+<li><code>dp[i][j] = Math.max(dp[i-1][j],dp[i-1][j-W[i-1]]+V[i-1]);</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPack01</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span>[] W, <span class="keyword">int</span>[] V)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//dp[i][j]表示将前i个元素的组合、装入容量为j的背包 能获得的最大价值</span></span><br><span class="line">    <span class="comment">//显然dp[i][j]的值一定大于等于dp[i-1][j]，可以所谓基础值</span></span><br><span class="line">    <span class="comment">//初始化 dp[..][0] = 0;</span></span><br><span class="line">    <span class="comment">//终点 dp[n][m]</span></span><br><span class="line">    <span class="comment">//动态迭代</span></span><br><span class="line">    <span class="comment">//先令dp[i][j]=dp[i-1][j],,若(j-W[i-1]&gt;0),就表示W[i-1]元素可以作为填充背包的一部分，则</span></span><br><span class="line">    <span class="comment">//dp[i][j] = max(dp[i-1][j],dp[i-1][j-W[i-1]]+V[i-1]);</span></span><br><span class="line">    <span class="keyword">int</span> n = A.length;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;++j)&#123;</span><br><span class="line">            dp[i][j]=dp[i-<span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">if</span>(j-W[i-<span class="number">1</span>]&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                dp[i][j] = Math.max(dp[i-<span class="number">1</span>][j],dp[i-<span class="number">1</span>][j-W[i-<span class="number">1</span>]]+V[i-<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n][m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由遍历过程我们可以知道，<code>dp[i][j]</code>层都是由<code>dp[i-1][j]</code>层推导过来的，其实可以只使用一维数组保存状态。</p>
+<p><strong>要注意到，此时<code>j</code>的循环必须是从大到小的逆序循环！！ 因为<code>dp[i][j]</code>是由<code>dp[i-1][j]</code>  <code>dp[i-1][j-w[i-1]]</code>推导而来，，每次求<code>j</code>的位置的值 用到了<code>j</code>位置和<code>j</code>之前位置的元素！！！</strong></p>
+<p>代码如下，不再赘述：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPack01</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span>[] W, <span class="keyword">int</span>[] V)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>];<span class="comment">//表示容量为j的背包的最大价值和</span></span><br><span class="line">    <span class="keyword">int</span> n = W.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=m; j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j-W[i-<span class="number">1</span>]&gt;=<span class="number">0</span>) dp[j] = Math.max(dp[j],dp[j-W[i-<span class="number">1</span>]]+V[i-<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-01背包题解"><a href="#2-01背包题解" class="headerlink" title="2 01背包题解"></a>2 01背包题解</h1><blockquote>
+<p>了解概念之后、直接刷题学习</p>
+<p>0/1背包类型：5m、53e、55m、62m、70e、91m、121e、139m、152m、198m、 213m、300m、303e、309m、322m、338m、377m、<strong>416m</strong>、647m、673m、698m</p>
+<p>416 1049 494 474</p>
+</blockquote>
+<h2 id="92-·-背包问题"><a href="#92-·-背包问题" class="headerlink" title="92 · 背包问题"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/92/">92 · 背包问题</a></h2><blockquote>
+<p>在<code>n</code>个物品中挑选若干物品装入背包，最多能装多满？假设背包的大小为<code>m</code>，每个物品的大小为<code>A[i]</code></p>
+</blockquote>
+<p>思路：<code>dp[i][j]</code> 表示使用前<code>i</code>个物品最多能将容量为<code>j</code>的背包装的容量大小</p>
+<ul>
+<li>初始化<code>dp[i][0]=0  dp[0][j]=0</code>  <code>dp[i][j] = dp[i-1][j]</code></li>
+<li>迭代方程<code>if(j&gt;A[i-1]) dp[i][j] = dp[i-1][j-A[i-1]]+A[i-1]</code></li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPack</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// `dp[i][j]` 表示使用前`i`个物品最多能将容量为`j`的背包装的容量大小</span></span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>][m+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="keyword">if</span>(j&gt;=A[i-<span class="number">1</span>]) dp[i][j] = Math.max(dp[i-<span class="number">1</span>][j], dp[i-<span class="number">1</span>][j-A[i-<span class="number">1</span>]]+A[i-<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="416-分割等和子集"><a href="#416-分割等和子集" class="headerlink" title="416. 分割等和子集"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a></h2><blockquote>
+<p>给你一个 只包含正整数 的 非空 数组 nums 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+<p>输入：nums = [1,5,11,5]<br>输出：true<br>解释：数组可以分割成 [1, 5, 5] 和 [11] 。</p>
+</blockquote>
+<p>思路：<strong>做这道题需要做一个等价转换：两子集元素和相等即表示：是否可以从输入数组中挑选出一些正整数，使得这些数的和 等于 整个数组元素的和的一半。</strong></p>
+<p>所以题目变成了，是否可以挑出一些数来是他们的和等于sum/2。挑选的过程就类似与背包选择的过程。经典的背包问题是能装多满、这里问的是是否刚好等于，所以状态数组<code>dp[][]</code>是boolean类型的</p>
+<ul>
+<li>状态<code>dp[i][j]</code> 表示使用前<code>i</code>个元素，是否存在一个组合使其和为<code>j</code><ul>
+<li>i从0到n-1，，j从0到target</li>
+</ul>
+</li>
+<li>初始化 <code>dp[i][0]=false</code>; <code>dp[0][j]=true(if nums[0]==j)</code> ;<code>dp[i][j] = dp[i - 1][j]</code></li>
+<li>终点 <code>dp[n-1][sum/2]</code>;</li>
+<li>动态迭代 <code>if(j-nums[i]&gt;=0 &amp;&amp; dp[i-1][j-nums[i]]) dp[i][j] = true;</code></li>
+</ul>
+<p>依然可以看到<code>dp[i][j] = dp[i - 1][j]</code>类似的初始化，因为多一个元素一定比少一个元素的结果更理想，</p>
+<p>然后动态迭代时，同样也用到了<code>dp[i-1][j-nums[i]]</code> 之前的状态，即使用nums[i]和不使用nums[i]存在明显的先后关系！！</p>
+<p>代码：细节挺多的，不容易ak</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canPartition</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//dp[i][j]表示前i个数是否能组合出j的整数和</span></span><br><span class="line">        <span class="comment">//目标值target就是sum的一半</span></span><br><span class="line">        <span class="keyword">int</span> n = nums.length;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) sum+=nums[i];</span><br><span class="line">        <span class="keyword">if</span>(sum%<span class="number">2</span>!=<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">int</span> target = sum/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][target+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) dp[i][<span class="number">0</span>] = <span class="keyword">false</span>; <span class="comment">//可写可不写</span></span><br><span class="line">        <span class="comment">//0个数一定组合不出来什么 这样的初始状态无意义 所以要从1个数开始</span></span><br><span class="line">        <span class="keyword">if</span>(nums[<span class="number">0</span>]&lt;=target) dp[<span class="number">0</span>][nums[<span class="number">0</span>]] = <span class="keyword">true</span>; <span class="comment">//这里的判断别忘记加</span></span><br><span class="line">        <span class="comment">//for(int j=0;j&lt;=target;j++) dp[0][j] = nums[0]==j? true:false;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=target;j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="keyword">if</span>(j-nums[i]&gt;=<span class="number">0</span> &amp;&amp; dp[i-<span class="number">1</span>][j-nums[i]]) dp[i][j] = <span class="keyword">true</span> ; </span><br><span class="line">                <span class="comment">//这里必须这么写 防止把true变为了false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>][target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="494-目标和"><a href="#494-目标和" class="headerlink" title="494. 目标和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/target-sum/">494. 目标和</a></h2><blockquote>
+<p>给你一个整数数组 nums 和一个整数 target 。</p>
+<p>向数组中的每个整数前添加 ‘+’ 或 ‘-‘ ，然后串联起所有整数，可以构造一个 表达式 ：</p>
+<p>例如，nums = [2, 1] ，可以在 2 之前添加 ‘+’ ，在 1 之前添加 ‘-‘ ，然后串联起来得到表达式 “+2-1” 。<br>返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。</p>
+<p>输入：nums = [1,1,1,1,1], target = 3<br>输出：5<br>解释：一共有 5 种方法让最终目标和为 3 。<br>-1 + 1 + 1 + 1 + 1 = 3<br>+1 - 1 + 1 + 1 + 1 = 3<br>+1 + 1 - 1 + 1 + 1 = 3<br>+1 + 1 + 1 - 1 + 1 = 3<br>+1 + 1 + 1 + 1 - 1 = 3</p>
+</blockquote>
+<p>下意识看到觉得好难，然后思路是回溯….</p>
+<p>方法一：回溯法（为什么不需要用for循环呢？)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sumIndex = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//自己再尝试一下回溯写法</span></span><br><span class="line">        backtrack(nums,target,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target, <span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index==nums.length) &#123;</span><br><span class="line">            <span class="keyword">if</span>(sumIndex == target) count++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//做加法的选择</span></span><br><span class="line">        sumIndex += nums[index];</span><br><span class="line">        backtrack(nums,target,index+<span class="number">1</span>);</span><br><span class="line">        sumIndex -= nums[index];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//做减法的选择</span></span><br><span class="line">        sumIndex -= nums[index];</span><br><span class="line">        backtrack(nums,target,index+<span class="number">1</span>);</span><br><span class="line">        sumIndex +=nums[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//还是先写一遍递归的吧 最适合面试A</span></span><br><span class="line">        helper(<span class="number">0</span>,<span class="number">0</span>,nums,target);</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> SumIndex, <span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index&gt;=nums.length)&#123;</span><br><span class="line">            <span class="keyword">if</span>(SumIndex==target) count++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            helper(index+<span class="number">1</span>,SumIndex+nums[index], nums,target);</span><br><span class="line">            helper(index+<span class="number">1</span>,SumIndex-nums[index],nums,target);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法三：动态规划（01背包问题）</strong></p>
+<p>思路：看起来不像01背包、但其实就是01背包</p>
+<ul>
+<li><code>dp[i][j]</code> 表示前i个元素可以组成j值的组合数目</li>
+<li>动态规划问题，建议先考虑迭代方程（这样你才知道需要初始化哪些位置：因为不一定总是第1行第1列）</li>
+<li><code>dp[i][j] = dp[i-1][j-nums[i]] + dp[i-1][j+nums[i]]</code> //总是由上一行推导这一行，所以初始化第一行就ok</li>
+<li> <code>dp[0][j]</code> //第一个元素组合出j的种数，，那就是<code>dp[0][nums[i]] += 1; dp[0][-nums[i]] += 1</code>; 就完事  ！！注意用+=因为这两个可能是同一个位置！！</li>
+<li>最后因为<code>j</code>可能为负数，且范围是[-1000,1000], 所以<code>j</code>索引的位置总是+1000，使索引非负</li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//dp[i][j] 表示前i个元素可以组成j值的组合数目</span></span><br><span class="line">        <span class="keyword">int</span> m = nums.length; <span class="keyword">int</span> n = <span class="number">2001</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m][n];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        dp[<span class="number">0</span>][nums[<span class="number">0</span>]+<span class="number">1000</span>] += <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">0</span>][-nums[<span class="number">0</span>]+<span class="number">1000</span>] += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=-<span class="number">1000</span>;j&lt;=<span class="number">1000</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(j-nums[i]+<span class="number">1000</span>&gt;=<span class="number">0</span>) dp[i][j+<span class="number">1000</span>] += dp[i-<span class="number">1</span>][j-nums[i]+<span class="number">1000</span>]; </span><br><span class="line">                <span class="keyword">if</span>(j+nums[i]+<span class="number">1000</span>&lt;=<span class="number">2000</span>) dp[i][j+<span class="number">1000</span>] += dp[i-<span class="number">1</span>][j+nums[i]+<span class="number">1000</span>]; </span><br><span class="line">                <span class="comment">//if(j==0) System.out.println(dp[i][j+1000]);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][target+<span class="number">1000</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么说他是零一背包的问题呢？因为都是由上一行的状态推导这一行，并且推导过程需要减去（加上）<code>nums[i]</code></p>
+<ul>
+<li><code>dp[i][j] += dp[i-1][j-nums[i]]</code></li>
+<li><code>dp[i][j] += dp[i-1][j+nums[i]]</code></li>
+</ul>
+<h2 id="474-一和零"><a href="#474-一和零" class="headerlink" title="474. 一和零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/">474. 一和零</a></h2><blockquote>
+<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+<p>输入：strs = [“10”, “0001”, “111001”, “1”, “0”], m = 5, n = 3<br>输出：4<br>解释：最多有 5 个 0 和 3 个 1 的最大子集是 {“10”,”0001”,”1”,”0”} ，因此答案是 4 。<br>其他满足题意但较小的子集包括 {“0001”,”1”} 和 {“10”,”1”,”0”} 。{“111001”} 不满足题意，因为它含 4 个 1 ，大于 n 的值 3 。</p>
+</blockquote>
+<p>思路：就是多了一维的01背包问题</p>
+<ul>
+<li><code>dp[i][j][k]</code> 表示前<code>i</code>索引的字符串 满足0的个数&lt;=j &amp;&amp; 1的个数&lt;=k的最大子集的大小</li>
+<li><code>dp[i][j][k] = dp[i-1][k][j]</code>; <code>dp[i][j][k] = dp[i-1][j-a][k-b]+1</code>    a、b分别表示strs[i]中0和1的个数</li>
+<li>初始化：01背包问题都是有上一行推导下一行、所以只用初始化第一行<code>dp[0][j][k] =1 if(j&gt;=a&amp;&amp;k&gt;=b)</code></li>
+</ul>
+<p>代码：其实代码简单、就是不容易想到是01背包问题…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(String[] strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//恐怖如斯，，我思路和题解完全一致..多了一维的01背包问题</span></span><br><span class="line">        <span class="comment">//dp[i][j][k] 表示前i索引的字符串 满足0的个数&lt;=j &amp;&amp; 1的个数&lt;=k的最大子集的大小</span></span><br><span class="line">        <span class="keyword">int</span> len = strs.length;</span><br><span class="line">        <span class="keyword">int</span>[][][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[len][m+<span class="number">1</span>][n+<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span>[] temp = getCount(strs[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=m;j&gt;=temp[<span class="number">0</span>];j--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=n;k&gt;=temp[<span class="number">1</span>];k--)&#123;</span><br><span class="line">                dp[<span class="number">0</span>][j][k]=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=n;k++)&#123;</span><br><span class="line">                    dp[i][j][k] = dp[i-<span class="number">1</span>][j][k];</span><br><span class="line">                    temp = getCount(strs[i]);</span><br><span class="line">                    <span class="keyword">if</span>(temp[<span class="number">0</span>]&lt;=j&amp;&amp;temp[<span class="number">1</span>]&lt;=k) dp[i][j][k] = Math.max(dp[i][j][k], dp[i-<span class="number">1</span>][j-temp[<span class="number">0</span>]][k-temp[<span class="number">1</span>]]+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[len-<span class="number">1</span>][m][n];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] getCount(String s)&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i)==<span class="string">&#x27;0&#x27;</span>) a++;</span><br><span class="line">            <span class="keyword">else</span> b++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;a,b&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="3-完全背包题解"><a href="#3-完全背包题解" class="headerlink" title="3 完全背包题解"></a>3 完全背包题解</h1><blockquote>
+<p><strong>518</strong> 377  322 279 139</p>
+<p>70 爬楼梯是完全背包？我不会写了</p>
+</blockquote>
+<h2 id="440-·-背包问题-III"><a href="#440-·-背包问题-III" class="headerlink" title="440 · 背包问题 III"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/440/">440 · 背包问题 III</a></h2><blockquote>
+<p>给定 <code>n</code> 种物品, 每种物品都有无限个. 第 <code>i</code> 个物品的体积为 <code>A[i]</code>, 价值为 <code>V[i]</code>.</p>
+<p>再给定一个容量为 <code>m</code> 的背包. 问可以装入背包的最大价值是多少?</p>
+<p><strong>样例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: A &#x3D; [2, 3, 5, 7], V &#x3D; [1, 5, 2, 4], m &#x3D; 10</span><br><span class="line">输出: 15</span><br><span class="line">解释: 装入三个物品 1 (A[1] &#x3D; 3, V[1] &#x3D; 5), 总价值 15.</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>思路一：先来一个01背包的解法。（01生万物）</strong></p>
+<ul>
+<li>   完全背包问题，<strong>三层循环</strong></li>
+<li>   <code>dp[i][j]</code>表示前<code>i</code>索引物品任意取，背包容量为<code>j</code>时的最大价值</li>
+<li><pre><code>动态迭代 第`i`索引物品最多使用的个数是 `m/A[i]`   所以次数`k`取0到`m/A[i]`</code></pre>
+</li>
+<li>   ``dp[i][j] = max(dp[i][j], dp[i-1][j-k<em>A[i-1]]+k</em>V[i-1])`</li>
+<li>   初始化 <code>dp[0][j]=j/A[0]*A[0]</code>; <code>dp[i][j]=dp[i-1][j] </code>终点<code>dp[n-1][m]</code></li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPackIII</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] V, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 完全背包问题，三层循环</span></span><br><span class="line">        <span class="comment">// dp[i][j]表示前i索引物品任意取，背包容量为j时的最大价值</span></span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][m+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;=m;j++) dp[<span class="number">0</span>][j] = j/A[<span class="number">0</span>]*A[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//动态迭代</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k =<span class="number">0</span>;k&lt;=m/A[i];k++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(j-k*A[i]&gt;=<span class="number">0</span>)</span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i-<span class="number">1</span>][j-k*A[i]]+k*V[i] );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思考：</p>
+<ul>
+<li><p><code>dp[i][j]=dp[i-1][j] </code> 同样采用了多用一个元素一定比少用一个元素结果更理想的01背包思想！！</p>
+</li>
+<li><p>动态迭代方程采用<code>dp[i-1][j-k*A[i]]+k*V[i]</code>，表示在上一行的选择基础上、选择k个A[i]元素的价值，，取其中的最大值就好了。就是多了一层k循环的01背包问题</p>
+</li>
+</ul>
+<p><strong>思路二：对于时间问题的简化</strong></p>
+<p>01背包问题是每个物品只能选一次、所以我们只能在上一行未选择A[i]这个元素的基础上继续做选择（选或者不选），，，而完全背包的问题是A[i]这个元素可以选择任意次，所以<strong>我们可以直接在本行已选择A[i]的基础上继续选择！！！</strong>，这就是完全背包和01背包最根本的区别，<strong>所需的改动也仅仅是动态方程中从上行<code>[i-1]</code>选还是从本行<code>[i]</code>选</strong></p>
+<p>一旦我们从本行选择、就无需每次都遍历k次，直接减少一层循环！！因为本行的<code>dp[i][j]</code>用到了本行的<code>dp[i][j-A[i]]</code>所以，<code>j</code>一定过要从小到大遍历！！</p>
+<ul>
+<li> <code>dp[i][j]</code>表示前<code>i</code>索引物品任意取，背包容量为<code>j</code>时的最大价值</li>
+<li>动态迭代： <code>dp[i][j] = max(dp[i][j], dp[i][j-k*A[i-1]]+k*V[i-1])</code></li>
+<li>注意因为 <code>dp[i</code>][j]用到了<code>dp[i][j-k*A[i-1]]</code>，所以<code>j</code>的循环要从小到大</li>
+<li>初始化 <code>dp[0][j]=j/A[0]*A[0]</code>;   <code>dp[i][j]=dp[i-1</code>][j] 终点<code>dp[n-1</code>][m]</li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPackIII</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] V, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 方法二：完全背包问题的时间优化</span></span><br><span class="line">        <span class="comment">// dp[i][j]表示前i索引物品任意取，背包容量为j时的最大价值</span></span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n][m+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;=m;j++) dp[<span class="number">0</span>][j] = j/A[<span class="number">0</span>]*A[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//动态迭代</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i= <span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                    <span class="keyword">if</span>(j-A[i]&gt;=<span class="number">0</span>)</span><br><span class="line">                    dp[i][j] = Math.max(dp[i][j], dp[i][j-A[i]]+V[i] );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>][m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>思路三：进一步对空间问题的简化</strong></p>
+<p>因为求本行的数据只用到了上一行<code>j</code>位置的数据，和本行<code>j</code>之前的数据，所以一维数组就可以(和01背包的空间优化是一个思路)</p>
+<ul>
+<li><code>dp[j]</code>表示示前<code>i</code>个物品任意取，背包容量为<code>j</code>时的最大价值</li>
+<li>动态迭代 j从0迭代到m，，i还是从1迭代到n，，O(mn)时间复杂度</li>
+<li><code>dp[j] = Math.max(dp[j], dp[j-A[i]]+V[i])</code>;</li>
+<li>初始化 <code>dp[j]== j/A[0]*A[0]</code>; 终点<code>dp[m]</code></li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">backPackIII</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] V, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//方法三：完全背包 时间空间都优化</span></span><br><span class="line">        <span class="comment">//dp[j]表示示前i个物品任意取，背包容量为j时的最大价值</span></span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;=m;j++) dp[j] = j/A[<span class="number">0</span>]*A[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//动态迭代</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">                <span class="comment">//dp[j] = dp[j];</span></span><br><span class="line">                <span class="keyword">if</span>(j-A[i]&gt;=<span class="number">0</span>)</span><br><span class="line">                dp[j] = Math.max(dp[j], dp[j-A[i]]+V[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>所以完全背包问题的时间空间简化版本、和01背包的空间优化版本，其实就只有一个<code>j</code>遍历顺序的差别</strong></p>
+<h2 id="518-零钱兑换-II"><a href="#518-零钱兑换-II" class="headerlink" title="518. 零钱兑换 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h2><blockquote>
+<p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p>
+<p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p>
+<p>假设每一种面额的硬币有无限个。 </p>
+<p>题目数据保证结果符合 32 位带符号整数。</p>
+<p>输入：amount = 5, coins = [1, 2, 5]<br>输出：4<br>解释：有四种方式可以凑成总金额：<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p>
+</blockquote>
+<p><strong>思路：完全背包问题，注意第一行的初始化方式！！</strong></p>
+<ul>
+<li><code>dp[i][j]</code>表示前<code>i</code>索引的硬币，能够拼成<code>j</code>的组合数</li>
+<li><code>dp[i][j] += dp[i][j-coins[i]]</code></li>
+<li>初始化 <code>if(j%coins[0]==0) dp[0][j] = 1</code>,,, <code>dp[i][j]= dp[i-1][j]</code>;</li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="keyword">int</span>[] coins)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//典型完全背包问题</span></span><br><span class="line">        <span class="comment">//dp[i][j]表示前i索引的硬币，能够拼成j的组合数</span></span><br><span class="line">        <span class="keyword">int</span> m = coins.length;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span> [m][amount+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化 只要j%coins[0]==0 dp[0][j]=1;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=amount;j++) <span class="keyword">if</span>(j%coins[<span class="number">0</span>]==<span class="number">0</span>) dp[<span class="number">0</span>][j] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//动态迭代</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=amount;j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">                <span class="keyword">if</span>(j-coins[i]&gt;=<span class="number">0</span>) dp[i][j] += dp[i][j-coins[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：完全背包，优化空间</strong></p>
+<ul>
+<li><code>dp[j]</code>表示前<code>i</code>索引的硬币，能够拼成<code>j</code>的组合数</li>
+<li><code>dp[j] += [j-coins[i]]</code></li>
+<li>初始化 <code>if(j%coins[0]==0) dp[j] = 1</code>,,, <code>dp[j]= dp[j]</code></li>
+</ul>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="keyword">int</span>[] coins)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//典型完全背包问题 优化空间</span></span><br><span class="line">        <span class="comment">//dp[j]表示前i索引的硬币，能够拼成j的组合数</span></span><br><span class="line">        <span class="keyword">int</span> m = coins.length;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span> [amount+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">//初始化 只要j%coins[0]==0 dp[0][j]=1;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=amount;j++) <span class="keyword">if</span>(j%coins[<span class="number">0</span>]==<span class="number">0</span>) dp[j] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//动态迭代</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=amount;j++)&#123;</span><br><span class="line">                <span class="comment">//dp[j] = dp[j];</span></span><br><span class="line">                <span class="keyword">if</span>(j-coins[i]&gt;=<span class="number">0</span>) dp[j] += dp[j-coins[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h1><p>完全背包问题和01背包问题的区别在于是否可以重复选择，对应到代码层面，就是当前行是由当前行推导（完全背包）还是由上一行推导（01背包）</p>
+
+    </div>
+
+    <div>
+      
+          
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------感谢阅读<i class="fa fa-paw"></i>没事常来-------------
+        </div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag"># 力扣</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
+              <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="tag"># 背包问题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/18/%E7%AE%97%E6%B3%95_07_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="prev" title="动态规划-力扣题解">
+      <i class="fa fa-chevron-left"></i> 动态规划-力扣题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">1 背包问题介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 背包问题的基本描述和分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A7%A3%E6%B3%95%EF%BC%8801%E8%83%8C%E5%8C%85%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 背包问题的基本解法（01背包为例）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-01%E8%83%8C%E5%8C%85%E9%A2%98%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">2 01背包题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#92-%C2%B7-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">92 · 背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#416-%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86"><span class="nav-number">2.2.</span> <span class="nav-text">416. 分割等和子集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#494-%E7%9B%AE%E6%A0%87%E5%92%8C"><span class="nav-number">2.3.</span> <span class="nav-text">494. 目标和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#474-%E4%B8%80%E5%92%8C%E9%9B%B6"><span class="nav-number">2.4.</span> <span class="nav-text">474. 一和零</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85%E9%A2%98%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">3 完全背包题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#440-%C2%B7-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98-III"><span class="nav-number">3.1.</span> <span class="nav-text">440 · 背包问题 III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#518-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2-II"><span class="nav-number">3.2.</span> <span class="nav-text">518. 零钱兑换 II</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">4 总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wu kang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu kang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

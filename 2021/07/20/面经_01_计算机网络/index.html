@@ -27,18 +27,18 @@
 <meta property="og:site_name" content="落风的风">
 <meta property="og:description" content="计算机网络面经，极简共22个问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/640.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20210616092718682.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20210616102556722.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/20210616124706.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/641.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212121.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212125.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212131.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212135.png">
 <meta property="article:published_time" content="2021-07-20T14:55:00.000Z">
-<meta property="article:modified_time" content="2021-07-29T02:36:08.000Z">
+<meta property="article:modified_time" content="2021-11-12T14:05:20.416Z">
 <meta property="article:author" content="Wu kang">
 <meta property="article:tag" content="计算机网络">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/640.png">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png">
 
 <link rel="canonical" href="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
@@ -204,7 +204,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-29 10:36:08" itemprop="dateModified" datetime="2021-07-29T10:36:08+08:00">2021-07-29</time>
+                <time title="Modified: 2021-11-12 22:05:20" itemprop="dateModified" datetime="2021-11-12T22:05:20+08:00">2021-11-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,40 +235,45 @@
 <p>[2] <a target="_blank" rel="noopener" href="https://snailclimb.gitee.io/javaguide/">参考了JavaGuide的一些总结</a>]</p>
 <p>[3] <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/homepage?__biz=Mzg4MjUxMTI4NA==&hid=1&sn=991fdb47b57f5a276873f5c4d976f59f&scene=18&uin=&key=&devicetype=Windows+10+x64&version=6302019c&lang=zh_CN&ascene=7&fontgear=2">参考了公众号程序员库森的面经总结</a></p>
 </blockquote>
-<p>[TOC]</p>
 <h2 id="1-计算机网络的各层协议及作用？"><a href="#1-计算机网络的各层协议及作用？" class="headerlink" title="1. 计算机网络的各层协议及作用？"></a>1. 计算机网络的各层协议及作用？</h2><p>计算机网络体系可以大致分为一下三种，OSI七层模型、TCP/IP四层模型和五层模型。</p>
 <p>五层网络体系结构各层的主要功能：</p>
 <ul>
-<li>应用层：应用进程之间的交互来完成特定的网络应用功能，例如 HTTP、DNS 等协议。数据单位为报文。</li>
-<li>运输层：负责向两台主机进程之间的通信提供通用的数据传输服务。运输层主要有两种协议：<ul>
+<li>应用层：通过不同主机上应用进程之间的交互来完成特定的网络功能，例如 HTTP、DNS 等协议。数据单位为报文。</li>
+<li>运输层：负责为两台主机进程之间的通信提供通用的数据传输服务。运输层主要有两种协议：<ul>
 <li>TCP：提供面向连接的、可靠的数据传输服务；数据单位为报文段</li>
 <li>UDP：提供无连接的、尽最大努力的数据传输服务，但不保证数据传输的可靠性。数据单位为用户数据报</li>
 </ul>
 </li>
-<li>网络层：选择合适的路由和交换结点，确保数据及时传送。网络层把传输层传递下来的报文段或者用户数据报封装成分组。主要包括IP协议。</li>
-<li>数据链路层：将网络层传下来的IP数据报组装成帧，并再相邻节点的链路上传送帧。</li>
+<li>网络层：选择合适的路由和交换结点，确保数据及时传送。网络层把传输层传递下来的报文段或者用户数据报封装成分组进行传输。主要包括IP协议。</li>
+<li>数据链路层：将网络层传下来的IP分组封装成帧，并再相邻节点的链路上传送帧。</li>
 <li>物理层：实现相邻节点间比特流的透明传输，尽可能屏蔽传输介质和通信手段的差异，使数据链路层感觉不到这些差异。</li>
 </ul>
-<p><img src="/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/640.png" alt="图片"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png" alt="图片"></p>
 <h2 id="2-TCP和UDP的区别？"><a href="#2-TCP和UDP的区别？" class="headerlink" title="2. TCP和UDP的区别？"></a>2. TCP和UDP的区别？</h2><p>TCP\UDP都是传输层的协议，TCP指传输控制协议，UDP指用户数据报协议</p>
 <ul>
-<li>TCP 是面向连接的，而 UDP 是无连接的，发送数据之前不需要建立连接，减少了开销和发送数据之前 的时延。</li>
-<li>TCP 保证数据的可靠传输，UDP 只尽最大努力交付，即不保证可靠交付。</li>
-<li>TCP 是面向字节流的，UDP 是面向报文的。UDP 对应用层交下来的报文既不拆分也不合并，传输整个报文。当报文过短或过长都会影响网络层的传输效率。</li>
-<li>TCP 有拥塞控制，UDP 没有拥塞控制，因此网络中出现的拥塞不会降低源主机的发送速率。</li>
-<li>TCP 是点到点之间的一对一通信，UDP 支持一对一、一对多和多对多的交互通信。</li>
-<li>UDP 的首部开销很小，只有 8 字节，相比 TCP 的 20 字节要短。</li>
+<li><p>TCP 保证数据的可靠传输，UDP 只尽最大努力交付，即不保证可靠交付。</p>
+</li>
+<li><p>TCP 是面向连接的，而 UDP 是无连接的，发送数据之前不需要建立连接，减少了开销和发送数据之前 的时延。</p>
+</li>
+<li><p>TCP 是面向字节流的，UDP 是面向报文的。UDP 对应用层交下来的报文既不拆分也不合并，传输整个报文。当报文过短或过长都会影响网络层的传输效率。</p>
+</li>
+<li><p>TCP 有拥塞控制，UDP 没有拥塞控制，因此网络中出现的拥塞不会降低源主机的发送速率。</p>
+</li>
+<li><p>TCP 是点到点之间的一对一通信，UDP 支持一对一、一对多和多对多的交互通信。</p>
+</li>
+<li><p>UDP 的首部开销很小，只有 8 字节，TCP 的首部开销为20个字节。</p>
+</li>
 </ul>
-<p>适用场景的区别</p>
+<p>适应场景的区别：</p>
 <ul>
-<li>TCP：适应用于效率要求相对较低，但准确率相对要求较高的场景，例如：文件传输、接收邮件、HTTP。</li>
-<li>UDP：适用于效率要求相对较高，但准确性相对要求较低的场景， 例如：QQ聊天、在线视频、语音电话、DNS等</li>
+<li>TCP：适应用于传输效率要求较低，但准确率要求较高的场景，例如：文件传输、接收邮件、HTTP。</li>
+<li>UDP：适用于效率要求相对较高，但准确性相对较低的场景， 例如：QQ聊天、在线视频、语音电话、DNS等</li>
 </ul>
-<h2 id="3-详细介绍一下-TCP-的三次握手机制？"><a href="#3-详细介绍一下-TCP-的三次握手机制？" class="headerlink" title="3. 详细介绍一下 TCP 的三次握手机制？"></a>3. 详细介绍一下 TCP 的三次握手机制？</h2><img src="/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20210616092718682.png" alt="image-20210616092718682" style="zoom: 50%;">
+<h2 id="3-详细介绍一下-TCP-的三次握手机制？"><a href="#3-详细介绍一下-TCP-的三次握手机制？" class="headerlink" title="3. 详细介绍一下 TCP 的三次握手机制？"></a>3. 详细介绍一下 TCP 的三次握手机制？</h2><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212121.png" alt="image-20210616092718682" style="zoom: 50%;">
 
 <ul>
 <li>SYN同步字段：用来建立连接，需要消耗一个序号；ACK确认字段：是确认报文段的标识，确认报文须设置ACK为1。</li>
-<li>TCP连接是全双工通信，任何一方都可以发起连接请求，假设A是客户端，B是服务器；初始都是CLOSED状态，B会先创建一个连接控制块TCB并进入LISTEND收听状态，监听端口是否收到了连接请求、以便及时响应</li>
+<li>假设A是客户端，B是服务器；初始都是CLOSED状态，B会先创建一个连接控制块TCB并进入LISTEND收听状态，监听端口是否收到了连接请求、以便及时响应</li>
 <li>第一次握手：A主动打开，发送建立连接的请求报文、其中SYN同步字段=1，并且消耗一个序号；假设A此时的发送序号为x。发送完之后A处于SYN_SENT同步已发送的状态；</li>
 <li>第二次握手：B收到A发送过来的请求连接的报文，发送给A一个确认收到的报文。其中SYN同步字段=1，ACK确认字段=1；假设此时B的发送序号为y，确认号为x+1。发送完之后B处于SYN_RCVD同步已收到的状态；</li>
 <li>第三次握手：A收到B的确认报文之后，还要给B发送一个确认报文。其中ACK确认字段=1；发送序号为x+1，确认号为y+1；发送完之后A处于连接已建立的状态；当B收到这个确认报文后、也进入连接已建立的状态。服务器要比客户端稍晚一点进入已连接的状态</li>
@@ -285,7 +290,7 @@
 </ul>
 <p><strong>客户端：</strong></p>
 <p>客户端认为这个连接已经建立，如果客户端向服务端发送数据，服务端将以RST包（Reset，标示复位，用于异常的关闭连接）响应。此时，客户端知道第三次握手失败。</p>
-<h2 id="6-详细介绍一下-TCP-的四次挥手机制？"><a href="#6-详细介绍一下-TCP-的四次挥手机制？" class="headerlink" title="6. 详细介绍一下 TCP 的四次挥手机制？"></a>6. 详细介绍一下 TCP 的四次挥手机制？</h2><p><img src="/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/image-20210616102556722.png" alt="image-20210616102556722"></p>
+<h2 id="6-详细介绍一下-TCP-的四次挥手机制？"><a href="#6-详细介绍一下-TCP-的四次挥手机制？" class="headerlink" title="6. 详细介绍一下 TCP 的四次挥手机制？"></a>6. 详细介绍一下 TCP 的四次挥手机制？</h2><p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212125.png" alt="image-20210616102556722"></p>
 <ul>
 <li>FIN指终止字段，释放连接时用来同步序号、需要消耗一个序号</li>
 <li>第一次挥手：当A已经没有要发送的数据就会释放连接，A发送一个请求终止连接的报文，其中FIN终止字段=1，发送序号假设等于x；x等于A发送的上一个报文的序号+1；发送完毕后A进入终止等待1状态。</li>
@@ -330,31 +335,31 @@
 </ul>
 </li>
 </ul>
-<h2 id="11-TCP可靠传输"><a href="#11-TCP可靠传输" class="headerlink" title="11 TCP可靠传输"></a>11 TCP可靠传输</h2><ul>
-<li><p>报文被分割成 TCP 认为最适合发送的报文段。</p>
-</li>
-<li><p>TCP 给发送的每一个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。</p>
-</li>
-<li><p>超时重传协议：超时重传是指发送出去的数据包到接收到确认包之间的时间，如果超过了这个时间会被认为是丢包了，需要重传。最大超时时间是动态计算的</p>
-</li>
-<li><p>连续ARQ（自动重传请求）协议：</p>
+<h2 id="11-TCP可靠传输"><a href="#11-TCP可靠传输" class="headerlink" title="11 TCP可靠传输"></a>11 TCP可靠传输</h2><p>TCP打包传输过程：</p>
 <ul>
+<li>报文被分割成 TCP 认为最适合发送的报文段，然后把每个报文段打包传输。</li>
+<li>TCP 给发送的每一个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。</li>
+<li>检验和：通过检验和的方式，接收端可以检测出来数据是否有差错和异常，假如有差错就会直接丢弃TCP段，重新发送。</li>
+<li>序列号/确认应答：序列号的作用不仅仅是应答的作用，有了序列号能够将接收到的数据根据序列号排序，并且去掉重复序列号的数据。</li>
+</ul>
+<p>TCP的两个重传协议：</p>
+<ul>
+<li>超时重传协议：超时重传是指发送出去的数据包到接收到确认包之间的时间，如果超过了这个时间会被认为是丢包了，需要重传。最大超时时间是动态计算的</li>
+<li>连续ARQ（自动重传请求）协议：<ul>
 <li>发送方维持一个发送窗口、窗口内的分组都可以连续发送出去，而不必等待确认重传；</li>
 <li>如果窗口按序收到了一个“确认”、窗口就向后滑动一格</li>
 <li>这里的确认机制指累计确认方式、接收方对按序收到的最后一个分组发送确认，确认一旦接受、就认为这个分组之前的确认都收到了</li>
 </ul>
 </li>
-<li><p>检验和：通过检验和的方式，接收端可以检测出来数据是否有差错和异常，假如有差错就会直接丢弃TCP段，重新发送。</p>
-</li>
-<li><p>序列号/确认应答：序列号的作用不仅仅是应答的作用，有了序列号能够将接收到的数据根据序列号排序，并且去掉重复序列号的数据。</p>
-</li>
 </ul>
 <h2 id="12-浏览器输入url地址-到显示页面的过程"><a href="#12-浏览器输入url地址-到显示页面的过程" class="headerlink" title="12 浏览器输入url地址,到显示页面的过程"></a>12 浏览器输入url地址,到显示页面的过程</h2><ul>
 <li><p>1 DNS解析：实现了网址到IP地址的转换</p>
-</li>
+<ul>
 <li><p><strong>浏览器搜索自己的DNS缓存</strong>（维护一张域名与IP的对应表）；若没有，则搜索<strong>操作系统的DNS缓存</strong>（维护一张域名与IP的对应表）；若没有，则搜索操作系统的<strong>hosts文件</strong>（维护一张域名与IP的对应表）。</p>
 </li>
 <li><p>若都没有，则找 tcp/ip 参数中设置的首选 dns 服务器，即<strong>本地 dns 服务器</strong>（递归查询），<strong>本地域名服务器查询自己的dns缓存</strong>，如果没有，则进行迭代查询。将本地dns服务器将IP返回给操作系统，同时缓存IP。</p>
+</li>
+</ul>
 </li>
 <li><p>2 TCP连接：发起 tcp 的三次握手，建立 tcp 连接。浏览器会以一个随机端口（1024-65535）向服务端的 web 程序 <strong>80</strong> 端口发起 tcp 的连接。</p>
 </li>
@@ -370,7 +375,7 @@
 <li><p>6 连接结束</p>
 </li>
 </ul>
-<p><img src="/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/20210616124706.png" alt="20210616124706"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212131.png" alt="20210616124706"></p>
 <h2 id="13-介绍一下HTTP协议"><a href="#13-介绍一下HTTP协议" class="headerlink" title="13 介绍一下HTTP协议"></a>13 介绍一下HTTP协议</h2><p>HTTP 即超文本传输协议，是 Web 的应用层协议。HTTP定义了浏览器怎样向万维网服务器请求文档、以及服务器怎样把文档传输给浏览器</p>
 <p>HTTP在运输层使用TCP协议，TCP 为 HTTP 提供可靠的数据传输服务。</p>
 <p>HTTP 是一种无状态的协议，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何区别。一般靠cookie和session来保存状态</p>
@@ -385,7 +390,7 @@
 <li>500：(服务器内部错误) 服务器遇到错误，无法完成请求。</li>
 </ul>
 <p>状态码开头代表类型：</p>
-<p><img src="/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/641.png" alt="图片"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212135.png" alt="图片"></p>
 <h2 id="15-HTTP-常用的请求方式？"><a href="#15-HTTP-常用的请求方式？" class="headerlink" title="15 HTTP 常用的请求方式？"></a>15 HTTP 常用的请求方式？</h2><table>
 <thead>
 <tr>
@@ -450,11 +455,11 @@
 <h2 id="17-HTTP请求报文和响应报文的格式？"><a href="#17-HTTP请求报文和响应报文的格式？" class="headerlink" title="17 HTTP请求报文和响应报文的格式？"></a>17 HTTP请求报文和响应报文的格式？</h2><p><strong>请求报文格式</strong>：</p>
 <ol>
 <li>请求行（请求方法+URI协议+版本）</li>
-<li>请求头部</li>
+<li><strong>请求头部（具体几个参数还要看一看）</strong></li>
 <li>空行</li>
 <li>请求主体</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET&#x2F;sample.jspHTTP&#x2F;1.1 请求行</span><br><span class="line">Accept:image&#x2F;gif.image&#x2F;jpeg, 请求头部</span><br><span class="line">Accept-Language:zh-cn</span><br><span class="line">Connection:Keep-Alive</span><br><span class="line">Host:localhost</span><br><span class="line">User-Agent:Mozila&#x2F;4.0(compatible;MSIE5.01;Window NT5.0)</span><br><span class="line">Accept-Encoding:gzip,deflate</span><br><span class="line"></span><br><span class="line">username&#x3D;jinqiao&amp;password&#x3D;1234 请求主体</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET&#x2F;sample.jspHTTP&#x2F;1.1 请求行</span><br><span class="line">Accept:image&#x2F;gif.image&#x2F;jpeg, 浏览器可以接收的内容类型</span><br><span class="line">Accept-Language:zh-cn  浏览器接收的语言</span><br><span class="line">Connection:Keep-Alive 是否开启长连接</span><br><span class="line">Host:localhost  被服务器的域名或IP地址，如果不是通用端口，还包含该端口号</span><br><span class="line">User-Agent:Mozila&#x2F;4.0(compatible;MSIE5.01;Window NT5.0)</span><br><span class="line">Accept-Encoding:gzip,deflate 浏览器可以处理的编码方式</span><br><span class="line">&#x2F;&#x2F;还可以有cookie等...</span><br><span class="line"></span><br><span class="line">username&#x3D;jinqiao&amp;password&#x3D;1234 请求主体</span><br></pre></td></tr></table></figure>
 
 <p><strong>响应报文</strong>：</p>
 <ol>
@@ -471,7 +476,7 @@
 <p>在使用长连接的情况下，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的 TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。实现长连接要客户端和服务端都支持长连接。</p>
 <h2 id="19-http和https的区别"><a href="#19-http和https的区别" class="headerlink" title="19 http和https的区别"></a>19 http和https的区别</h2><ul>
 <li>端口 ：HTTP默认使用端口80，而HTTPS使用端口443。</li>
-<li>安全性和资源消耗：HTTP 安全性没有 HTTPS高，但是 HTTP 比HTTPS耗费更多服务器资源更少。<ul>
+<li>安全性和资源消耗：HTTP 安全性没有 HTTPS高，但是 HTTP 比HTTPS耗费的服务器资源更少。<ul>
 <li> HTTP协议运行在TCP之上，所有传输的内容都是明文，客户端和服务器端都无法验证对方的身份。</li>
 <li>HTTPS所有传输的内容都经过加密，加密采用对称加密，但对称加密的密钥用服务器方的证书进行了非对称加密。<ul>
 <li>对称加密：密钥只有一个，加密解密为同一个密码，且加解密速度快，典型的对称加密算法有DES、AES等；</li>
@@ -481,16 +486,15 @@
 </ul>
 </li>
 </ul>
-<h2 id="20-Cookie、Session"><a href="#20-Cookie、Session" class="headerlink" title="20 Cookie、Session"></a>20 Cookie、Session</h2><p><strong>Cookie通过在客户端记录信息确定用户身份</strong></p>
+<h2 id="20-Cookie、Session的区别"><a href="#20-Cookie、Session的区别" class="headerlink" title="20 Cookie、Session的区别"></a>20 Cookie、Session的区别</h2><p><strong>Cookie通过在客户端记录信息确定用户身份</strong></p>
 <p>类似给客户端们颁发一个通行证吧，每人一个，无论谁访问都必须携带自己通行证。这样服务器就能从通行证上确认客户身份了。这就是Cookie的工作原理。Cookie实际上是一小段的文本信息，储存在浏览器中。服务器还可以根据需要修改Cookie的内容。</p>
 <p><strong>Session通过在服务器端记录信息确定用户身份</strong></p>
-<p>Session是服务器端使用的一种记录客户端状态的机制，使用上比Cookie简单一些，相应的也增加了服务器的存储压力。</p>
-<p>Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。</p>
+<p>Session相当于程序在服务器上建立的一份客户档案，类似于一份“客户明细表”，客户来访的时候只需要查询客户档案表就可以了。Session会增加一些服务器端的存储压力。</p>
 <p><strong>cookie和session的区别</strong></p>
 <ul>
-<li><p>一个是IE启动到IE关闭.(浏览器页面一关 ,session就消失了)，一个是预先设置的生存周期，或永久的保存于本地的文件。(cookie)</p>
-</li>
 <li><p>cookie数据存放在客户的浏览器上，session数据放在服务器上.</p>
+</li>
+<li><p>一个是IE启动到IE关闭.(浏览器页面一关 ,session就消失了)，一个是预先设置的生存周期，或永久的保存于本地的文件。(cookie)</p>
 </li>
 <li><p>session会比较占用你服务器的性能考虑到减轻服务器性能方面，应当使用cookie，考虑到安全应当使用session。</p>
 </li>
@@ -510,6 +514,12 @@
 <li>限制数据库权限，给用户提供仅仅能够满足其工作的最低权限。</li>
 <li>对进入数据库的特殊字符（’”\尖括号&amp;*;等）转义处理。</li>
 <li>提供参数化查询接口，不要直接使用原生SQL。</li>
+<li>${} #{}都是进行动态传参的标记符，尽量用#{}进行传参<ul>
+<li>${}在动态解析SQL阶段就直接替换为一个字符串</li>
+<li>#{}是先用一个占位符?占位，然后在SQL执行的时候进行变量替换</li>
+<li>#{}可以避免sql注入，能用#{}的应该尽量用#{}。表名参数的传递必须用${}</li>
+</ul>
+</li>
 </ul>
 <h2 id="22-负载均衡算法有哪些？"><a href="#22-负载均衡算法有哪些？" class="headerlink" title="22 负载均衡算法有哪些？"></a>22 负载均衡算法有哪些？</h2><p>多台服务器以对称的方式组成一个服务器集合，每台服务器都具有等价的地位，能互相分担负载。</p>
 <ul>
@@ -625,7 +635,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%90%84%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8F%8A%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">1. 计算机网络的各层协议及作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">2. TCP和UDP的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-TCP-%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">3. 详细介绍一下 TCP 的三次握手机制？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E4%B8%A4%E6%AC%A1%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">4. 为什么需要三次握手，而不是两次？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E8%BF%9E%E6%8E%A5%E9%98%B6%E6%AE%B5%EF%BC%8C%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1ACK%E5%8C%85%E4%B8%A2%E5%A4%B1%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">5. 三次握手连接阶段，最后一次ACK包丢失，会发生什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-TCP-%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">6. 详细介绍一下 TCP 的四次挥手机制？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84-TIME-WAIT-%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E7%AD%89%E5%BE%85-2MSL-%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">7. 为什么客户端的 TIME-WAIT 状态必须等待 2MSL ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A6%82%E6%9E%9C%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E4%BA%86%E8%BF%9E%E6%8E%A5%EF%BC%8C%E4%BD%86%E6%98%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%87%BA%E7%8E%B0%E6%95%85%E9%9A%9C%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">8. 如果已经建立了连接，但是客户端出现故障了怎么办？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">9.</span> <span class="nav-text">9 TCP流量控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">10.</span> <span class="nav-text">10 TCP拥塞控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-number">11.</span> <span class="nav-text">11 TCP可靠传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%9C%B0%E5%9D%80-%E5%88%B0%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">12 浏览器输入url地址,到显示页面的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BHTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">13.</span> <span class="nav-text">13 介绍一下HTTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">14 HTTP常见的状态码有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-HTTP-%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">15 HTTP 常用的请求方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-post%E5%92%8Cget%E5%8C%BA%E5%88%AB"><span class="nav-number">16.</span> <span class="nav-text">16 post和get区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E7%9A%84%E6%A0%BC%E5%BC%8F%EF%BC%9F"><span class="nav-number">17.</span> <span class="nav-text">17 HTTP请求报文和响应报文的格式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8BHTTP%E9%95%BF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%9F%AD%E8%BF%9E%E6%8E%A5%EF%BC%9F"><span class="nav-number">18.</span> <span class="nav-text">18 解释一下HTTP长连接和短连接？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-http%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">19.</span> <span class="nav-text">19 http和https的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Cookie%E3%80%81Session"><span class="nav-number">20.</span> <span class="nav-text">20 Cookie、Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-SQL%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DSQL%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-number">21.</span> <span class="nav-text">21 SQL注入是什么，如何避免SQL注入？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">22.</span> <span class="nav-text">22 负载均衡算法有哪些？</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%90%84%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8F%8A%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">1. 计算机网络的各层协议及作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">2. TCP和UDP的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-TCP-%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">3. 详细介绍一下 TCP 的三次握手机制？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E4%B8%A4%E6%AC%A1%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">4. 为什么需要三次握手，而不是两次？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E8%BF%9E%E6%8E%A5%E9%98%B6%E6%AE%B5%EF%BC%8C%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1ACK%E5%8C%85%E4%B8%A2%E5%A4%B1%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">5. 三次握手连接阶段，最后一次ACK包丢失，会发生什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-TCP-%E7%9A%84%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">6. 详细介绍一下 TCP 的四次挥手机制？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84-TIME-WAIT-%E7%8A%B6%E6%80%81%E5%BF%85%E9%A1%BB%E7%AD%89%E5%BE%85-2MSL-%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">7. 为什么客户端的 TIME-WAIT 状态必须等待 2MSL ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A6%82%E6%9E%9C%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E4%BA%86%E8%BF%9E%E6%8E%A5%EF%BC%8C%E4%BD%86%E6%98%AF%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%87%BA%E7%8E%B0%E6%95%85%E9%9A%9C%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">8. 如果已经建立了连接，但是客户端出现故障了怎么办？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="nav-number">9.</span> <span class="nav-text">9 TCP流量控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-number">10.</span> <span class="nav-text">10 TCP拥塞控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-TCP%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="nav-number">11.</span> <span class="nav-text">11 TCP可靠传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5url%E5%9C%B0%E5%9D%80-%E5%88%B0%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-number">12.</span> <span class="nav-text">12 浏览器输入url地址,到显示页面的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BHTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">13.</span> <span class="nav-text">13 介绍一下HTTP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">14 HTTP常见的状态码有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-HTTP-%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">15 HTTP 常用的请求方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-post%E5%92%8Cget%E5%8C%BA%E5%88%AB"><span class="nav-number">16.</span> <span class="nav-text">16 post和get区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-HTTP%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E5%92%8C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E7%9A%84%E6%A0%BC%E5%BC%8F%EF%BC%9F"><span class="nav-number">17.</span> <span class="nav-text">17 HTTP请求报文和响应报文的格式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-%E8%A7%A3%E9%87%8A%E4%B8%80%E4%B8%8BHTTP%E9%95%BF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%9F%AD%E8%BF%9E%E6%8E%A5%EF%BC%9F"><span class="nav-number">18.</span> <span class="nav-text">18 解释一下HTTP长连接和短连接？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-http%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">19.</span> <span class="nav-text">19 http和https的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-Cookie%E3%80%81Session%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">20.</span> <span class="nav-text">20 Cookie、Session的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-SQL%E6%B3%A8%E5%85%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DSQL%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-number">21.</span> <span class="nav-text">21 SQL注入是什么，如何避免SQL注入？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">22.</span> <span class="nav-text">22 负载均衡算法有哪些？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -639,7 +649,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -652,7 +662,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -27,19 +27,19 @@
 <meta property="og:site_name" content="落风的风">
 <meta property="og:description" content="狂神Mybatis教学视频学习笔记，仅实操重要部分，面向秋招学习，知识点  mybaits实现的两种方式：xml文件和注解 映射器（mappers）实现的三种方式 参数的map映射、结果集的map映射 分页、动态SQL、mybatis的两级缓存的机制">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569633932712.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/image-20210323195446143.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569660737088.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569979229205.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569979339190.png">
-<meta property="og:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569985541106.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210046.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210055.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210104.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210109.png">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210115.png">
 <meta property="article:published_time" content="2021-06-02T14:55:00.000Z">
-<meta property="article:modified_time" content="2021-06-02T13:41:50.000Z">
+<meta property="article:modified_time" content="2021-11-12T13:53:14.774Z">
 <meta property="article:author" content="Wu kang">
 <meta property="article:tag" content="框架">
 <meta property="article:tag" content="Mybatis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569633932712.png">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png">
 
 <link rel="canonical" href="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/">
 
@@ -197,10 +197,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-02 22:55:00 / Modified: 21:41:50" itemprop="dateCreated datePublished" datetime="2021-06-02T22:55:00+08:00">2021-06-02</time>
+              <time title="Created: 2021-06-02 22:55:00" itemprop="dateCreated datePublished" datetime="2021-06-02T22:55:00+08:00">2021-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 21:53:14" itemprop="dateModified" datetime="2021-11-12T21:53:14+08:00">2021-11-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -231,15 +237,10 @@
 </ul>
 <a id="more"></a>
 
-<p>环境：</p>
-<ul>
-<li>JDK11.0.6</li>
-<li>Mysql 5.7</li>
-<li>maven 3.3.9</li>
-<li>IDEA</li>
-</ul>
-<p>SSM框架：配置文件的。  最好的方式：看官网文档；</p>
-<h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><h3 id="1-1、什么是Mybatis"><a href="#1-1、什么是Mybatis" class="headerlink" title="1.1、什么是Mybatis"></a>1.1、什么是Mybatis</h3><p><img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569633932712.png" alt="1569633932712"></p>
+<h2 id="Mybatis-狂神笔记"><a href="#Mybatis-狂神笔记" class="headerlink" title="Mybatis_狂神笔记"></a>Mybatis_狂神笔记</h2><blockquote>
+<p>环境：JDK11.0.6、Mysql 5.7、maven 3.3.9、IDEA</p>
+</blockquote>
+<h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><h3 id="1-1、什么是Mybatis"><a href="#1-1、什么是Mybatis" class="headerlink" title="1.1、什么是Mybatis"></a>1.1、什么是Mybatis</h3><p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png" alt="1569633932712"></p>
 <ul>
 <li>MyBatis 是一款优秀的<strong>持久层框架</strong></li>
 <li>它支持定制化 SQL、存储过程以及高级映射。</li>
@@ -361,7 +362,7 @@
 <li>返回类型不对</li>
 <li>Maven导出资源问题</li>
 </ol>
-<img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/image-20210323195446143.png" alt="image-20210323195446143" style="zoom:67%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210046.png" alt="image-20210323195446143" style="zoom:67%;">
 
 
 
@@ -376,7 +377,7 @@
 <li><p>编写接口</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据ID查询用户</span></span><br><span class="line"><span class="function">User <span class="title">getUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>编写对应的mapper中的sql语句</p>
+<li><p>编写对应的mapper.xml中的sql语句</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">&quot;getUserById&quot;</span> parameterType=<span class="string">&quot;int&quot;</span> resultType=<span class="string">&quot;com.kuang.pojo.User&quot;</span>&gt;</span><br><span class="line">        select * from mybatis.user where id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>测试</p>
@@ -467,7 +468,7 @@
 <li>接口和他的Mapper配置文件必须在同一个包下！</li>
 </ul>
 <h2 id="5、生命周期和作用域"><a href="#5、生命周期和作用域" class="headerlink" title="5、生命周期和作用域"></a>5、生命周期和作用域</h2><p>这里指的是SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession的作用域</p>
-<img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569660737088.png" alt="1569660737088" style="zoom: 50%;">
+<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210055.png" alt="1569660737088" style="zoom: 50%;">
 
 <p><strong>SqlSessionFactoryBuilder：</strong></p>
 <ul>
@@ -480,7 +481,7 @@
 </li>
 <li><p>SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，<strong>没有任何理由丢弃它或重新创建另一个实例。</strong> </p>
 </li>
-<li><p>因此 SqlSessionFactory 的最佳作用域是应用作用域。 最简单的就是使用<strong>单例模式</strong>或者静态单例模式。</p>
+<li><p>因此 SqlSessionFactory 的最佳作用域是应用作用域。 最简单的仅创建一个SqlSessionFactory 的单例</p>
 </li>
 </ul>
 <p><strong>SqlSession</strong></p>
@@ -532,7 +533,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--绑定接口--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;com.kuang.dao.UserMapper&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>测试(与之前一样的)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">    List&lt;User&gt; users = mapper.getUsers();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (User user:users)&#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sqlSession.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">    List&lt;User&gt; users = mapper.getUsers();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (User user:users)&#123;</span><br><span class="line">        System.out.println(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -578,8 +579,8 @@
 <p><strong>举例：使用foreach执行批量操作</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="number">1</span>=<span class="number">1</span> <span class="keyword">and</span> </span><br><span class="line"></span><br><span class="line">  &lt;foreach item=<span class="string">&quot;id&quot;</span> collection=<span class="string">&quot;ids&quot;</span></span><br><span class="line">      <span class="keyword">open</span>=<span class="string">&quot;(&quot;</span> separator=<span class="string">&quot;or&quot;</span> <span class="keyword">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span><br><span class="line">        <span class="comment">#&#123;id&#125;</span></span><br><span class="line">  &lt;/foreach&gt;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">or</span> <span class="keyword">id</span>=<span class="number">2</span> <span class="keyword">or</span> <span class="keyword">id</span>=<span class="number">3</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569979229205.png" alt="1569979229205"></p>
-<p><img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569979339190.png" alt="1569979339190"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210104.png" alt="1569979229205"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210109.png" alt="1569979339190"></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        select * from mybatis.blog where 1=1 and (id=1 or id = 2 or id=3)</span></span><br><span class="line"><span class="comment">        我们现在传递一个万能的map ， 这map中可以存在一个集合！</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;queryBlogForeach&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;map&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;blog&quot;</span>&gt;</span></span><br><span class="line">    select * from mybatis.blog</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;ids&quot;</span> <span class="attr">item</span>=<span class="string">&quot;id&quot;</span> <span class="attr">open</span>=<span class="string">&quot;and (&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;or&quot;</span>&gt;</span></span><br><span class="line">            id = #&#123;id&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="10、缓存"><a href="#10、缓存" class="headerlink" title="10、缓存"></a>10、缓存</h2><h3 id="10-1、缓存定义"><a href="#10-1、缓存定义" class="headerlink" title="10.1、缓存定义"></a>10.1、缓存定义</h3><ol>
@@ -608,14 +609,14 @@
 </li>
 <li><p>所有 select 语句的结果将会被缓存</p>
 </li>
-<li><p> 执行insert、update 和 delete 语句会刷新缓存</p>
+<li><p>执行insert、update 和 delete 语句会刷新缓存</p>
 </li>
 <li><p>缓存会使用最近最少使用算法（LRU, Least Recently Used）算法来清除不需要的缓存（默认）。</p>
 </li>
 </ul>
 <h4 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存:"></a>二级缓存:</h4><ul>
-<li>基于namespace级别的缓存，一个命名空间Mapper，对应一个二级缓存；</li>
-<li>如果当前会话关闭了，这个会话对应的一级缓存就失效了；但是我们仍需要这个缓存数据，会话关闭时，我们将一级缓存中的数据被保存到二级缓存中；</li>
+<li>基于namespace级别的缓存，一个命名空间Mapper，对应一个二级缓存；（需要手动打开）</li>
+<li>如果当前会话关闭了，这个会话对应的一级缓存就失效了；但是如果我们仍需要这个缓存数据，会话关闭时，我们将一级缓存中的数据被保存到二级缓存中；</li>
 </ul>
 <p>步骤：</p>
 <ol>
@@ -647,7 +648,7 @@
 <li>再看一级缓存中有没有</li>
 <li>都没有再查询数据库</li>
 </ul>
-<p><img src="/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/1569985541106.png" alt="1569985541106"></p>
+<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210115.png" alt="1569985541106"></p>
 <p>Redis数据库来做缓存！  K-V键值对</p>
 <h2 id="11-总结"><a href="#11-总结" class="headerlink" title="11 总结"></a>11 总结</h2><ul>
 <li>mybaits实现的两种方式：xml文件和注解</li>
@@ -764,7 +765,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMybatis"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、什么是Mybatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81%E6%8C%81%E4%B9%85%E5%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、持久层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Mybatis%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 为什么需要Mybatis？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%AC%AC%E4%B8%80%E4%B8%AAMybatis%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">2、第一个Mybatis程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E3%80%81%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9D%97-%E5%AD%90%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、创建一个模块(子项目)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E3%80%81%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、编写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4%E3%80%81%E6%B5%8B%E8%AF%95"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81CRUD%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">3、CRUD（基础）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81namespace"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81select"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81Insert"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、Insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81update"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5%E3%80%81Delete"><span class="nav-number">3.5.</span> <span class="nav-text">3.5、Delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6%E3%80%81%E5%88%86%E6%9E%90%E9%94%99%E8%AF%AF"><span class="nav-number">3.6.</span> <span class="nav-text">3.6、分析错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7%E3%80%81%E4%B8%87%E8%83%BDMap"><span class="nav-number">3.7.</span> <span class="nav-text">3.7、万能Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">3.8.</span> <span class="nav-text">3.8、思考题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9%E3%80%81%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84resultMap"><span class="nav-number">3.9.</span> <span class="nav-text">3.9、结果集映射resultMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">4、配置解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%99%A8%EF%BC%88mappers%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">映射器（mappers）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">5.</span> <span class="nav-text">5、生命周期和作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%88%86%E9%A1%B5"><span class="nav-number">6.</span> <span class="nav-text">6、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9C%A8sql%E8%AF%AD%E5%8F%A5%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%8C%E4%BD%BF%E7%94%A8Limit%E5%88%86%E9%A1%B5"><span class="nav-number">6.1.</span> <span class="nav-text">1、在sql语句层实现，使用Limit分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%9C%A8java%E4%BB%A3%E7%A0%81%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%8C%E4%BD%BF%E7%94%A8RowBounds%E7%B1%BB%E5%88%86%E9%A1%B5"><span class="nav-number">6.2.</span> <span class="nav-text">2、在java代码层实现，使用RowBounds类分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="nav-number">7.</span> <span class="nav-text">7、使用注解开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%B3%A8%E8%A7%A3%E6%9F%A5%E8%AF%A2%E7%A4%BA%E4%BE%8B"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 注解查询示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E7%9A%84CRUD"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 使用注解的CRUD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%8C%BA%E5%88%AB"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 #{}     ${} 区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A4%9A%E5%AF%B9%E4%B8%80%E5%A4%84%E7%90%86%E3%80%81%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%A4%84%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">8 多对一处理、一对多处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%8A%A8%E6%80%81SQL"><span class="nav-number">9.</span> <span class="nav-text">9 动态SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E7%BC%93%E5%AD%98"><span class="nav-number">10.</span> <span class="nav-text">10、缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1%E3%80%81%E7%BC%93%E5%AD%98%E5%AE%9A%E4%B9%89"><span class="nav-number">10.1.</span> <span class="nav-text">10.1、缓存定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2%E3%80%81Mybatis%E7%BC%93%E5%AD%98"><span class="nav-number">10.2.</span> <span class="nav-text">10.2、Mybatis缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%9A"><span class="nav-number">10.2.1.</span> <span class="nav-text">一级缓存：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">10.2.2.</span> <span class="nav-text">二级缓存:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BC%93%E5%AD%98ehcache-%EF%BC%88%E8%B7%B3%E8%BF%87%EF%BC%89"><span class="nav-number">10.2.3.</span> <span class="nav-text">自定义缓存ehcache:（跳过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%9F%A5%E6%89%BE%E5%8E%9F%E7%90%86"><span class="nav-number">10.2.4.</span> <span class="nav-text">缓存查找原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%80%BB%E7%BB%93"><span class="nav-number">11.</span> <span class="nav-text">11 总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">Mybatis_狂神笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">1、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMybatis"><span class="nav-number">2.1.</span> <span class="nav-text">1.1、什么是Mybatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E3%80%81%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">1.2、持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E3%80%81%E6%8C%81%E4%B9%85%E5%B1%82"><span class="nav-number">2.3.</span> <span class="nav-text">1.3、持久层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Mybatis%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 为什么需要Mybatis？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%AC%AC%E4%B8%80%E4%B8%AAMybatis%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">2、第一个Mybatis程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1%E3%80%81%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">2.1、搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9D%97-%E5%AD%90%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2.2、创建一个模块(子项目)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3%E3%80%81%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">2.3、编写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4%E3%80%81%E6%B5%8B%E8%AF%95"><span class="nav-number">3.4.</span> <span class="nav-text">2.4、测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81CRUD%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">3、CRUD（基础）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E3%80%81namespace"><span class="nav-number">4.1.</span> <span class="nav-text">3.1、namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2%E3%80%81select"><span class="nav-number">4.2.</span> <span class="nav-text">3.2、select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3%E3%80%81Insert"><span class="nav-number">4.3.</span> <span class="nav-text">3.3、Insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4%E3%80%81update"><span class="nav-number">4.4.</span> <span class="nav-text">3.4、update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5%E3%80%81Delete"><span class="nav-number">4.5.</span> <span class="nav-text">3.5、Delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6%E3%80%81%E5%88%86%E6%9E%90%E9%94%99%E8%AF%AF"><span class="nav-number">4.6.</span> <span class="nav-text">3.6、分析错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7%E3%80%81%E4%B8%87%E8%83%BDMap"><span class="nav-number">4.7.</span> <span class="nav-text">3.7、万能Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8%E3%80%81%E6%80%9D%E8%80%83%E9%A2%98"><span class="nav-number">4.8.</span> <span class="nav-text">3.8、思考题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9%E3%80%81%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84resultMap"><span class="nav-number">4.9.</span> <span class="nav-text">3.9、结果集映射resultMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">4、配置解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%99%A8%EF%BC%88mappers%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">映射器（mappers）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">5、生命周期和作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%88%86%E9%A1%B5"><span class="nav-number">7.</span> <span class="nav-text">6、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9C%A8sql%E8%AF%AD%E5%8F%A5%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%8C%E4%BD%BF%E7%94%A8Limit%E5%88%86%E9%A1%B5"><span class="nav-number">7.1.</span> <span class="nav-text">1、在sql语句层实现，使用Limit分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%9C%A8java%E4%BB%A3%E7%A0%81%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%8C%E4%BD%BF%E7%94%A8RowBounds%E7%B1%BB%E5%88%86%E9%A1%B5"><span class="nav-number">7.2.</span> <span class="nav-text">2、在java代码层实现，使用RowBounds类分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="nav-number">8.</span> <span class="nav-text">7、使用注解开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%B3%A8%E8%A7%A3%E6%9F%A5%E8%AF%A2%E7%A4%BA%E4%BE%8B"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 注解查询示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E7%9A%84CRUD"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 使用注解的CRUD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%8C%BA%E5%88%AB"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 #{}     ${} 区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A4%9A%E5%AF%B9%E4%B8%80%E5%A4%84%E7%90%86%E3%80%81%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%A4%84%E7%90%86"><span class="nav-number">9.</span> <span class="nav-text">8 多对一处理、一对多处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%8A%A8%E6%80%81SQL"><span class="nav-number">10.</span> <span class="nav-text">9 动态SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E7%BC%93%E5%AD%98"><span class="nav-number">11.</span> <span class="nav-text">10、缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1%E3%80%81%E7%BC%93%E5%AD%98%E5%AE%9A%E4%B9%89"><span class="nav-number">11.1.</span> <span class="nav-text">10.1、缓存定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2%E3%80%81Mybatis%E7%BC%93%E5%AD%98"><span class="nav-number">11.2.</span> <span class="nav-text">10.2、Mybatis缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%EF%BC%9A"><span class="nav-number">11.2.1.</span> <span class="nav-text">一级缓存：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">11.2.2.</span> <span class="nav-text">二级缓存:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BC%93%E5%AD%98ehcache-%EF%BC%88%E8%B7%B3%E8%BF%87%EF%BC%89"><span class="nav-number">11.2.3.</span> <span class="nav-text">自定义缓存ehcache:（跳过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%9F%A5%E6%89%BE%E5%8E%9F%E7%90%86"><span class="nav-number">11.2.4.</span> <span class="nav-text">缓存查找原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E6%80%BB%E7%BB%93"><span class="nav-number">12.</span> <span class="nav-text">11 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -778,7 +779,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -791,7 +792,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
