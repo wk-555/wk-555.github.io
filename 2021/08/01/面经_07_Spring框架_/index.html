@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wukang555.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring框架面经">
+<meta property="og:url" content="https://wukang555.github.io/2021/08/01/%E9%9D%A2%E7%BB%8F_07_Spring%E6%A1%86%E6%9E%B6%20/index.html">
+<meta property="og:site_name" content="落风的风">
+<meta property="og:description" content="Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212551.jpg">
+<meta property="article:published_time" content="2021-08-01T14:55:00.000Z">
+<meta property="article:modified_time" content="2021-11-12T14:15:44.892Z">
+<meta property="article:author" content="Wu kang">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="后端开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212551.jpg">
+
+<link rel="canonical" href="https://wukang555.github.io/2021/08/01/%E9%9D%A2%E7%BB%8F_07_Spring%E6%A1%86%E6%9E%B6%20/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>Spring框架面经 | 落风的风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落风的风" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">落风的风</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wukang555.github.io/2021/08/01/%E9%9D%A2%E7%BB%8F_07_Spring%E6%A1%86%E6%9E%B6%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wu kang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落风的风">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring框架面经
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-01 22:55:00" itemprop="dateCreated datePublished" datetime="2021-08-01T22:55:00+08:00">2021-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-12 22:15:44" itemprop="dateModified" datetime="2021-11-12T22:15:44+08:00">2021-11-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E7%BB%8F/" itemprop="url" rel="index"><span itemprop="name">面经</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Spring框架面经。包括mubatis、spring、springMVC、springBoot，以理解为主。</p>
+<a id="more"></a>
+
+<h1 id="1-Mybatis"><a href="#1-Mybatis" class="headerlink" title="1 Mybatis"></a>1 Mybatis</h1><h2 id="1-1-Mybatis的介绍和运行原理"><a href="#1-1-Mybatis的介绍和运行原理" class="headerlink" title="1.1 Mybatis的介绍和运行原理"></a>1.1 Mybatis的介绍和运行原理</h2><blockquote>
+<p>Mybatis介绍，Mybatis的映射原理、Mybatis的工作流程、Mybatis里类的生命周期</p>
+</blockquote>
+<h3 id="1-1-1-什么是Mybatis、Mybatis的好处？"><a href="#1-1-1-什么是Mybatis、Mybatis的好处？" class="headerlink" title="1.1.1 什么是Mybatis、Mybatis的好处？"></a>1.1.1 什么是Mybatis、Mybatis的好处？</h3><p><strong>Mybatis的定义：</strong></p>
+<ul>
+<li>MyBatis 是一款持久层框架。一般就是写一个抽象的mapper接口，然后用xml（或者注解的方式）去实现该接口写SQL语句，实现了SQL与业务代码的分离。但一般注解方式只支持一些简单的SQL语句。</li>
+</ul>
+<p><strong>Mybatis的好处：</strong></p>
+<ul>
+<li>1 最重要的就是用xml实现接口来写SQL语句，实现了SQL与业务代码的分离</li>
+<li>2 mybatis配置了数据库的连接，无需程序员配置JDBC加载驱动、创建连接等繁杂的过程</li>
+<li>3 还有比较重要的就是：自动映射功能，Mybatis自动将Java对象映射至sql语句、也能将sql的执行结果映射至java对象</li>
+</ul>
+<h3 id="1-1-2-XML映射文件实现mapper接口的工作原理"><a href="#1-1-2-XML映射文件实现mapper接口的工作原理" class="headerlink" title="1.1.2 XML映射文件实现mapper接口的工作原理"></a>1.1.2 XML映射文件实现mapper接口的工作原理</h3><blockquote>
+<p>接口如何找到xml文件、如何定位到SQL语句</p>
+<p>比如我写一个mapper.java的接口（里面有一个findById(int id)的方法），在mapper.xml里面写了对应的SQL语句</p>
+</blockquote>
+<p><strong>mapper接口的工作原理? 动态代理：</strong></p>
+<p>Dao 接口的工作原理是 JDK 动态代理，MyBatis 运行时会使用 JDK 动态代理为 Dao 接口生成代理 proxy 对象，代理对象 proxy 会拦截接口方法，转而执行该接口方法对应的 sql语句，然后将 sql 执行结果返回。</p>
+<p>需要设置：</p>
+<ul>
+<li>1 mappr.xml映射文件中的 namespace 的值 需要与mapper接口的全限名一致</li>
+<li>2 mappr.xml映射文件中的SQL语句的id值，需要与 接口的方法名一致。接口方法内的参数，就是传递给sql的参数</li>
+</ul>
+<p>所以，虽然<code>Mapper.java</code>接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为 key 值，可唯一定位一个<code>MappedStatement</code>也即是SQL语句。实现接口的方式是动态代理。</p>
+<p>还有两个小问题：id值必须唯一么？ mapper接口中的方法可不可以重载？</p>
+<p><strong>id值必须唯一么？</strong></p>
+<ul>
+<li>同一个XML映射文件，的id必须唯一</li>
+<li>不同XML映射文件，如果配置了namespace ，则id值可以重复，因为namespace+id是作为寻找SQL语句的key使用的</li>
+</ul>
+<p><strong>mapper接口中的方法可不可以重载？</strong></p>
+<ul>
+<li>mapper.java 接口里的方法可以重载，但是Mybatis的XML里面的ID不允许重复。</li>
+<li>因为只有一个ID，所以可以用动态SQL分别处理两个重载的方法！！</li>
+</ul>
+<h3 id="1-1-3-Mybatis内部的工作流程"><a href="#1-1-3-Mybatis内部的工作流程" class="headerlink" title="1.1.3 Mybatis内部的工作流程"></a>1.1.3 Mybatis内部的工作流程</h3><p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212551.jpg" alt="20200225164530119"></p>
+<p>1）读取 MyBatis 配置文件：mybatis-config.xml 为 MyBatis 的全局配置文件，配置了 MyBatis 的运行环境等信息，例如数据库连接信息。</p>
+<p>2）加载映射文件（就是我们写的SQL语句）。映射文件即 SQL 映射文件，该文件中配置了操作数据库的 SQL 语句。一个mybatis-config.xml 配置文件可以加载多个映射文件。</p>
+<p>3）构造会话工厂SqlSessionFactory</p>
+<p>4）创建会话对象：由会话工厂创建 SqlSession 对象，该对象中包含了执行 SQL 语句的所有方法。</p>
+<p>5）Executor 执行器：MyBatis 底层定义了一个 Executor 接口来操作数据库，它将根据 SqlSession 传递的参数动态地生成需要执行的 SQL 语句，同时负责查询缓存的维护。</p>
+<p>6）MappedStatement 对象（处理对象的映射关系，参数映射和结果映射）：在 Executor 接口的执行方法中有一个 MappedStatement 类型的参数，该参数是对映射信息的封装，用于存储要映射的 SQL 语句的 id、参数等信息。</p>
+<p>7）执行数据库的命令。</p>
+<h3 id="1-1-4-Mybatis内部对象的生命周期和作用域"><a href="#1-1-4-Mybatis内部对象的生命周期和作用域" class="headerlink" title="1.1.4 Mybatis内部对象的生命周期和作用域"></a>1.1.4 Mybatis内部对象的生命周期和作用域</h3><blockquote>
+<p>这里指的是SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession、mapper接口的作用域</p>
+</blockquote>
+<p><strong>SqlSessionFactoryBuilder：</strong></p>
+<ul>
+<li>一旦创建了 SqlSessionFactory，就不再需要它了</li>
+<li>局部变量</li>
+</ul>
+<p><strong>SqlSessionFactory：</strong></p>
+<ul>
+<li><p>类似数据库连接池</p>
+</li>
+<li><p>SqlSessionFactory 一旦被创建就应该在应用的运行期间一直存在，<strong>没有任何理由丢弃它或重新创建另一个实例。</strong> </p>
+</li>
+<li><p>因此 SqlSessionFactory 的最佳作用域是应用作用域。 最简单的仅创建一个SqlSessionFactory 的单例对象</p>
+</li>
+</ul>
+<p><strong>SqlSession</strong></p>
+<ul>
+<li>连接到连接池的一个请求！SqlSession就相当于一个数据库连接，你可以在一个事务里面执行多条SQL,然后通过它的commit、rollback等方法，提交或者回滚事务。所以它应该存活在一个业务请求中</li>
+<li>SqlSession 的实例的最佳的作用域是请求或方法作用域。</li>
+<li>处理完整个请求之后需要赶紧关闭，否则资源被占用！</li>
+</ul>
+<h2 id="1-2-Mybatis的特色功能"><a href="#1-2-Mybatis的特色功能" class="headerlink" title="1.2 Mybatis的特色功能"></a>1.2 Mybatis的特色功能</h2><blockquote>
+<p>最重要的是参数映射和结果集映射、这里还介绍一些不同的执行器和批量update的操作</p>
+</blockquote>
+<h3 id="1-2-1-Mybatis的执行器Executor"><a href="#1-2-1-Mybatis的执行器Executor" class="headerlink" title="1.2.1 Mybatis的执行器Executor"></a>1.2.1 Mybatis的执行器Executor</h3><blockquote>
+<p>Executor的作用范围：Executor 严格限制在 SqlSession 生命周期范围内。</p>
+<p>指定Executor的方式：</p>
+<p>1 在 MyBatis 配置文件中，可以指定默认的 ExecutorType 执行器类型，</p>
+<p>2 手动给 <code>DefaultSqlSessionFactory</code> 的创建 SqlSession 的方法传递 ExecutorType 类型参数。</p>
+</blockquote>
+<p>答：MyBatis 有三种基本的 Executor 执行器，**<code>SimpleExecutor</code>、<code>ReuseExecutor</code>、<code>BatchExecutor</code>。**</p>
+<p><strong><code>SimpleExecutor</code>：</strong>每执行一次 update 或 select，就开启一个 Statement 对象，用完立刻关闭 Statement 对象。</p>
+<p><strong><code>ReuseExecutor</code>：</strong>执行 update 或 select，以 sql 作为 key 查找 Statement 对象，存在就使用，不存在就创建，用完后，不关闭 Statement 对象，而是放置于 Map&lt;String, Statement&gt;内，供下一次使用。简言之，就是重复使用 Statement 对象。</p>
+<p><strong><code>BatchExecutor</code>：</strong>执行 update（没有 select，JDBC 批处理不支持 select），将所有 sql 都添加到批处理中（addBatch()），等待统一执行（executeBatch()），它缓存了多个 Statement 对象，每个 Statement 对象都是 addBatch()完毕后，等待逐一执行 executeBatch()批处理。与 JDBC 批处理相同。</p>
+<h3 id="1-2-2-扩展Mybatis的批量update操作"><a href="#1-2-2-扩展Mybatis的批量update操作" class="headerlink" title="1.2.2 扩展Mybatis的批量update操作"></a>1.2.2 扩展Mybatis的批量update操作</h3><blockquote>
+<p>有人做过了两种实现对比<a target="_blank" rel="noopener" href="https://blog.csdn.net/lixiaolian123/article/details/110112030">批量插入对比</a></p>
+</blockquote>
+<p>1 foreach方式插入：sql语句里面写循环代码</p>
+<ul>
+<li>mysql默认接受sql的大小是 1M，当使用foreach同时插入1w行左右时会因为sql长度超过mysql的限制而无法执行</li>
+</ul>
+<p>2  BATCH模式插入：直接在java代码中写循环调用插入的接口</p>
+<ul>
+<li>参考文章显示使用BatchExecutor执行器的batch模式没有foreach快（作者很不解）</li>
+</ul>
+<h3 id="1-2-3-Mybatis自动映射功能：参数映射和结果集映射"><a href="#1-2-3-Mybatis自动映射功能：参数映射和结果集映射" class="headerlink" title="1.2.3 Mybatis自动映射功能：参数映射和结果集映射"></a>1.2.3 Mybatis自动映射功能：参数映射和结果集映射</h3><p>参数映射（万能的map）</p>
+<ul>
+<li><p>Map传递参数，直接在sql中取出key即可！    【parameterType=”map”】#{userid},#{passWord}</p>
+</li>
+<li><p>对象传递参数，直接在sql中取对象的属性即可！【parameterType=”Object”】#{name}</p>
+</li>
+</ul>
+<p>结果集映射resultMap</p>
+<ul>
+<li>可以在UserMapper.xml中单独写一个结果集的映射，其他sql语句的返回值的类型可以指定为该结果集</li>
+</ul>
+<h2 id="1-3-Mybatis中的SQL语句和缓存"><a href="#1-3-Mybatis中的SQL语句和缓存" class="headerlink" title="1.3 Mybatis中的SQL语句和缓存"></a>1.3 Mybatis中的SQL语句和缓存</h2><h3 id="1-Mybatis-的-XML-文件有哪些标签属性？"><a href="#1-Mybatis-的-XML-文件有哪些标签属性？" class="headerlink" title="1 Mybatis 的 XML 文件有哪些标签属性？"></a>1 Mybatis 的 XML 文件有哪些标签属性？</h3><ul>
+<li><p><code>select</code>、<code>insert</code>、<code>update</code>、<code>delete</code> 标签分别对应查询、添加、更新、删除操作。</p>
+</li>
+<li><p><code>parameterType</code> 属性表示参数的数据类型，<code>resultType</code> 表示返回的结果类型</p>
+</li>
+<li><p>还有动态 sql 的 9 个标签，<code>trim|where|set|foreach|if|choose|when|otherwise|bind</code>等</p>
+</li>
+</ul>
+<h3 id="2-SQL分页的三种实现方式"><a href="#2-SQL分页的三种实现方式" class="headerlink" title="2 SQL分页的三种实现方式"></a>2 SQL分页的三种实现方式</h3><ul>
+<li><p>1  在sql语句层实现，使用Limit分页</p>
+</li>
+<li><p>2 使用分页插件 PageHelper</p>
+</li>
+<li><p>3 在java代码层实现，使用RowBounds类分页</p>
+<ul>
+<li>使用RowBounds类分页是一种逻辑分页查询，一次性查出很多的数据，然后在查询结果中进行分页，明显的缺点就是消耗内存，存在内存溢出的风险</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-和-区别"><a href="#3-和-区别" class="headerlink" title="3 #{} 和 ${} 区别"></a>3 #{} 和 ${} 区别</h3><ul>
+<li><p>MyBatis 在处理 #{} 时，会将 SQL 中的 #{} 替换为 ?，预编译 SQL，通过set()方法进行参数赋值。使用 #{} 可以有效地防止 SQL 注入。（能用尽用）</p>
+</li>
+<li><p>在处理 ${} 时，会直接把${} 替换为参数值，存在 SQL 注入的风险</p>
+</li>
+<li><p>${}一般用入传入数据库对象，比如数据库表名；还有使用动态参数的时候，不支持使用#{}，所以只能用${}</p>
+</li>
+</ul>
+<h3 id="4-mybatis的两级缓存的机制"><a href="#4-mybatis的两级缓存的机制" class="headerlink" title="4 mybatis的两级缓存的机制"></a>4 mybatis的两级缓存的机制</h3><p>MyBatis默认定义了两级缓存：<strong>一级缓存</strong>、<strong>二级缓存</strong>和<strong>可自定义的二级缓存</strong></p>
+<p><strong>一级缓存：</strong></p>
+<ul>
+<li><p><strong>默认开启一级缓存。SqlSession级别的缓存,存在于一次会话之间</strong></p>
+</li>
+<li><p>所有 select 语句的结果将会被缓存</p>
+</li>
+<li><p>执行insert、update 和 delete 语句会刷新缓存</p>
+</li>
+<li><p>缓存会使用最近最少使用算法（LRU, Least Recently Used）算法来清除不需要的缓存（默认）。</p>
+</li>
+</ul>
+<p><strong>二级缓存:</strong></p>
+<ul>
+<li>基于namespace级别的缓存，一个命名空间Mapper，对应一个二级缓存；（需要手动打开）</li>
+<li>如果当前会话关闭了，这个会话对应的一级缓存就失效了；但是如果我们仍需要这个缓存数据，会话关闭时，我们将一级缓存中的数据被保存到二级缓存中；</li>
+</ul>
+<p><strong>缓存查找原理：</strong></p>
+<p>查数据时，先看二级缓存中有没有，再看一级缓存中有没有，都没有再查询数据库。</p>
+<h1 id="2-Spring"><a href="#2-Spring" class="headerlink" title="2 Spring"></a>2 Spring</h1><blockquote>
+<p>什么是Spring? Spring的组成\不要</p>
+<p>IOC 控制翻转、AOP 依赖注入   代理模式</p>
+<p>Bean  Bean 的作用域  自动装配 </p>
+<p>spring事务</p>
+</blockquote>
+<h2 id="2-1-什么是Spring"><a href="#2-1-什么是Spring" class="headerlink" title="2.1 什么是Spring?"></a>2.1 什么是Spring?</h2><p>Spring是一个具有控制反转(IoC)和面向切面(AOP)特点的容器（框架），旨在提高开发人员的开发效率以及系统的可维护性。</p>
+<p>一般说 Spring 框架指的都是 Spring Framework，它是很多模块的集合，使用这些模块可以很方便地协助我们进行开发。Spring 最核心的思想就是不重新造轮子，开箱即用！</p>
+<p>语言的流行通常需要一个杀手级的应用，Spring 就是 Java 生态得以流行的一个杀手级的应用框架。</p>
+<p>Spring 框架是一个分层架构，由 7 个定义良好的模块组成。Spring 模块构建在核心容器(Spring Core)之上，其他分别有Spring 上下文(Spring Context)、Spring AOP、Spring DAO、Spring ORM、Spring Web 模块、Spring MVC 框架</p>
+<h2 id="2-2-IOC-和-AOP"><a href="#2-2-IOC-和-AOP" class="headerlink" title="2.2 IOC  和 AOP"></a>2.2 IOC  和 AOP</h2><h3 id="1-IOC是什么"><a href="#1-IOC是什么" class="headerlink" title="1 IOC是什么"></a>1 IOC是什么</h3><p>控制反转(IoC)：一个对象的创建和管理不再由对象本身控制，而是将这个对象注入Ioc容器中，由spring 来管理对象的创建和初始化。</p>
+<p><strong>控制反转IoC(Inversion of Control)，是一种设计思想，DI(依赖注入)是实现IOC的一种方法</strong>。没有IoC的程序中 , 我们使用面向对象编程 , 对象的创建与对象间的依赖关系 全在编码在程序中，对象的创建由程序自己控制，控制反转后将对象的创建转移给第三方也就是Spring容器。</p>
+<p>将对象注入spring容器中的方式也很简单，在xml配置文件中写一个<bean>标签就好了。取用的时候用getBean()方法可以直接获得该注入的对象。除了使用XML配置，springboot中支持基于注解的配置更为方便和流行。</bean></p>
+<p>DI(依赖注入)有三种实现方式：1构造方法、2set方式、3注解方式</p>
+<h3 id="2-AOP是什么"><a href="#2-AOP是什么" class="headerlink" title="2 AOP是什么"></a>2 AOP是什么</h3><p>AOP为Aspect Oriented Programming的缩写，意为：<strong>面向切面编程</strong>，通过预编译方式和运行期间<strong>动态代理</strong>实现程序功能的统一维护的一种技术。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。</p>
+<p>比如将共同调用的业务逻辑（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低耦合性。</p>
+<h3 id="3-静态代理和动态代理"><a href="#3-静态代理和动态代理" class="headerlink" title="3 静态代理和动态代理"></a>3 静态代理和动态代理</h3><p><strong>代理模式几个组成部分</strong></p>
+<ul>
+<li>抽象角色： 一般会使用一个接口或者抽象类来实现（比如出<strong>租房子这件事</strong>）</li>
+<li>真实角色：被代理的角色（这里指<strong>房东</strong>实现出租房子的接口）</li>
+<li>代理角色：代理真实角色，代理真实角色后，一般会做一些附属操作（这里指<strong>中介</strong>、帮房东出租房子，也要实现出租房子的接口、但有自己的一些其他方法）</li>
+<li>客户：访问代理对象的人 （这里表示<strong>要租房子的人</strong>）</li>
+</ul>
+<p><strong>代理模式的好处：</strong></p>
+<ul>
+<li><p>可以使真实角色的操作更加纯粹，不用去关注一些公共的业务</p>
+</li>
+<li><p>公共业务交给代理角色去实现，实现业务的分工</p>
+</li>
+<li><p>公共业务发生扩展时，方便集中管理</p>
+</li>
+</ul>
+<p><strong>静态代理：</strong></p>
+<p>有一个真实角色就要对应写一个代理角色，代码量翻倍、效率较低</p>
+<p><strong>动态代理：</strong></p>
+<p>和静态代理最大的区别：动态代理的代理类是动态生成的，不是我们直接写好的</p>
+<h2 id="2-3-Spring-bean"><a href="#2-3-Spring-bean" class="headerlink" title="2.3 Spring bean"></a>2.3 Spring bean</h2><p>bean 就是指的就是那些被 IoC 容器所管理的对象，被Ioc托管的对象都叫bean。</p>
+<h3 id="1-bean的作用域"><a href="#1-bean的作用域" class="headerlink" title="1 bean的作用域"></a>1 bean的作用域</h3><ul>
+<li><p>单例模式singleton </p>
+<ul>
+<li>singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。</li>
+</ul>
+</li>
+<li><p>原型模式prototype </p>
+<ul>
+<li> 每次请求都会创建一个新的 bean 实例。</li>
+</ul>
+</li>
+<li><p><strong>request</strong> : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</p>
+</li>
+<li><p><strong>session</strong> : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</p>
+</li>
+<li><p><strong>global-session</strong> ： 全局 session 作用域，仅仅在基于 portlet 的 web 应用中才有意义，Spring5 已经没有了。Portlet 是能够生成语义代码(例如：HTML)片段的小型 Java Web 插件。它们基于 portlet 容器，可以像 servlet 一样处理 HTTP 请求。但是，与 servlet 不同，每个 portlet 都有不同的会话。</p>
+</li>
+</ul>
+<h3 id="2-单例的线程安全"><a href="#2-单例的线程安全" class="headerlink" title="2 单例的线程安全"></a>2 单例的线程安全</h3><p>单例 bean 存在线程问题，主要是因为当多个线程操作同一个对象的时候是存在资源竞争的。</p>
+<ul>
+<li><p>常见的有两种解决办法：</p>
+<ul>
+<li><p>在 bean 中尽量避免定义可变的成员变量。</p>
+</li>
+<li><p>在类中定义一个 ThreadLocal 成员变量，将需要的可变成员变量保存在 ThreadLocal 中（推荐的一种方式）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-spring的自动装配原理"><a href="#3-spring的自动装配原理" class="headerlink" title="3 spring的自动装配原理"></a>3 spring的自动装配原理</h3><p>Bean 的自动装配指Spring会在上下文中自动寻找，并自动给bean装备属性。简单来讲，给一个复杂对象赋值属性的时候，如果要调用容器中已经存在的对象的话、spring会帮我们自动装配调用。一般来说有两种自动装配的方式ByName 和 ByType</p>
+<ul>
+<li><p>byNmae 会自动在容器上下文中查找和自己对象set方法后面的值对应的id</p>
+</li>
+<li><p>byType 会自动在容器上下文中查找和自己对象属性类型相同的bean</p>
+</li>
+</ul>
+<p>@Autowired注解：自动装配，默认通过byType的方式实现，如果相同Type&gt;1,就用byName，而且必须要求这个对象存在【常用】</p>
+<p>@Resource 注解：自动装配，默认通过byname的方式实现，如果找不到名字，则通过byType实现</p>
+<h2 id="2-4-Spring-事务（bd）"><a href="#2-4-Spring-事务（bd）" class="headerlink" title="2.4 Spring 事务（bd）"></a>2.4 Spring 事务（bd）</h2><h3 id="1-Spring-事务实现方式有哪些？"><a href="#1-Spring-事务实现方式有哪些？" class="headerlink" title="1 Spring 事务实现方式有哪些？"></a>1 Spring 事务实现方式有哪些？</h3><p>Spring支持编程式事务管理和声明式的事务管理。</p>
+<p><strong>编程式事务管理：</strong></p>
+<ul>
+<li>将事务管理代码嵌到业务方法中来控制事务的提交和回滚</li>
+<li>缺点：必须在每个事务操作业务逻辑中包含额外的事务管理代码</li>
+</ul>
+<p><strong>声明式事务管理（更好用）：</strong></p>
+<ul>
+<li>将事务管理代码从业务方法中分离出来，以声明的方式来实现事务管理。</li>
+<li>将事务管理作为横切关注点，通过aop方法模块化。Spring中通过Spring AOP框架支持声明式事务 管理。</li>
+</ul>
+<h3 id="2-spring事务传播特性"><a href="#2-spring事务传播特性" class="headerlink" title="2 spring事务传播特性"></a>2 spring事务传播特性</h3><p>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。spring支持7种事务传播行为</p>
+<ul>
+<li>propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这 个事务中，这是最常见的选择。 <strong>（默认）</strong></li>
+<li>propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。 </li>
+<li>propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。 </li>
+<li>propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。 </li>
+<li>propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。 </li>
+<li>propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。 </li>
+<li>propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与</li>
+</ul>
+<p>需要手动实现：在配置文件中声明事务的传播特性（比如REQUIRED），然后以AOP的方式实现事务的织入</p>
+<blockquote>
+<p>编写Spring的辅助配置文件spring-dao.xml；在配置声明式事务，并结合AOP实现事务的织入</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置声明式事务--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--结合AOP实现事务的织入--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置事务通知；--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--给那些方法配置事务--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置事务的传播特性：new  propagation= --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;add&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;delete&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;update&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;query&quot;</span> <span class="attr">read-only</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--配置事务切入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;txPointCut&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution(* com.kuang.mapper.*.*(..))&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;txPointCut&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-SpringMVC"><a href="#3-SpringMVC" class="headerlink" title="3 SpringMVC"></a>3 SpringMVC</h1><blockquote>
+<ul>
+<li>springMVC</li>
+</ul>
+<p>MVC三层架构</p>
+<p>SprincgMVC执行原理</p>
+<p>拦截器、文件上传下载？</p>
+</blockquote>
+<p>3.1 什么是SpringMVC？</p>
+<p>Spring MVC是一个基于Java的实现了MVC模式的一个的轻量级Web框架，通过把Model，View，Controller分离，将web层进行职责解耦，把复杂的web应用分成逻辑清晰的几部分，简化开发，减少出错，方便组内开发人员之间的配合。</p>
+<p>3.2 SprincgMVC执行原理</p>
+<ul>
+<li><p>SpringMVC的执行过程是围绕着前置（调度）控制器DispatcherServlet的调度来设计的。</p>
+<ul>
+<li><p>第一步，DispatcherServlet拦截请求，并调用 处理器映射HandlerMapping 和 解析控制器映射HandlerExecution。</p>
+<ul>
+<li>目的是根据url查找对应控制器，找到是哪个Controller应该处理这个请求，找到之后返回给DispatcherServlet</li>
+</ul>
+</li>
+<li><p>第二步，DispatcherServlet调用HandlerAdapter处理器适配器，并让他调用那个Controller。</p>
+<ul>
+<li><p>接下来就是我们编写的代码逻辑，后端Controller调Service、Service调Mapper接口，mapper.xml做持久层的增删改查，得到一个JSON对象传递给前端</p>
+</li>
+<li><p>前端解析JSON为自己的js对象，然后得到视图和模型，通过HandlerAdapter处理器适配器传递给DispatcherServlet</p>
+</li>
+</ul>
+</li>
+<li><p>第三步，DispatcherServlet调用视图解析器(ViewResolver)来解析逻辑视图，最后得到视图，再呈现给用户！！</p>
+</li>
+</ul>
+</li>
+<li><p>总结：简单来讲的话就是三步：1通过url找到对应的Controller、然后2调用执行持久化层的查询获得逻辑视图或者model，最后3解析视图、并呈现给用户。</p>
+</li>
+</ul>
+<p>3.3 SpringMVC常用的注解有哪些</p>
+<p>@RequestMapping：用于处理请求 url 映射的注解，可用于类或方法上。用于类上，则表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
+<p>@RequestBody：注解实现接收http请求的json数据，将json转换为java对象。</p>
+<p>@ResponseBody：注解实现将conreoller方法返回对象转化为json对象响应给客户。(一般与@Controller标识控制器组合，成为@RestController使用，)</p>
+<h1 id="4-Springboot"><a href="#4-Springboot" class="headerlink" title="4 Springboot"></a>4 Springboot</h1><h2 id="4-1-什么是Springboot"><a href="#4-1-什么是Springboot" class="headerlink" title="4.1 什么是Springboot?"></a>4.1 什么是Springboot?</h2><p>Spring Boot 主要是简化了使用 Spring 的开发难度，简省了繁重的配置，提供了各种启动器，是开发者能快速上手。约定大于配置。</p>
+<h2 id="4-2-springboot常用注解"><a href="#4-2-springboot常用注解" class="headerlink" title="4.2 springboot常用注解"></a>4.2 springboot常用注解</h2><p><strong>1 @SpringBootApplication：</strong></p>
+<p>我们可以把 <code>@SpringBootApplication</code>看作是 <code>@Configuration</code>、<code>@EnableAutoConfiguration</code>、<code>@ComponentScan</code> 注解的集合。根据 SpringBoot 官网，这三个注解的作用分别是：</p>
+<ul>
+<li><code>@EnableAutoConfiguration</code>：启用 SpringBoot 的自动配置机制</li>
+<li><code>@ComponentScan</code>： 扫描被<code>@Component</code> (<code>@Service</code>,<code>@Controller</code>)注解的 bean，注解默认会扫描该类所在的包下所有的类。</li>
+<li><code>@Configuration</code>：允许在 Spring 上下文中注册额外的 bean 或导入其他配置类</li>
+</ul>
+<p><strong>2 Spring Bean 相关</strong></p>
+<ul>
+<li><p>@Autowired 自动装配</p>
+<ul>
+<li>自动导入对象到Bean中，被注入进的类同样要被 Spring 容器管理</li>
+<li>默认通过byType的方式实现，如果相同Type&gt;1,就用byName，而且必须要求这个对象存在【常用】</li>
+</ul>
+</li>
+<li><p>几种声明实体类被Spring管理成为bean对象的注解</p>
+<ul>
+<li><code>@Controller</code> : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面。</li>
+<li><code>@Service</code> : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。</li>
+<li><code>@Repository</code> : 对应持久层即 Dao 层，主要用于数据库相关操作。</li>
+<li><code>@Component</code> ：通用的注解，可标注任意类为 <code>Spring</code> 组件。如果一个 Bean 不知道属于哪个层，可以使用<code>@Component</code> 注解标注。一般pojo层</li>
+</ul>
+</li>
+<li><p>@RestController</p>
+<ul>
+<li><code>@RestController</code>注解是<code>@Controller和</code>@<code>ResponseBody</code>的合集,表示这是个控制器 bean,并且是将函数的返回值以JSON的格式直接填入 HTTP 响应体中,是 REST 风格的控制器。</li>
+</ul>
+</li>
+<li><p>@Scope()设置作用域的注解</p>
+<ul>
+<li>@Scope(“singleton”) //表示单例模式的注解</li>
+<li>@Scope(“prototype”) //表示原型模式的注解</li>
+</ul>
+</li>
+<li><p>@Configuration 声明配置类</p>
+</li>
+</ul>
+<p><strong>3 http请求和前后端传值</strong></p>
+<ul>
+<li>四种http请求<ul>
+<li>@GetMapping(“users”)</li>
+<li>@PostMapping(“users”)</li>
+<li>@PutMapping(“users”)</li>
+<li>@DeleteMapping(“users”)</li>
+<li>@PatchMapping(“/profile”) 更新数据</li>
+</ul>
+</li>
+<li>`获取路径参数、获取查询参数<ul>
+<li><code>@PathVariable</code>用于获取路径参数</li>
+<li><code>@RequestParam</code>用于获取查询参数。</li>
+</ul>
+</li>
+</ul>
+<p><strong>4 读取配置信息</strong></p>
+<p>很多时候我们需要将一些常用的配置信息比如阿里云 oss、发送短信、微信认证的相关配置信息等等放到配置文件中。</p>
+<ul>
+<li><p>使用 <code>@Value(&quot;$&#123;property&#125;&quot;)</code> 读取比较简单的配置信息：</p>
+</li>
+<li><p>通过<code>@ConfigurationProperties</code>读取配置信息并与 bean 绑定。</p>
+</li>
+</ul>
+<h1 id="5-RabbitMQ"><a href="#5-RabbitMQ" class="headerlink" title="5 RabbitMQ"></a>5 RabbitMQ</h1>
+    </div>
+
+    <div>
+      
+          
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------感谢阅读<i class="fa fa-paw"></i>没事常来-------------
+        </div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag"># 后端开发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/30/%E9%9D%A2%E7%BB%8F_06_%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20/" rel="prev" title="设计模式">
+      <i class="fa fa-chevron-left"></i> 设计模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/02/%E9%9D%A2%E7%BB%8F_08_vhr%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E9%97%AE%E7%AD%94/" rel="next" title="vhr人力资源管理系统面经">
+      vhr人力资源管理系统面经 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Mybatis"><span class="nav-number">1.</span> <span class="nav-text">1 Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Mybatis%E7%9A%84%E4%BB%8B%E7%BB%8D%E5%92%8C%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Mybatis的介绍和运行原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E4%BB%80%E4%B9%88%E6%98%AFMybatis%E3%80%81Mybatis%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 什么是Mybatis、Mybatis的好处？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-XML%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0mapper%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 XML映射文件实现mapper接口的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-Mybatis%E5%86%85%E9%83%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3 Mybatis内部的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4-Mybatis%E5%86%85%E9%83%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.1.4 Mybatis内部对象的生命周期和作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Mybatis%E7%9A%84%E7%89%B9%E8%89%B2%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Mybatis的特色功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-Mybatis%E7%9A%84%E6%89%A7%E8%A1%8C%E5%99%A8Executor"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 Mybatis的执行器Executor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E6%89%A9%E5%B1%95Mybatis%E7%9A%84%E6%89%B9%E9%87%8Fupdate%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 扩展Mybatis的批量update操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-Mybatis%E8%87%AA%E5%8A%A8%E6%98%A0%E5%B0%84%E5%8A%9F%E8%83%BD%EF%BC%9A%E5%8F%82%E6%95%B0%E6%98%A0%E5%B0%84%E5%92%8C%E7%BB%93%E6%9E%9C%E9%9B%86%E6%98%A0%E5%B0%84"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 Mybatis自动映射功能：参数映射和结果集映射</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Mybatis%E4%B8%AD%E7%9A%84SQL%E8%AF%AD%E5%8F%A5%E5%92%8C%E7%BC%93%E5%AD%98"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Mybatis中的SQL语句和缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Mybatis-%E7%9A%84-XML-%E6%96%87%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%EF%BC%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">1 Mybatis 的 XML 文件有哪些标签属性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SQL%E5%88%86%E9%A1%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text">2 SQL分页的三种实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%92%8C-%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.3.</span> <span class="nav-text">3 #{} 和 ${} 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-mybatis%E7%9A%84%E4%B8%A4%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.4.</span> <span class="nav-text">4 mybatis的两级缓存的机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Spring"><span class="nav-number">2.</span> <span class="nav-text">2 Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AFSpring"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 什么是Spring?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-IOC-%E5%92%8C-AOP"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 IOC  和 AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IOC%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.2.1.</span> <span class="nav-text">1 IOC是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-AOP%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.2.2.</span> <span class="nav-text">2 AOP是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8C%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">2.2.3.</span> <span class="nav-text">3 静态代理和动态代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Spring-bean"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 Spring bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.3.1.</span> <span class="nav-text">1 bean的作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8D%95%E4%BE%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">2.3.2.</span> <span class="nav-text">2 单例的线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-spring%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.3.</span> <span class="nav-text">3 spring的自动装配原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Spring-%E4%BA%8B%E5%8A%A1%EF%BC%88bd%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Spring 事务（bd）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spring-%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">2.4.1.</span> <span class="nav-text">1 Spring 事务实现方式有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-spring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E7%89%B9%E6%80%A7"><span class="nav-number">2.4.2.</span> <span class="nav-text">2 spring事务传播特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-SpringMVC"><span class="nav-number">3.</span> <span class="nav-text">3 SpringMVC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Springboot"><span class="nav-number">4.</span> <span class="nav-text">4 Springboot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BB%80%E4%B9%88%E6%98%AFSpringboot"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 什么是Springboot?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-springboot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 springboot常用注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-RabbitMQ"><span class="nav-number">5.</span> <span class="nav-text">5 RabbitMQ</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wu kang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu kang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
