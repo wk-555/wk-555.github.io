@@ -27,19 +27,19 @@
 <meta property="og:site_name" content="落风的风">
 <meta property="og:description" content="狂神Mybatis教学视频学习笔记，仅实操重要部分，面向秋招学习，知识点  mybaits实现的两种方式：xml文件和注解 映射器（mappers）实现的三种方式 参数的map映射、结果集的map映射 分页、动态SQL、mybatis的两级缓存的机制">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210046.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210055.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210104.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210109.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210115.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210036.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210046.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210055.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210104.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210109.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210115.png">
 <meta property="article:published_time" content="2021-06-02T14:55:00.000Z">
-<meta property="article:modified_time" content="2021-11-12T13:53:14.774Z">
+<meta property="article:modified_time" content="2022-05-17T11:50:07.874Z">
 <meta property="article:author" content="Wu kang">
 <meta property="article:tag" content="框架">
 <meta property="article:tag" content="Mybatis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png">
+<meta name="twitter:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210036.png">
 
 <link rel="canonical" href="https://wukang555.github.io/2021/06/02/%E6%A1%86%E6%9E%B6_02_Mybatis_wukang/">
 
@@ -205,7 +205,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-12 21:53:14" itemprop="dateModified" datetime="2021-11-12T21:53:14+08:00">2021-11-12</time>
+                <time title="Modified: 2022-05-17 19:50:07" itemprop="dateModified" datetime="2022-05-17T19:50:07+08:00">2022-05-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
 <h2 id="Mybatis-狂神笔记"><a href="#Mybatis-狂神笔记" class="headerlink" title="Mybatis_狂神笔记"></a>Mybatis_狂神笔记</h2><blockquote>
 <p>环境：JDK11.0.6、Mysql 5.7、maven 3.3.9、IDEA</p>
 </blockquote>
-<h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><h3 id="1-1、什么是Mybatis"><a href="#1-1、什么是Mybatis" class="headerlink" title="1.1、什么是Mybatis"></a>1.1、什么是Mybatis</h3><p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210036.png" alt="1569633932712"></p>
+<h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><h3 id="1-1、什么是Mybatis"><a href="#1-1、什么是Mybatis" class="headerlink" title="1.1、什么是Mybatis"></a>1.1、什么是Mybatis</h3><p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210036.png" alt="1569633932712"></p>
 <ul>
 <li>MyBatis 是一款优秀的<strong>持久层框架</strong></li>
 <li>它支持定制化 SQL、存储过程以及高级映射。</li>
@@ -362,7 +362,7 @@
 <li>返回类型不对</li>
 <li>Maven导出资源问题</li>
 </ol>
-<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210046.png" alt="image-20210323195446143" style="zoom:67%;">
+<img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210046.png" alt="image-20210323195446143" style="zoom:67%;">
 
 
 
@@ -468,7 +468,7 @@
 <li>接口和他的Mapper配置文件必须在同一个包下！</li>
 </ul>
 <h2 id="5、生命周期和作用域"><a href="#5、生命周期和作用域" class="headerlink" title="5、生命周期和作用域"></a>5、生命周期和作用域</h2><p>这里指的是SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession的作用域</p>
-<img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210055.png" alt="1569660737088" style="zoom: 50%;">
+<img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210055.png" alt="1569660737088" style="zoom: 50%;">
 
 <p><strong>SqlSessionFactoryBuilder：</strong></p>
 <ul>
@@ -579,8 +579,8 @@
 <p><strong>举例：使用foreach执行批量操作</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="number">1</span>=<span class="number">1</span> <span class="keyword">and</span> </span><br><span class="line"></span><br><span class="line">  &lt;foreach item=<span class="string">&quot;id&quot;</span> collection=<span class="string">&quot;ids&quot;</span></span><br><span class="line">      <span class="keyword">open</span>=<span class="string">&quot;(&quot;</span> separator=<span class="string">&quot;or&quot;</span> <span class="keyword">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span><br><span class="line">        <span class="comment">#&#123;id&#125;</span></span><br><span class="line">  &lt;/foreach&gt;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">or</span> <span class="keyword">id</span>=<span class="number">2</span> <span class="keyword">or</span> <span class="keyword">id</span>=<span class="number">3</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210104.png" alt="1569979229205"></p>
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210109.png" alt="1569979339190"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210104.png" alt="1569979229205"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210109.png" alt="1569979339190"></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        select * from mybatis.blog where 1=1 and (id=1 or id = 2 or id=3)</span></span><br><span class="line"><span class="comment">        我们现在传递一个万能的map ， 这map中可以存在一个集合！</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;queryBlogForeach&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;map&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;blog&quot;</span>&gt;</span></span><br><span class="line">    select * from mybatis.blog</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;ids&quot;</span> <span class="attr">item</span>=<span class="string">&quot;id&quot;</span> <span class="attr">open</span>=<span class="string">&quot;and (&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;or&quot;</span>&gt;</span></span><br><span class="line">            id = #&#123;id&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="10、缓存"><a href="#10、缓存" class="headerlink" title="10、缓存"></a>10、缓存</h2><h3 id="10-1、缓存定义"><a href="#10-1、缓存定义" class="headerlink" title="10.1、缓存定义"></a>10.1、缓存定义</h3><ol>
@@ -648,7 +648,7 @@
 <li>再看一级缓存中有没有</li>
 <li>都没有再查询数据库</li>
 </ul>
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112210115.png" alt="1569985541106"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112210115.png" alt="1569985541106"></p>
 <p>Redis数据库来做缓存！  K-V键值对</p>
 <h2 id="11-总结"><a href="#11-总结" class="headerlink" title="11 总结"></a>11 总结</h2><ul>
 <li>mybaits实现的两种方式：xml文件和注解</li>
@@ -819,7 +819,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

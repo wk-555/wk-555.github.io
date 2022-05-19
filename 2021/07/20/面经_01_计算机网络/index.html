@@ -27,18 +27,18 @@
 <meta property="og:site_name" content="落风的风">
 <meta property="og:description" content="计算机网络面经，极简共22个问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212121.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212125.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212131.png">
-<meta property="og:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212135.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212117.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212121.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212125.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212131.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212135.png">
 <meta property="article:published_time" content="2021-07-20T14:55:00.000Z">
-<meta property="article:modified_time" content="2021-11-12T14:05:20.416Z">
+<meta property="article:modified_time" content="2022-05-17T12:15:59.771Z">
 <meta property="article:author" content="Wu kang">
 <meta property="article:tag" content="计算机网络">
 <meta property="article:tag" content="计算机基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png">
+<meta name="twitter:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212117.png">
 
 <link rel="canonical" href="https://wukang555.github.io/2021/07/20/%E9%9D%A2%E7%BB%8F_01_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
@@ -204,7 +204,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-12 22:05:20" itemprop="dateModified" datetime="2021-11-12T22:05:20+08:00">2021-11-12</time>
+                <time title="Modified: 2022-05-17 20:15:59" itemprop="dateModified" datetime="2022-05-17T20:15:59+08:00">2022-05-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,7 +248,7 @@
 <li>数据链路层：将网络层传下来的IP分组封装成帧，并再相邻节点的链路上传送帧。</li>
 <li>物理层：实现相邻节点间比特流的透明传输，尽可能屏蔽传输介质和通信手段的差异，使数据链路层感觉不到这些差异。</li>
 </ul>
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212117.png" alt="图片"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212117.png" alt="图片"></p>
 <h2 id="2-TCP和UDP的区别？"><a href="#2-TCP和UDP的区别？" class="headerlink" title="2. TCP和UDP的区别？"></a>2. TCP和UDP的区别？</h2><p>TCP\UDP都是传输层的协议，TCP指传输控制协议，UDP指用户数据报协议</p>
 <ul>
 <li><p>TCP 保证数据的可靠传输，UDP 只尽最大努力交付，即不保证可靠交付。</p>
@@ -269,7 +269,7 @@
 <li>TCP：适应用于传输效率要求较低，但准确率要求较高的场景，例如：文件传输、接收邮件、HTTP。</li>
 <li>UDP：适用于效率要求相对较高，但准确性相对较低的场景， 例如：QQ聊天、在线视频、语音电话、DNS等</li>
 </ul>
-<h2 id="3-详细介绍一下-TCP-的三次握手机制？"><a href="#3-详细介绍一下-TCP-的三次握手机制？" class="headerlink" title="3. 详细介绍一下 TCP 的三次握手机制？"></a>3. 详细介绍一下 TCP 的三次握手机制？</h2><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212121.png" alt="image-20210616092718682" style="zoom: 50%;">
+<h2 id="3-详细介绍一下-TCP-的三次握手机制？"><a href="#3-详细介绍一下-TCP-的三次握手机制？" class="headerlink" title="3. 详细介绍一下 TCP 的三次握手机制？"></a>3. 详细介绍一下 TCP 的三次握手机制？</h2><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212121.png" alt="image-20210616092718682" style="zoom: 50%;">
 
 <ul>
 <li>SYN同步字段：用来建立连接，需要消耗一个序号；ACK确认字段：是确认报文段的标识，确认报文须设置ACK为1。</li>
@@ -290,7 +290,7 @@
 </ul>
 <p><strong>客户端：</strong></p>
 <p>客户端认为这个连接已经建立，如果客户端向服务端发送数据，服务端将以RST包（Reset，标示复位，用于异常的关闭连接）响应。此时，客户端知道第三次握手失败。</p>
-<h2 id="6-详细介绍一下-TCP-的四次挥手机制？"><a href="#6-详细介绍一下-TCP-的四次挥手机制？" class="headerlink" title="6. 详细介绍一下 TCP 的四次挥手机制？"></a>6. 详细介绍一下 TCP 的四次挥手机制？</h2><p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212125.png" alt="image-20210616102556722"></p>
+<h2 id="6-详细介绍一下-TCP-的四次挥手机制？"><a href="#6-详细介绍一下-TCP-的四次挥手机制？" class="headerlink" title="6. 详细介绍一下 TCP 的四次挥手机制？"></a>6. 详细介绍一下 TCP 的四次挥手机制？</h2><p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212125.png" alt="image-20210616102556722"></p>
 <ul>
 <li>FIN指终止字段，释放连接时用来同步序号、需要消耗一个序号</li>
 <li>第一次挥手：当A已经没有要发送的数据就会释放连接，A发送一个请求终止连接的报文，其中FIN终止字段=1，发送序号假设等于x；x等于A发送的上一个报文的序号+1；发送完毕后A进入终止等待1状态。</li>
@@ -375,7 +375,7 @@
 <li><p>6 连接结束</p>
 </li>
 </ul>
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212131.png" alt="20210616124706"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212131.png" alt="20210616124706"></p>
 <h2 id="13-介绍一下HTTP协议"><a href="#13-介绍一下HTTP协议" class="headerlink" title="13 介绍一下HTTP协议"></a>13 介绍一下HTTP协议</h2><p>HTTP 即超文本传输协议，是 Web 的应用层协议。HTTP定义了浏览器怎样向万维网服务器请求文档、以及服务器怎样把文档传输给浏览器</p>
 <p>HTTP在运输层使用TCP协议，TCP 为 HTTP 提供可靠的数据传输服务。</p>
 <p>HTTP 是一种无状态的协议，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何区别。一般靠cookie和session来保存状态</p>
@@ -390,7 +390,7 @@
 <li>500：(服务器内部错误) 服务器遇到错误，无法完成请求。</li>
 </ul>
 <p>状态码开头代表类型：</p>
-<p><img src="https://gitee.com/wukang555/blog-figure-bed/raw/master/img/20211112212135.png" alt="图片"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com/img/20211112212135.png" alt="图片"></p>
 <h2 id="15-HTTP-常用的请求方式？"><a href="#15-HTTP-常用的请求方式？" class="headerlink" title="15 HTTP 常用的请求方式？"></a>15 HTTP 常用的请求方式？</h2><table>
 <thead>
 <tr>
@@ -689,7 +689,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
