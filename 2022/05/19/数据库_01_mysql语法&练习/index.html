@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"wukang555.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基础SQL命令记录、以及一个简单的例子作为参考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql语法&amp;练习">
+<meta property="og:url" content="https://wukang555.github.io/2022/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93_01_mysql%E8%AF%AD%E6%B3%95&%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:site_name" content="落风的风">
+<meta property="og:description" content="基础SQL命令记录、以及一个简单的例子作为参考">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212702.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212704.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212706.png">
+<meta property="og:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212713.png">
+<meta property="article:published_time" content="2022-05-19T15:55:00.000Z">
+<meta property="article:modified_time" content="2022-05-19T01:58:09.719Z">
+<meta property="article:author" content="Wu kang">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212702.png">
+
+<link rel="canonical" href="https://wukang555.github.io/2022/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93_01_mysql%E8%AF%AD%E6%B3%95&%E7%BB%83%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-cn'
+  };
+</script>
+
+  <title>mysql语法&练习 | 落风的风</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="落风的风" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">落风的风</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-cn">
+    <link itemprop="mainEntityOfPage" href="https://wukang555.github.io/2022/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93_01_mysql%E8%AF%AD%E6%B3%95&%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Wu kang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落风的风">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql语法&练习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-19 23:55:00 / Modified: 09:58:09" itemprop="dateCreated datePublished" datetime="2022-05-19T23:55:00+08:00">2022-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>基础SQL命令记录、以及一个简单的例子作为参考</p>
+<a id="more"></a>
+
+<h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><p>SQL（Structured Query Language)：结构化查询语言，用于和数据库通信的语言，不是某个数据库软件特有的，而是几乎所有的主流数据库软件通用的语言</p>
+<p>SQL 语句不区分大小写，但是数据库表名、列名和值是否区分依赖于具体的 DBMS 以及配置。</p>
+<p>1 启动MySQL</p>
+<ul>
+<li>cmd打开运行窗口 键入,启动mysql服务</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打开SQLyog，连接数据库、进入本地数据库</li>
+<li>创建一个数据库并使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE mysqlWk; -- 直接点击建库更好、字符集选择utf-8 排序选择utf_general_ci</span><br><span class="line">USE mysqlWk; ##如果已有数据库 直接使用即可</span><br><span class="line">drop database if exists mysqlWk； ##删库跑路</span><br></pre></td></tr></table></figure>
+
+<p>2 MySQL三种注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 注释</span><br><span class="line">-- 注释</span><br><span class="line">&#x2F;* 注释1</span><br><span class="line">   注释2 *&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>3 MySQL数据类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 整型&#x2F;字节数</span><br><span class="line">tinyint smallint mediumint int&#x2F;integer bigint</span><br><span class="line">1         2        3          4            8</span><br><span class="line"></span><br><span class="line"># 浮点数 D位存小数部分，剩下M-D部分存整数部分</span><br><span class="line">float(M,D) 4    double(M,D) 8</span><br><span class="line"></span><br><span class="line"># 字符型</span><br><span class="line">char  varchar 定长&#x2F;变长</span><br><span class="line">-- varchar(50) 中 50 的涵义最多存放 50 个字符。varchar(50) 和 (200) 存储 hello 所占空间一样。</span><br><span class="line">-- 但建议选择合适的 varchar长度，因为 order by排序时，计算的是可变的长度、会占用更多的内存</span><br><span class="line"></span><br><span class="line"># 时间和日期</span><br><span class="line">datetime 8 -- 与时区无关，存从1000年到9999年的日期和时间，精度s</span><br><span class="line">timestamp 4 -- 和时区有关,表示从 1970 年到 2038 年,使用效率更高</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、创建和修改表"><a href="#二、创建和修改表" class="headerlink" title="二、创建和修改表"></a>二、创建和修改表</h1><blockquote>
+<p>这里所有的表名、属性都用 小写字母_ 的组合</p>
+</blockquote>
+<p>1 创建表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 创建 student_info 表</span><br><span class="line">create table student_info (</span><br><span class="line">s_id int primary key not null,</span><br><span class="line">s_name varchar(30) not null,</span><br><span class="line">s_gender int not null default 1,</span><br><span class="line">s_hometown varchar(50),</span><br><span class="line">s_tuition int</span><br><span class="line">);</span><br><span class="line"># 创建 student_subject 表</span><br><span class="line">create table student_subject(</span><br><span class="line">s_id int primary key not null,</span><br><span class="line">s_grade int not null default 60,</span><br><span class="line">sub_id int not null</span><br><span class="line">);</span><br><span class="line"># 创建 subject_info表</span><br><span class="line">create table subject_info(</span><br><span class="line">sub_id int primary key not null,</span><br><span class="line">sub_name varchar(20) not null</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>2 修改表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alter table student_info add age int; -- 添加列</span><br><span class="line">alter table student_info drop age int; -- 删除列</span><br><span class="line">drop table student_info; -- 删除表</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、增删改"><a href="#三、增删改" class="headerlink" title="三、增删改"></a>三、增删改</h1><p>1 插入数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">insert into student_info(s_id,s_name,s_gender,s_hometown,s_tuition) values(1,&#39;吴康&#39;,1,&#39;湖南长沙&#39;,8000);</span><br><span class="line">insert into student_info values(2,&#39;落风&#39;,1,&#39;湖北武汉&#39;,5000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(3,&#39;用户1&#39;,1,6000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(4,&#39;用户2&#39;,1,6000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(5,&#39;妹子1&#39;,2,8000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(6,&#39;妹子2&#39;,2,5000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(7,&#39;妹子3&#39;,2,4000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(8,&#39;妹子4&#39;,2,5000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(9,&#39;妹子5&#39;,2,9000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(10,&#39;妹子6&#39;,2,5000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(11,&#39;用户3&#39;,1,4000);</span><br><span class="line">insert into student_info(s_id,s_name,s_gender,s_tuition) values(12,&#39;用户4&#39;,1,5000);</span><br><span class="line"></span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(1,80,1);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(2,59,1);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(3,60,2);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(4,40,2);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(5,80,3);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(6,75,4);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(7,80,4);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(8,90,4);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(9,80,3);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(10,95,3);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(11,96,4);</span><br><span class="line">insert into student_subject(s_id,s_grade,sub_id) values(12,80,1);</span><br><span class="line"></span><br><span class="line">insert into subject_info(sub_id,sub_name) values(1, &#39;Math&#39;);</span><br><span class="line">insert into subject_info(sub_id,sub_name) values(2, &#39;English&#39;);</span><br><span class="line">insert into subject_info(sub_id,sub_name) values(3, &#39;Computer&#39;);</span><br><span class="line">insert into subject_info(sub_id,sub_name) values(4, &#39;News&#39;);</span><br><span class="line">insert into subject_info(sub_id,sub_name) values(5, &#39;civil enginering&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>2 更新数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update student_info set s_hometown &#x3D; &#39;湖北荆州&#39; where s_id &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<p>3 删除数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from subject_info where sun_id &#x3D; 5; -- 垃圾土木 毁我青春</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212702.png" alt="image-20210825010240565"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212704.png" alt="image-20210825010257556"></p>
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212706.png" alt="image-20210825010309056"></p>
+<h1 id="四、查询语句"><a href="#四、查询语句" class="headerlink" title="四、查询语句"></a>四、查询语句</h1><blockquote>
+<p><strong>书写顺序和执行顺序！！</strong>语法：<br>select 查询列表    ⑦<br>from 表1 别名       ①<br>连接类型 join 表2   ②<br>on 连接条件         ③<br> group by 分组列表   ⑤<br>having 筛选         ⑥<br>order by排序列表    ⑧<br>limit 起始条目索引，条目数;  ⑨</p>
+</blockquote>
+<p><strong>1 limit i，j;  返回第i行开始的共j行数据</strong></p>
+<ul>
+<li>查询subject_info的前三行数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from subject_info limit 0,3;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询student_info的4到7行数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info limit 3,4;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2 order by 排序:ASC升序（默认） DESC降序 【重要】</strong></p>
+<ul>
+<li>student_info表中按学费的降序排序，如果学费相同按id升序排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info order by s_tuition DESC, s_id ASC;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3 where 过滤：（= &gt; &lt; between is null and or in not）</strong></p>
+<ul>
+<li>查询s_tuition&gt;=8000并且s_gender=1的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info where s_tuition&gt;&#x3D;8000 and s_gender &#x3D; 1;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询tuition在6000到8000范围内的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info where s_tuition between 6000 and 8000;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查询s_hometown不为null的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info where s_hometown is not null;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4 like通配符： %匹配任意数量的字符  _匹配一个字符   [ ]匹配括号内的元素</strong></p>
+<ul>
+<li>查询s_name是“用”开头的数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student_info where s_name  like &#39;用%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5 数学函数：count()求数量 max()最大值 sum()求和..等</strong></p>
+<ul>
+<li>查询学费=8000的人的数据 和数量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student_info WHERE s_tuition &#x3D; 8000; -- 显示两条数据</span><br><span class="line">select *,count(*) from student_info where s_tuition &#x3D; 8000; -- 只显示一条数据，count列&#x3D;2</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="五-子查询、分组和连接、分页"><a href="#五-子查询、分组和连接、分页" class="headerlink" title="五 子查询、分组和连接、分页"></a>五 子查询、分组和连接、分页</h1><blockquote>
+<p>考虑到分组和连接比较重要，单独拿出一章来介绍和了解</p>
+</blockquote>
+<h2 id="5-1-子查询"><a href="#5-1-子查询" class="headerlink" title="5.1 子查询"></a>5.1 子查询</h2><p><strong>子查询中只能返回一个字段的数据。</strong></p>
+<p>==1 可以将子查询的结果作为 WHRER 语句的过滤条件。这个懂==</p>
+<ul>
+<li>比如我要查出来sub_id=4的专业的所有学生姓名和家乡<ul>
+<li>从student_subject中找到这个sub_id对应的学生s_id</li>
+<li>然后从student_info表中根据这个s_id找到姓名和家乡</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT s_name,s_hometown FROM student_info WHERE s_id IN</span><br><span class="line">(SELECT s_id FROM student_subject  WHERE sub_id &#x3D; 4</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>如果要进一步查具体某个专业，就要再嵌套一层子查询</p>
+<ul>
+<li>比如我要查出来sub_name=News专业的所有学生姓名和家乡<ul>
+<li>要先从subject_info中找到News专业对应的sub_id</li>
+<li>然后从student_subject中找到这个sub_id对应的学生s_id</li>
+<li>最后从student_info表中根据这个s_id找到姓名和家乡</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select s_name,s_hometown from student_info where s_id in</span><br><span class="line">(select s_id from student_subject where sub_id &#x3D; </span><br><span class="line"> 	( select sub_id from subject_info where sub_name &#x3D; &#39;News&#39;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>也就是说：我最后查得的数据，只能是一个表内的，子查询顶多给我做了一个筛选的功能。（不知道这个理解对不对）</strong></p>
+<p>==2 子查询还有一个功能！！就是将子查询放在查询字段中时，会对每一行查询的结果都做一次子查询！！==</p>
+<ul>
+<li>比如我要查每个专业分别有几个同学<ul>
+<li>我可以先写查某一个具体的专业有几个人</li>
+<li>然后嵌套进查所有专业的语句中、实现差所有专业的人数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">## 查Math专业有几个人</span><br><span class="line">select count(*) nums from student_subject where sub_id &#x3D; 1;</span><br><span class="line"></span><br><span class="line">## 查所有的专业</span><br><span class="line">select sub_name, sub_id from subject_info;</span><br><span class="line"></span><br><span class="line">## 嵌套子查询 每个抓专业有多少人 用where连接两个表</span><br><span class="line">select sub_name, sub_id,</span><br><span class="line">(select count(*) from student_subject where student_subject.sub_id&#x3D; subject_info.sub_id) nums</span><br><span class="line">from subject_info;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-2-分组group-by"><a href="#5-2-分组group-by" class="headerlink" title="5.2 分组group by"></a>5.2 分组group by</h2><p><strong>1 group by理解</strong></p>
+<p>我之前一直疑惑一个问题：<strong>group by 排完序之后到底变成了一个怎样的表？</strong></p>
+<ul>
+<li><p>==分组操作执行之后：每一行代表一个分组，每个分组只显示第一个数据==</p>
+</li>
+<li><p>可以用count(*) nums求每一个分组内元素的个数</p>
+</li>
+<li><p>还可以用HAVING nums&gt;6; 过滤分组中的字段</p>
+</li>
+<li><p>如果group by后面只有一个字段就是只按这一个字段的来分组，如果group by后面有多个字段，那需要这些字段都相同才是一个分组！！</p>
+</li>
+</ul>
+<p>两个重要的要求：</p>
+<ul>
+<li><strong>除了count()等字段外，SELECT 语句中要查的每一字段都必须在 GROUP BY 子句中给出</strong><ul>
+<li>关系数据库就是基于关系的，单元格中是不允许有多个值的，只对一个字段分组了，那么就只有该列不是重复的！！如果执行select * 就会报错！！</li>
+<li>聚合函数比如count()、sum()、就是将一组内的多个数据计算输出一个数据</li>
+</ul>
+</li>
+<li><strong>where要用在group之前，having要用在group之后</strong><ul>
+<li>WHERE 过滤行数据，HAVING 过滤分组，行过滤应当先于分组过滤。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2 group by练习</strong></p>
+<ul>
+<li>按s_tuition分组，学费相同的为一组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select s_tuition from student_info group by s_tuition;</span><br><span class="line">SELECT s_name,s_tuition,COUNT(*) nums FROM student_info GROUP BY s_tuition;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>按s_gender分组，性别相同的为一组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select s_gender from student_info group by s_gender;</span><br><span class="line">-- 我用的这个版本没有报错，显示了该分组第一行的所有数据。</span><br><span class="line">select * from student_info group by s_gender; </span><br><span class="line">select * ,count(*) nums from student_info group by s_gender; -- 显示数据个数</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-3-连接-join【重点】"><a href="#5-3-连接-join【重点】" class="headerlink" title="5.3 连接 join【重点】"></a>5.3 连接 join【重点】</h2><p>连接用于连接多个表，使用 <code>join</code> 关键字，并且条件语句使用 <code>on</code> ！！！连接一般可以用来替代子查询！！使用超级频繁</p>
+<p>三种连接方式：内连接、左连接、右连接</p>
+<ul>
+<li>内连接：就是只有两个表都不为null的数据才能显示出来（取交集）inner join</li>
+<li>左连接：以左表为主表（左边表的数据全显示）、右表中无对应数据的显示为null</li>
+<li>右连接：以右表为主表（右边表的数据全显示）、左表中无对应数据的显示为null</li>
+</ul>
+<p>一般会一个就好了，就练习左连接吧</p>
+<ul>
+<li>查询所有学生的s_id、sub_id和sub_name，很显然要连接student_subject和表subjct_info</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select b.s_id,b.sub_id,c.sub_name from</span><br><span class="line">	student_subject b left join subject_info c</span><br><span class="line">    on b.sub_id &#x3D; c.sub_id;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再看看把subject_info放在前面会怎么样</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT b.s_id,b.sub_id,c.sub_name FROM</span><br><span class="line">	subject_info c LEFT JOIN student_subject b</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id;</span><br><span class="line">-- 发现结果基本一样（因为都不为空）</span><br><span class="line">-- 只是数据的排序方式不一样（似乎是按副表的字段排序的）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>我试一下吧三个表都连接起来看看!!</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#先连接bc两个表</span><br><span class="line">(select b.s_id, b.s_grade,b.sub_id,c.sub_name from</span><br><span class="line">	student_subject b left join subject_info c</span><br><span class="line">	on b.sub_id &#x3D; c.sub_id) bc</span><br><span class="line">#然后连接a表和bc表</span><br><span class="line">select a.s_id,a.s_name,a.s_gender,a.s_hometown,a.s_tuition,</span><br><span class="line">bc.s_grade,bc.sub_id,bc.sub_name from</span><br><span class="line">student_info a left join </span><br><span class="line">(select b.s_id, b.s_grade,b.sub_id,c.sub_name from</span><br><span class="line">	student_subject b left join subject_info c</span><br><span class="line">	on b.sub_id &#x3D; c.sub_id) bc</span><br><span class="line">on a.s_id&#x3D;bc.s_id;</span><br><span class="line">-- 居然还成功了</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-4-分页查询"><a href="#5-4-分页查询" class="headerlink" title="5.4 分页查询"></a>5.4 分页查询</h2><blockquote>
+<p>参考文章<a target="_blank" rel="noopener" href="https://www.cnblogs.com/endv/p/12275043.html">https://www.cnblogs.com/endv/p/12275043.html</a></p>
+</blockquote>
+<h1 id="六-终极查询练习"><a href="#六-终极查询练习" class="headerlink" title="六 终极查询练习"></a>六 终极查询练习</h1><blockquote>
+<p>找男生人数最多的两个专业和人数！！</p>
+</blockquote>
+<p>其实就可以用我上面那个查出来的大表，先筛选出男生的行，然后以专业分组、计算数量排序然后取前两个就好</p>
+<ul>
+<li>1 先连接形成大表</li>
+<li>2 where筛选出s_gender=1，所有的男生</li>
+<li>3 用group by对sub_name分组，并求每个分组的数量count(*) nums</li>
+<li>4 用order by对nums降序排列</li>
+<li>5 limit 0,2找出前两行数据！！</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.s_id,a.s_name,a.s_gender,a.s_hometown,a.s_tuition,</span><br><span class="line">bc.s_grade,bc.sub_id,bc.sub_name,COUNT(*) nums FROM</span><br><span class="line">student_info a LEFT JOIN </span><br><span class="line">(SELECT b.s_id, b.s_grade,b.sub_id,c.sub_name FROM</span><br><span class="line">	student_subject b LEFT JOIN subject_info c</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id) bc</span><br><span class="line">ON a.s_id&#x3D;bc.s_id</span><br><span class="line">WHERE s_gender &#x3D; 1</span><br><span class="line">GROUP BY sub_name</span><br><span class="line">ORDER BY nums DESC</span><br><span class="line">LIMIT 0,2;</span><br><span class="line">-- 总感觉这么直接连接不太优雅</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blog-figure.oss-cn-hangzhou.aliyuncs.com//img/20211112212713.png" alt="image-20210827010908573"></p>
+<h1 id="七-表的索引"><a href="#七-表的索引" class="headerlink" title="七 表的索引"></a>七 表的索引</h1><blockquote>
+<p>数据量较大时，建立和使用提高效率。</p>
+<p>本机创建千万级别的数据表单，用于测试</p>
+</blockquote>
+<h1 id="附录：所有sql语句"><a href="#附录：所有sql语句" class="headerlink" title="附录：所有sql语句"></a>附录：所有sql语句</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">## 创建student_info表并插入数据</span><br><span class="line">CREATE TABLE student_info (</span><br><span class="line">s_id INT PRIMARY KEY NOT NULL,</span><br><span class="line">s_name VARCHAR(30) NOT NULL,</span><br><span class="line">s_gender INT NOT NULL DEFAULT 1,</span><br><span class="line">s_hometown VARCHAR(50),</span><br><span class="line">s_tuition INT</span><br><span class="line">);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_hometown,s_tuition) VALUES(1,&#39;吴康&#39;,1,&#39;湖南长沙&#39;,8000);</span><br><span class="line">INSERT INTO student_info VALUES(2,&#39;落风&#39;,1,&#39;湖北武汉&#39;,5000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(3,&#39;用户1&#39;,1,6000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(4,&#39;用户2&#39;,1,6000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(5,&#39;妹子1&#39;,2,8000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(6,&#39;妹子2&#39;,2,5000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(7,&#39;妹子3&#39;,2,4000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(8,&#39;妹子4&#39;,2,5000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(9,&#39;妹子5&#39;,2,9000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(10,&#39;妹子6&#39;,2,5000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(11,&#39;用户3&#39;,1,4000);</span><br><span class="line">INSERT INTO student_info(s_id,s_name,s_gender,s_tuition) VALUES(12,&#39;用户4&#39;,1,5000);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 创建 student_subject 表</span><br><span class="line">CREATE TABLE student_subject(</span><br><span class="line">s_id INT PRIMARY KEY NOT NULL,</span><br><span class="line">s_grade INT NOT NULL DEFAULT 60,</span><br><span class="line">sub_id INT NOT NULL</span><br><span class="line">);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(1,80,1);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(2,59,1);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(3,60,2);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(4,40,2);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(5,80,3);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(6,75,4);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(7,80,4);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(8,90,4);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(9,80,3);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(10,95,3);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(11,96,4);</span><br><span class="line">INSERT INTO student_subject(s_id,s_grade,sub_id) VALUES(12,80,1);</span><br><span class="line"></span><br><span class="line"># 创建 subject_info表</span><br><span class="line">CREATE TABLE subject_info(</span><br><span class="line">sub_id INT PRIMARY KEY NOT NULL,</span><br><span class="line">sub_name VARCHAR(20) NOT NULL</span><br><span class="line">);</span><br><span class="line">INSERT INTO subject_info(sub_id,sub_name) VALUES(1, &#39;Math&#39;);</span><br><span class="line">INSERT INTO subject_info(sub_id,sub_name) VALUES(2, &#39;English&#39;);</span><br><span class="line">INSERT INTO subject_info(sub_id,sub_name) VALUES(3, &#39;Computer&#39;);</span><br><span class="line">INSERT INTO subject_info(sub_id,sub_name) VALUES(4, &#39;News&#39;);</span><br><span class="line">INSERT INTO subject_info(sub_id,sub_name) VALUES(5, &#39;civil enginering&#39;);</span><br><span class="line"># 更新和删除</span><br><span class="line">UPDATE student_info SET s_hometown &#x3D; &#39;湖北荆州&#39; WHERE s_id &#x3D; 1;</span><br><span class="line">DELETE FROM subject_info WHERE sub_id &#x3D; 5;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## limit</span><br><span class="line">SELECT * FROM subject_info LIMIT 0,3;</span><br><span class="line">SELECT * FROM student_info LIMIT 3,4;</span><br><span class="line">## order by</span><br><span class="line">SELECT * FROM student_info ORDER BY s_tuition DESC, s_id ASC;</span><br><span class="line">## where</span><br><span class="line">SELECT * FROM student_info WHERE s_tuition&gt;&#x3D;8000 AND s_gender &#x3D; 1;</span><br><span class="line">SELECT * FROM student_info WHERE s_tuition BETWEEN 6000 AND 8000;</span><br><span class="line">SELECT * FROM student_info WHERE s_hometown  IS  NOT NULL;</span><br><span class="line">SELECT * FROM student_info WHERE s_name  LIKE &#39;用%&#39;;</span><br><span class="line"></span><br><span class="line">SELECT * FROM student_info WHERE s_tuition &#x3D; 8000;</span><br><span class="line">SELECT *,COUNT(*) FROM student_info WHERE s_tuition &#x3D; 8000;</span><br><span class="line"></span><br><span class="line">## group by</span><br><span class="line">SELECT s_name,s_tuition,COUNT(*) nums FROM student_info GROUP BY s_tuition;</span><br><span class="line">SELECT s_gender FROM student_info GROUP BY s_gender;</span><br><span class="line">SELECT *  nums FROM student_info GROUP BY s_gender;</span><br><span class="line">SELECT * ,COUNT(*) nums FROM student_info GROUP BY s_gender;</span><br><span class="line"></span><br><span class="line">## 子查询</span><br><span class="line">SELECT s_name,s_hometown FROM student_info WHERE s_id IN</span><br><span class="line">(SELECT s_id FROM student_subject  WHERE sub_id &#x3D; 4</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">SELECT COUNT(*) nums FROM student_subject WHERE sub_id &#x3D; 1;</span><br><span class="line">SELECT sub_name, sub_id FROM subject_info;</span><br><span class="line"></span><br><span class="line">SELECT sub_name, sub_id,</span><br><span class="line">(SELECT COUNT(*) FROM student_subject WHERE student_subject.sub_id&#x3D; subject_info.sub_id) nums</span><br><span class="line">FROM subject_info;</span><br><span class="line"></span><br><span class="line">## left join...on</span><br><span class="line">SELECT b.s_id,b.sub_id,c.sub_name FROM</span><br><span class="line">	student_subject b LEFT JOIN subject_info c</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id;</span><br><span class="line"></span><br><span class="line">SELECT b.s_id,b.sub_id,c.sub_name FROM</span><br><span class="line">	subject_info c  LEFT JOIN student_subject b</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id;</span><br><span class="line"></span><br><span class="line">SELECT a.s_id,a.s_name,a.s_gender,a.s_hometown,a.s_tuition,</span><br><span class="line">bc.s_grade,bc.sub_id,bc.sub_name FROM</span><br><span class="line">student_info a LEFT JOIN </span><br><span class="line">(SELECT b.s_id, b.s_grade,b.sub_id,c.sub_name FROM</span><br><span class="line">	student_subject b LEFT JOIN subject_info c</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id) bc</span><br><span class="line">ON a.s_id&#x3D;bc.s_id;</span><br><span class="line"></span><br><span class="line">## 终极查询：找男生人数最多的两个专业和人数</span><br><span class="line">SELECT a.s_id,a.s_name,a.s_gender,a.s_hometown,a.s_tuition,</span><br><span class="line">bc.s_grade,bc.sub_id,bc.sub_name,COUNT(*) nums FROM</span><br><span class="line">student_info a LEFT JOIN </span><br><span class="line">(SELECT b.s_id, b.s_grade,b.sub_id,c.sub_name FROM</span><br><span class="line">	student_subject b LEFT JOIN subject_info c</span><br><span class="line">	ON b.sub_id &#x3D; c.sub_id) bc</span><br><span class="line">ON a.s_id&#x3D;bc.s_id</span><br><span class="line">WHERE s_gender &#x3D; 1</span><br><span class="line">GROUP BY sub_name</span><br><span class="line">ORDER BY nums DESC</span><br><span class="line">LIMIT 0,2;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    <div>
+      
+          
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+              -------------感谢阅读<i class="fa fa-paw"></i>没事常来-------------
+        </div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93_02_mysql%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="prev" title="MySQL知识点">
+      <i class="fa fa-chevron-left"></i> MySQL知识点
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/19/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83_04_Git%E5%8D%8F%E5%90%8C/" rel="next" title="代码规范_04_Git协同">
+      代码规范_04_Git协同 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一、基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">二、创建和修改表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%A2%9E%E5%88%A0%E6%94%B9"><span class="nav-number">3.</span> <span class="nav-text">三、增删改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">四、查询语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-%E5%AD%90%E6%9F%A5%E8%AF%A2%E3%80%81%E5%88%86%E7%BB%84%E5%92%8C%E8%BF%9E%E6%8E%A5%E3%80%81%E5%88%86%E9%A1%B5"><span class="nav-number">5.</span> <span class="nav-text">五 子查询、分组和连接、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E5%88%86%E7%BB%84group-by"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 分组group by</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E8%BF%9E%E6%8E%A5-join%E3%80%90%E9%87%8D%E7%82%B9%E3%80%91"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 连接 join【重点】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 分页查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E7%BB%88%E6%9E%81%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0"><span class="nav-number">6.</span> <span class="nav-text">六 终极查询练习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83-%E8%A1%A8%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">7.</span> <span class="nav-text">七 表的索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E6%89%80%E6%9C%89sql%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.</span> <span class="nav-text">附录：所有sql语句</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Wu kang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wu kang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
